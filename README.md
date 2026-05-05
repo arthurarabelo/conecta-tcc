@@ -132,7 +132,7 @@ text
 POST   /api/register           - Registro de usuário (aluno/professor)
 POST   /api/login              - Login, retorna token
 POST   /api/logout             - Logout (auth)
-GET    /api/user               - Dados do usuário logado (auth)
+GET    /api/me               - Dados do usuário logado (auth)
 
 3.2 Propostas (Mural de Ideias)
 text

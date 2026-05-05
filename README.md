@@ -47,6 +47,6 @@ A dinâmica principal do sistema baseia-se na oferta e demanda de projetos:
 
 - **Frontend**: React / Vue / HTML, CSS e JS puro
 
-- **Backend**: Node.js / Python (Django/FastAPI) / PHP
+- **Backend**:PHP/Laravel
 
-- **Banco de Dados**: PostgreSQL / MySQL / MongoDB
+- **Banco de Dados**:MySQL

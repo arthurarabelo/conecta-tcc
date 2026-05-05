@@ -2,6 +2,13 @@
 
 Trabalho Prático - Testes de Software
 
+Alunos:
+
+- Arthur Araujo Rabelo
+- Clara Garcia Tavares
+- Davi Porto Araujo
+- Thiago Roberto Magalhães
+
 ## Sobre o Projeto
 
 O **Portal Conecta TCC** é uma plataforma web desenvolvida para otimizar e centralizar o processo de alocação de Trabalhos de Conclusão de Curso (TCC). O sistema atua como uma ponte entre o corpo docente e os discentes, facilitando a descoberta de temas de pesquisa e a formação de parcerias acadêmicas.

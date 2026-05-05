@@ -8,11 +8,17 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+Route::get('/proposals', [ProposalController::class, 'index']);
+Route::get('/proposals/{proposal}', [ProposalController::class, 'show']);
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::get('/user', [AuthController::class, 'me']);
+    Route::get('/me', [AuthController::class, 'me']);
 
-    Route::apiResource('proposals', ProposalController::class);
+    Route::post('/proposals', [ProposalController::class, 'store']);
+    Route::put('/proposals/{proposal}', [ProposalController::class, 'update']);
+    Route::patch('/proposals/{proposal}', [ProposalController::class, 'update']);
+    Route::delete('/proposals/{proposal}', [ProposalController::class, 'destroy']);
 
     Route::post('/proposals/{proposal}/apply', [ApplicationController::class, 'apply']);
     Route::get('/applications', [ApplicationController::class, 'index']);

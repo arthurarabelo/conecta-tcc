@@ -20,11 +20,22 @@ class ShowProposalTest extends TestCase
         $token = $user->createToken('api')->plainTextToken;
         $proposal = Proposal::factory()->create();
 
-        $response = $this->withHeader('Authorization', "Bearer {$token}")
-            ->getJson("/api/proposals/{$proposal->id}");
-
-        $response->assertStatus(200)
+        $this->withHeader('Authorization', "Bearer {$token}")
+            ->getJson("/api/proposals/{$proposal->id}")
+            ->assertStatus(200)
             ->assertJsonFragment(['id' => $proposal->id, 'title' => $proposal->title]);
+    }
+
+    /**
+     * @return void
+     */
+    public function test_unauthenticated_user_can_view_proposal(): void
+    {
+        $proposal = Proposal::factory()->create();
+
+        $this->getJson("/api/proposals/{$proposal->id}")
+            ->assertStatus(200)
+            ->assertJsonFragment(['id' => $proposal->id]);
     }
 
     /**
@@ -32,21 +43,6 @@ class ShowProposalTest extends TestCase
      */
     public function test_returns_404_for_nonexistent_proposal(): void
     {
-        $user = User::factory()->create();
-        $token = $user->createToken('api')->plainTextToken;
-
-        $this->withHeader('Authorization', "Bearer {$token}")
-            ->getJson('/api/proposals/999')
-            ->assertStatus(404);
-    }
-
-    /**
-     * @return void
-     */
-    public function test_unauthenticated_user_cannot_view_proposal(): void
-    {
-        $proposal = Proposal::factory()->create();
-
-        $this->getJson("/api/proposals/{$proposal->id}")->assertStatus(401);
+        $this->getJson('/api/proposals/999')->assertStatus(404);
     }
 }

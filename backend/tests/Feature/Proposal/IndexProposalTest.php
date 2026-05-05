@@ -36,16 +36,11 @@ class IndexProposalTest extends TestCase
     /**
      * @return void
      */
-    public function test_proposals_can_be_filtered_by_status(): void
+    public function test_unauthenticated_user_can_list_proposals(): void
     {
-        $professor = User::factory()->create(['role' => 'professor']);
-        $token = $professor->createToken('api')->plainTextToken;
+        Proposal::factory()->count(2)->create();
 
-        Proposal::factory()->count(2)->create(['professor_id' => $professor->id, 'status' => 'open']);
-        Proposal::factory()->create(['professor_id' => $professor->id, 'status' => 'closed']);
-
-        $response = $this->withHeader('Authorization', "Bearer {$token}")
-            ->getJson('/api/proposals?status=open');
+        $response = $this->getJson('/api/proposals');
 
         $response->assertStatus(200);
         $this->assertCount(2, $response->json('data'));
@@ -54,8 +49,16 @@ class IndexProposalTest extends TestCase
     /**
      * @return void
      */
-    public function test_unauthenticated_user_cannot_list_proposals(): void
+    public function test_proposals_can_be_filtered_by_status(): void
     {
-        $this->getJson('/api/proposals')->assertStatus(401);
+        $professor = User::factory()->create(['role' => 'professor']);
+
+        Proposal::factory()->count(2)->create(['professor_id' => $professor->id, 'status' => 'open']);
+        Proposal::factory()->create(['professor_id' => $professor->id, 'status' => 'closed']);
+
+        $response = $this->getJson('/api/proposals?status=open');
+
+        $response->assertStatus(200);
+        $this->assertCount(2, $response->json('data'));
     }
 }

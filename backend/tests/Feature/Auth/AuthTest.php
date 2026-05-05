@@ -133,7 +133,7 @@ class AuthTest extends TestCase
         $token = $user->createToken('api')->plainTextToken;
 
         $response = $this->withHeader('Authorization', "Bearer {$token}")
-            ->getJson('/api/user');
+            ->getJson('/api/me');
 
         $response->assertStatus(200)
             ->assertJsonFragment(['email' => $user->email]);
@@ -144,6 +144,6 @@ class AuthTest extends TestCase
      */
     public function test_me_requires_authentication(): void
     {
-        $this->getJson('/api/user')->assertStatus(401);
+        $this->getJson('/api/me')->assertStatus(401);
     }
 }

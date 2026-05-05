@@ -23,6 +23,12 @@ RUN docker-php-ext-install \
     gd \
     zip
 
+RUN apk add --no-cache $PHPIZE_DEPS linux-headers \
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug \
+    && echo "xdebug.mode=coverage" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && apk del $PHPIZE_DEPS
+
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html

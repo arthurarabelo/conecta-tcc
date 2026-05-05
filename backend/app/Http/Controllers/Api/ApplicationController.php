@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ApplyProposalRequest;
+use App\Http\Requests\ApproveApplicationRequest;
+use App\Http\Requests\RejectApplicationRequest;
 use App\Models\Application;
 use App\Models\Proposal;
 use Illuminate\Http\JsonResponse;
@@ -10,14 +13,13 @@ use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
 {
-    public function apply(Request $request, Proposal $proposal): JsonResponse
+    /**
+     * @param ApplyProposalRequest $request
+     * @param Proposal $proposal
+     * @return JsonResponse
+     */
+    public function apply(ApplyProposalRequest $request, Proposal $proposal): JsonResponse
     {
-        $user = $request->user();
-
-        if (!$user->isStudent()) {
-            return response()->json(['message' => 'Apenas alunos podem se candidatar.'], 403);
-        }
-
         if ($proposal->status === 'closed') {
             return response()->json(['message' => 'Esta proposta está fechada.'], 422);
         }
@@ -26,7 +28,7 @@ class ApplicationController extends Controller
             return response()->json(['message' => 'Não há vagas disponíveis.'], 422);
         }
 
-        $existing = Application::where('student_id', $user->id)
+        $existing = Application::where('student_id', $request->user()->id)
             ->where('proposal_id', $proposal->id)
             ->first();
 
@@ -35,7 +37,7 @@ class ApplicationController extends Controller
         }
 
         $application = Application::create([
-            'student_id' => $user->id,
+            'student_id' => $request->user()->id,
             'proposal_id' => $proposal->id,
             'status' => 'pending',
             'applied_at' => now(),
@@ -44,6 +46,10 @@ class ApplicationController extends Controller
         return response()->json($application->load(['student', 'proposal']), 201);
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function index(Request $request): JsonResponse
     {
         $user = $request->user();
@@ -62,6 +68,11 @@ class ApplicationController extends Controller
         return response()->json($query->paginate(15));
     }
 
+    /**
+     * @param Request $request
+     * @param Application $application
+     * @return JsonResponse
+     */
     public function show(Request $request, Application $application): JsonResponse
     {
         $user = $request->user();
@@ -76,14 +87,13 @@ class ApplicationController extends Controller
         return response()->json($application->load(['student', 'proposal']));
     }
 
-    public function approve(Request $request, Application $application): JsonResponse
+    /**
+     * @param ApproveApplicationRequest $request
+     * @param Application $application
+     * @return JsonResponse
+     */
+    public function approve(ApproveApplicationRequest $request, Application $application): JsonResponse
     {
-        $user = $request->user();
-
-        if ($application->proposal->professor_id !== $user->id) {
-            return response()->json(['message' => 'Sem permissão.'], 403);
-        }
-
         if (!$application->proposal->hasAvailableSlots()) {
             return response()->json(['message' => 'Não há vagas disponíveis.'], 422);
         }
@@ -100,21 +110,16 @@ class ApplicationController extends Controller
         return response()->json($application->load(['student', 'proposal']));
     }
 
-    public function reject(Request $request, Application $application): JsonResponse
+    /**
+     * @param RejectApplicationRequest $request
+     * @param Application $application
+     * @return JsonResponse
+     */
+    public function reject(RejectApplicationRequest $request, Application $application): JsonResponse
     {
-        $user = $request->user();
-
-        if ($application->proposal->professor_id !== $user->id) {
-            return response()->json(['message' => 'Sem permissão.'], 403);
-        }
-
-        $data = $request->validate([
-            'feedback' => 'nullable|string',
-        ]);
-
         $application->update([
             'status' => 'rejected',
-            'feedback' => $data['feedback'] ?? null,
+            'feedback' => $request->validated()['feedback'] ?? null,
             'reviewed_at' => now(),
         ]);
 

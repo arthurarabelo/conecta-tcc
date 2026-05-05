@@ -3,12 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProposalRequest;
+use App\Http\Requests\UpdateProposalRequest;
 use App\Models\Proposal;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ProposalController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function index(Request $request): JsonResponse
     {
         $query = Proposal::with(['professor', 'department', 'area']);
@@ -28,21 +34,13 @@ class ProposalController extends Controller
         return response()->json($query->paginate(15));
     }
 
-    public function store(Request $request): JsonResponse
+    /**
+     * @param StoreProposalRequest $request
+     * @return JsonResponse
+     */
+    public function store(StoreProposalRequest $request): JsonResponse
     {
-        if (!$request->user()->isProfessor()) {
-            return response()->json(['message' => 'Apenas professores podem criar propostas.'], 403);
-        }
-
-        $data = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'prerequisites' => 'nullable|string',
-            'max_slots' => 'required|integer|min:1',
-            'department_id' => 'nullable|exists:departments,id',
-            'area_id' => 'nullable|exists:knowledge_areas,id',
-        ]);
-
+        $data = $request->validated();
         $data['professor_id'] = $request->user()->id;
 
         $proposal = Proposal::create($data);
@@ -50,32 +48,32 @@ class ProposalController extends Controller
         return response()->json($proposal->load(['professor', 'department', 'area']), 201);
     }
 
+    /**
+     * @param Proposal $proposal
+     * @return JsonResponse
+     */
     public function show(Proposal $proposal): JsonResponse
     {
         return response()->json($proposal->load(['professor', 'department', 'area']));
     }
 
-    public function update(Request $request, Proposal $proposal): JsonResponse
+    /**
+     * @param UpdateProposalRequest $request
+     * @param Proposal $proposal
+     * @return JsonResponse
+     */
+    public function update(UpdateProposalRequest $request, Proposal $proposal): JsonResponse
     {
-        if ($request->user()->id !== $proposal->professor_id) {
-            return response()->json(['message' => 'Sem permissão.'], 403);
-        }
-
-        $data = $request->validate([
-            'title' => 'sometimes|string|max:255',
-            'description' => 'sometimes|string',
-            'prerequisites' => 'nullable|string',
-            'max_slots' => 'sometimes|integer|min:1',
-            'department_id' => 'nullable|exists:departments,id',
-            'area_id' => 'nullable|exists:knowledge_areas,id',
-            'status' => 'sometimes|in:open,closed',
-        ]);
-
-        $proposal->update($data);
+        $proposal->update($request->validated());
 
         return response()->json($proposal->load(['professor', 'department', 'area']));
     }
 
+    /**
+     * @param Request $request
+     * @param Proposal $proposal
+     * @return JsonResponse
+     */
     public function destroy(Request $request, Proposal $proposal): JsonResponse
     {
         if ($request->user()->id !== $proposal->professor_id) {

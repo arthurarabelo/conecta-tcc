@@ -141,7 +141,7 @@ describe('LoginForm', () => {
 
 - [ ] **Step 2: Run test — expect failure**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/features/auth/components/LoginForm.test.tsx --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/features/auth/components/LoginForm.test.tsx --reporter=verbose
 ```
 Expected: FAIL — LoginForm.tsx does not exist yet.
 
@@ -242,14 +242,14 @@ export function LoginForm() {
 
 - [ ] **Step 4: Run test — expect pass**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/features/auth/components/LoginForm.test.tsx --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/features/auth/components/LoginForm.test.tsx --reporter=verbose
 ```
 Expected: PASS all 6 tests.
 
 - [ ] **Step 5: Commit**
 ```bash
-git -C /home/supertgo/programas/conecta-tcc add frontend/src/features/auth/components/LoginForm.tsx frontend/src/features/auth/components/LoginForm.test.tsx
-git -C /home/supertgo/programas/conecta-tcc commit -m "feat: add LoginForm component with validation and API error display"
+git -C conecta-tcc add frontend/src/features/auth/components/LoginForm.tsx frontend/src/features/auth/components/LoginForm.test.tsx
+git -C conecta-tcc commit -m "feat: add LoginForm component with validation and API error display"
 ```
 
 ---
@@ -400,7 +400,7 @@ describe('RegisterForm', () => {
 
 - [ ] **Step 2: Run test — expect failure**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/features/auth/components/RegisterForm.test.tsx --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/features/auth/components/RegisterForm.test.tsx --reporter=verbose
 ```
 Expected: FAIL — RegisterForm.tsx does not exist yet.
 
@@ -610,14 +610,14 @@ export function RegisterForm() {
 
 - [ ] **Step 4: Run test — expect pass**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/features/auth/components/RegisterForm.test.tsx --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/features/auth/components/RegisterForm.test.tsx --reporter=verbose
 ```
 Expected: PASS all 6 tests.
 
 - [ ] **Step 5: Commit**
 ```bash
-git -C /home/supertgo/programas/conecta-tcc add frontend/src/features/auth/components/RegisterForm.tsx frontend/src/features/auth/components/RegisterForm.test.tsx
-git -C /home/supertgo/programas/conecta-tcc commit -m "feat: add RegisterForm component with role selector and validation"
+git -C conecta-tcc add frontend/src/features/auth/components/RegisterForm.tsx frontend/src/features/auth/components/RegisterForm.test.tsx
+git -C conecta-tcc commit -m "feat: add RegisterForm component with role selector and validation"
 ```
 
 ---
@@ -752,7 +752,7 @@ describe('LoginPage', () => {
 
 - [ ] **Step 2: Run test — expect failure**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/pages/login/login-page.test.tsx --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/pages/login/login-page.test.tsx --reporter=verbose
 ```
 Expected: FAIL — LoginPage is a stub with no real implementation.
 
@@ -859,20 +859,20 @@ export default function LoginPage() {
 
 - [ ] **Step 4: Run test — expect pass**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/pages/login/login-page.test.tsx --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/pages/login/login-page.test.tsx --reporter=verbose
 ```
 Expected: PASS all 5 tests.
 
 - [ ] **Step 5: Run full suite**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run --reporter=verbose
 ```
 Expected: all tests PASS.
 
 - [ ] **Step 6: Commit**
 ```bash
-git -C /home/supertgo/programas/conecta-tcc add frontend/src/pages/login/index.tsx frontend/src/pages/login/login-page.test.tsx
-git -C /home/supertgo/programas/conecta-tcc commit -m "feat: implement login page with two-panel layout and auth guard redirect"
+git -C conecta-tcc add frontend/src/pages/login/index.tsx frontend/src/pages/login/login-page.test.tsx
+git -C conecta-tcc commit -m "feat: implement login page with two-panel layout and auth guard redirect"
 ```
 
 ---
@@ -887,23 +887,23 @@ git -C /home/supertgo/programas/conecta-tcc commit -m "feat: implement login pag
 
 - [ ] **Step 1: Check if Shadcn components exist**
 ```bash
-ls /home/supertgo/programas/conecta-tcc/frontend/src/components/ui/ 2>/dev/null || echo "MISSING"
+ls conecta-tcc/frontend/src/components/ui/ 2>/dev/null || echo "MISSING"
 ```
 
 - [ ] **Step 2: If missing, initialize Shadcn and add components**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx shadcn@latest init --yes
-bunx shadcn@latest add form input button alert select
+cd conecta-tcc/frontend && npx shadcn@latest init --yes
+npx shadcn@latest add form input button alert select
 ```
 
 - [ ] **Step 3: Verify components are present**
 ```bash
-ls /home/supertgo/programas/conecta-tcc/frontend/src/components/ui/
+ls conecta-tcc/frontend/src/components/ui/
 ```
 Expected: form.tsx, input.tsx, button.tsx, alert.tsx present.
 
 - [ ] **Step 4: Commit**
 ```bash
-git -C /home/supertgo/programas/conecta-tcc add frontend/src/components/ frontend/components.json
-git -C /home/supertgo/programas/conecta-tcc commit -m "feat: add shadcn/ui form, input, button, alert components"
+git -C conecta-tcc add frontend/src/components/ frontend/components.json
+git -C conecta-tcc commit -m "feat: add shadcn/ui form, input, button, alert components"
 ```

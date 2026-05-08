@@ -22,7 +22,7 @@
 - [ ] **Step 1: Install MSW**
 
 ```bash
-cd frontend && bun add -D msw
+cd frontend && npm install -D msw
 ```
 
 - [ ] **Step 2: Create proposal MSW handlers**
@@ -150,7 +150,7 @@ afterAll(() => server.close())
 - [ ] **Step 5: Verify test infrastructure still works**
 
 ```bash
-cd frontend && bunx vitest run
+cd frontend && npx vitest run
 ```
 Expected: existing tests (StatusBadge, ProposalCard) still pass
 
@@ -171,7 +171,7 @@ git commit -m "test: add MSW server with proposal handlers for integration tests
 - [ ] **Step 1: Install Skeleton component**
 
 ```bash
-cd frontend && bunx shadcn@latest add skeleton
+cd frontend && npx shadcn@latest add skeleton
 ```
 
 - [ ] **Step 2: Verify skeleton file exists**
@@ -269,7 +269,7 @@ describe('HomePage', () => {
 - [ ] **Step 2: Run tests to verify they fail**
 
 ```bash
-cd frontend && bunx vitest run src/pages/home/home.test.tsx
+cd frontend && npx vitest run src/pages/home/home.test.tsx
 ```
 Expected: FAIL — errors about missing component implementations
 
@@ -438,21 +438,21 @@ export default function HomePage() {
 - [ ] **Step 2: Run tests to verify they pass**
 
 ```bash
-cd frontend && bunx vitest run src/pages/home/home.test.tsx
+cd frontend && npx vitest run src/pages/home/home.test.tsx
 ```
 Expected: PASS — 6 tests pass
 
 - [ ] **Step 3: Run all tests**
 
 ```bash
-cd frontend && bunx vitest run
+cd frontend && npx vitest run
 ```
 Expected: all tests pass
 
 - [ ] **Step 4: Verify TypeScript**
 
 ```bash
-cd frontend && bunx tsc --noEmit
+cd frontend && npx tsc --noEmit
 ```
 Expected: no errors
 

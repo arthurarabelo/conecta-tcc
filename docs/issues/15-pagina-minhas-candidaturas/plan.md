@@ -81,8 +81,8 @@ export function ProtectedRoute({ children, role }: ProtectedRouteProps) {
 - [ ] **Step 3: Verify TypeScript**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bunx tsc --noEmit
+cd conecta-tcc/frontend
+npx tsc --noEmit
 ```
 
 Expected: no errors.
@@ -90,7 +90,7 @@ Expected: no errors.
 - [ ] **Step 4: Commit**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
+cd conecta-tcc/frontend
 git add src/components/shared/StatusBadge/index.tsx src/components/shared/ProtectedRoute/index.tsx
 git commit -m "feat: add StatusBadge and ProtectedRoute shared components"
 ```
@@ -223,8 +223,8 @@ describe('ApplicationCard', () => {
 - [ ] **Step 2: Run tests — expect failure**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun test src/features/applications/components/ApplicationCard.test.tsx
+cd conecta-tcc/frontend
+npm test src/features/applications/components/ApplicationCard.test.tsx
 ```
 
 Expected: FAIL — `ApplicationCard` module not found.
@@ -295,8 +295,8 @@ export function ApplicationCard({ application }: ApplicationCardProps) {
 - [ ] **Step 4: Run tests — expect pass**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun test src/features/applications/components/ApplicationCard.test.tsx
+cd conecta-tcc/frontend
+npm test src/features/applications/components/ApplicationCard.test.tsx
 ```
 
 Expected: PASS — all 11 tests green.
@@ -304,7 +304,7 @@ Expected: PASS — all 11 tests green.
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
+cd conecta-tcc/frontend
 git add src/features/applications/components/ApplicationCard.tsx src/features/applications/components/ApplicationCard.test.tsx
 git commit -m "feat: add ApplicationCard component with area badge, status, feedback, and proposal link"
 ```
@@ -471,8 +471,8 @@ describe('MyApplicationsPage', () => {
 - [ ] **Step 2: Run tests — expect failure**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun test src/pages/my-applications/index.test.tsx
+cd conecta-tcc/frontend
+npm test src/pages/my-applications/index.test.tsx
 ```
 
 Expected: FAIL — the page renders only `<h1>Minhas Candidaturas</h1>` and has no skeletons, cards, or counts.
@@ -581,8 +581,8 @@ export default function MyApplicationsPage() {
 - [ ] **Step 4: Run tests — expect pass**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun test src/pages/my-applications/index.test.tsx
+cd conecta-tcc/frontend
+npm test src/pages/my-applications/index.test.tsx
 ```
 
 Expected: PASS — all 8 tests green.
@@ -590,8 +590,8 @@ Expected: PASS — all 8 tests green.
 - [ ] **Step 5: Verify TypeScript**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bunx tsc --noEmit
+cd conecta-tcc/frontend
+npx tsc --noEmit
 ```
 
 Expected: no errors.
@@ -599,7 +599,7 @@ Expected: no errors.
 - [ ] **Step 6: Commit**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
+cd conecta-tcc/frontend
 git add src/pages/my-applications/index.tsx src/pages/my-applications/index.test.tsx
 git commit -m "feat: implement MyApplicationsPage with status counts, skeletons, and empty state"
 ```

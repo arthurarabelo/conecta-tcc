@@ -19,13 +19,13 @@
 
 - [ ] **Step 1: Write failing test to confirm test runner is absent**
 ```bash
-bunx vitest run --reporter=verbose 2>&1 | head -20
+npx vitest run --reporter=verbose 2>&1 | head -20
 ```
 Expected: error about missing test config or no test files found.
 
 - [ ] **Step 2: Add Vitest dependencies and configure**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun add -D vitest @testing-library/react @testing-library/jest-dom @testing-library/user-event jsdom
+cd conecta-tcc/frontend && npm install -D vitest @testing-library/react @testing-library/jest-dom @testing-library/user-event jsdom
 ```
 
 - [ ] **Step 3: Create test setup file**
@@ -103,14 +103,14 @@ export { render, renderHook }
 
 - [ ] **Step 6: Run a smoke test**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run --reporter=verbose 2>&1 | head -20
+cd conecta-tcc/frontend && npx vitest run --reporter=verbose 2>&1 | head -20
 ```
 Expected: no test files found (but no config errors).
 
 - [ ] **Step 7: Commit**
 ```bash
-git -C /home/supertgo/programas/conecta-tcc add frontend/vite.config.ts frontend/src/test/setup.ts frontend/src/test/utils.tsx
-git -C /home/supertgo/programas/conecta-tcc commit -m "test: configure vitest with jsdom and testing-library"
+git -C conecta-tcc add frontend/vite.config.ts frontend/src/test/setup.ts frontend/src/test/utils.tsx
+git -C conecta-tcc commit -m "test: configure vitest with jsdom and testing-library"
 ```
 
 ---
@@ -250,7 +250,7 @@ describe('useAuthStore', () => {
 
 - [ ] **Step 2: Run test — expect failure**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/store/auth.store.test.ts --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/store/auth.store.test.ts --reporter=verbose
 ```
 Expected: FAIL — test files not found or import errors (no test infrastructure yet).
 
@@ -303,14 +303,14 @@ export const useAuthStore = create<AuthState>()(
 
 - [ ] **Step 4: Run test — expect pass**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/store/auth.store.test.ts --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/store/auth.store.test.ts --reporter=verbose
 ```
 Expected: PASS all 9 tests.
 
 - [ ] **Step 5: Commit**
 ```bash
-git -C /home/supertgo/programas/conecta-tcc add frontend/src/store/auth.store.test.ts
-git -C /home/supertgo/programas/conecta-tcc commit -m "test: add unit tests for auth.store.ts setAuth/clearAuth/persist"
+git -C conecta-tcc add frontend/src/store/auth.store.test.ts
+git -C conecta-tcc commit -m "test: add unit tests for auth.store.ts setAuth/clearAuth/persist"
 ```
 
 ---
@@ -431,7 +431,7 @@ describe('useAuth hook', () => {
 
 - [ ] **Step 2: Run test — expect failure**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/hooks/use-auth.test.ts --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/hooks/use-auth.test.ts --reporter=verbose
 ```
 Expected: FAIL — no test infrastructure yet.
 
@@ -463,14 +463,14 @@ export function useAuth() {
 
 - [ ] **Step 4: Run test — expect pass**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/hooks/use-auth.test.ts --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/hooks/use-auth.test.ts --reporter=verbose
 ```
 Expected: PASS all 6 tests.
 
 - [ ] **Step 5: Commit**
 ```bash
-git -C /home/supertgo/programas/conecta-tcc add frontend/src/hooks/use-auth.test.ts
-git -C /home/supertgo/programas/conecta-tcc commit -m "test: add unit tests for useAuth hook isProfessor/isStudent"
+git -C conecta-tcc add frontend/src/hooks/use-auth.test.ts
+git -C conecta-tcc commit -m "test: add unit tests for useAuth hook isProfessor/isStudent"
 ```
 
 ---
@@ -573,7 +573,7 @@ describe('api-client Authorization header interceptor', () => {
 
 - [ ] **Step 2: Run test — expect failure**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/services/api-client.test.ts --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/services/api-client.test.ts --reporter=verbose
 ```
 Expected: FAIL — no vitest config or import errors.
 
@@ -583,14 +583,14 @@ The existing `frontend/src/services/api-client.ts` reads `localStorage.getItem('
 
 - [ ] **Step 4: Run test — expect pass**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/services/api-client.test.ts --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/services/api-client.test.ts --reporter=verbose
 ```
 Expected: PASS all 4 tests.
 
 - [ ] **Step 5: Commit**
 ```bash
-git -C /home/supertgo/programas/conecta-tcc add frontend/src/services/api-client.test.ts
-git -C /home/supertgo/programas/conecta-tcc commit -m "test: integration test for api-client Authorization header interceptor"
+git -C conecta-tcc add frontend/src/services/api-client.test.ts
+git -C conecta-tcc commit -m "test: integration test for api-client Authorization header interceptor"
 ```
 
 ---
@@ -599,7 +599,7 @@ git -C /home/supertgo/programas/conecta-tcc commit -m "test: integration test fo
 
 - [ ] **Step 1: Start the dev server**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun run dev
+cd conecta-tcc/frontend && npm run dev
 ```
 
 - [ ] **Step 2: Open browser DevTools → Application → Local Storage**
@@ -636,6 +636,6 @@ localStorage.getItem('conecta-tcc-auth') // → JSON with user: null, token: nul
 
 - [ ] **Step 6: Run full test suite**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run --reporter=verbose
 ```
 Expected: all tests PASS.

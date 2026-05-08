@@ -190,7 +190,7 @@ describe('ProposalForm', () => {
 - [ ] **Step 2: Run to verify failure**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun test src/features/proposals/components/ProposalForm.test.tsx
+cd conecta-tcc/frontend && npm test src/features/proposals/components/ProposalForm.test.tsx
 ```
 
 Expected: FAIL — module not found.
@@ -478,7 +478,7 @@ export function ProposalForm({ mode, proposal, onSuccess, onDeleted }: ProposalF
 - [ ] **Step 4: Run to verify pass**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun test src/features/proposals/components/ProposalForm.test.tsx
+cd conecta-tcc/frontend && npm test src/features/proposals/components/ProposalForm.test.tsx
 ```
 
 Expected: PASS — 6 tests.
@@ -486,7 +486,7 @@ Expected: PASS — 6 tests.
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add src/features/proposals/components/ProposalForm.tsx src/features/proposals/components/ProposalForm.test.tsx && git commit -m "feat: add ProposalForm with create/edit modes and delete confirmation dialog"
+cd conecta-tcc/frontend && git add src/features/proposals/components/ProposalForm.tsx src/features/proposals/components/ProposalForm.test.tsx && git commit -m "feat: add ProposalForm with create/edit modes and delete confirmation dialog"
 ```
 
 ---
@@ -660,7 +660,7 @@ declare module '@tanstack/react-router' {
 - [ ] **Step 4: Commit**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add src/pages/proposal-create/index.tsx src/router.tsx src/constants/routes.ts && git commit -m "feat: add ProposalCreatePage route at /propostas/nova"
+cd conecta-tcc/frontend && git add src/pages/proposal-create/index.tsx src/router.tsx src/constants/routes.ts && git commit -m "feat: add ProposalCreatePage route at /propostas/nova"
 ```
 
 ---
@@ -853,7 +853,7 @@ describe('ProposalEditPage', () => {
 - [ ] **Step 3: Run to verify failure**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun test src/pages/proposal-edit/ProposalEditPage.test.tsx
+cd conecta-tcc/frontend && npm test src/pages/proposal-edit/ProposalEditPage.test.tsx
 ```
 
 Expected: FAIL — `src/pages/proposal-edit/index.tsx` not found.
@@ -936,7 +936,7 @@ export default function ProposalEditPage() {
 - [ ] **Step 5: Run to verify pass**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun test src/pages/proposal-edit/ProposalEditPage.test.tsx
+cd conecta-tcc/frontend && npm test src/pages/proposal-edit/ProposalEditPage.test.tsx
 ```
 
 Expected: PASS — 4 tests.
@@ -944,7 +944,7 @@ Expected: PASS — 4 tests.
 - [ ] **Step 6: Commit**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add src/pages/proposal-edit/index.tsx src/pages/proposal-edit/ProposalEditPage.test.tsx src/test/server.ts && git commit -m "feat: add ProposalEditPage with ownership guard, edit form and delete flow"
+cd conecta-tcc/frontend && git add src/pages/proposal-edit/index.tsx src/pages/proposal-edit/ProposalEditPage.test.tsx src/test/server.ts && git commit -m "feat: add ProposalEditPage with ownership guard, edit form and delete flow"
 ```
 
 ---
@@ -956,7 +956,7 @@ cd /home/supertgo/programas/conecta-tcc/frontend && git add src/pages/proposal-e
 - [ ] **Step 1: Run all tests**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun test
+cd conecta-tcc/frontend && npm test
 ```
 
 Expected: all tests pass, no failures.
@@ -964,7 +964,7 @@ Expected: all tests pass, no failures.
 - [ ] **Step 2: TypeScript check**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx tsc --noEmit
+cd conecta-tcc/frontend && npx tsc --noEmit
 ```
 
 Expected: exits with code 0, no type errors.
@@ -972,7 +972,7 @@ Expected: exits with code 0, no type errors.
 - [ ] **Step 3: Commit if any fixes were needed**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add -p && git commit -m "fix: resolve type errors from proposal form integration"
+cd conecta-tcc/frontend && git add -p && git commit -m "fix: resolve type errors from proposal form integration"
 ```
 
 Skip this step if there were no errors and no uncommitted changes.

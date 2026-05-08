@@ -28,7 +28,7 @@ VITE_API_BASE_URL=http://localhost:8000
 This file is already covered by Vite's default gitignore rules (`.env.local` is ignored by Vite's scaffolded `.gitignore`). Verify:
 
 ```bash
-grep -n "env.local" /home/supertgo/programas/conecta-tcc/frontend/.gitignore 2>/dev/null || echo "not found — add manually"
+grep -n "env.local" conecta-tcc/frontend/.gitignore 2>/dev/null || echo "not found — add manually"
 ```
 
 If not found, open `frontend/.gitignore` and add:
@@ -52,8 +52,8 @@ Replace `https://your-api-domain.com` with the actual production backend URL bef
 - [ ] **Step 3: Verify VITE_API_BASE_URL is read correctly in dev**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun run dev &
+cd conecta-tcc/frontend
+npm run dev &
 # wait ~3 seconds, then:
 curl -s http://localhost:5173 | head -5
 kill %1
@@ -64,7 +64,7 @@ Expected: HTML page returned without errors. The `API_BASE_URL` constant in `src
 - [ ] **Step 4: Commit**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
+cd conecta-tcc/frontend
 git add .env.production
 git commit -m "chore: add frontend environment files for dev and production"
 ```
@@ -186,7 +186,7 @@ return Application::configure(basePath: dirname(__DIR__))
 - [ ] **Step 3: Clear config cache and verify CORS headers**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/backend
+cd conecta-tcc/backend
 php artisan config:clear
 php artisan serve --port=8000 &
 sleep 2
@@ -203,7 +203,7 @@ access-control-allow-methods: *
 - [ ] **Step 4: Commit**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/backend
+cd conecta-tcc/backend
 git add config/cors.php bootstrap/app.php
 git commit -m "chore: configure CORS middleware to allow localhost:5173 and Vercel domains"
 ```
@@ -218,8 +218,8 @@ git commit -m "chore: configure CORS middleware to allow localhost:5173 and Verc
 - [ ] **Step 1: Run the TypeScript type check**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bunx tsc --noEmit
+cd conecta-tcc/frontend
+npx tsc --noEmit
 ```
 
 Expected: exits with code 0 and no output. If there are errors, fix them in the relevant source files before continuing.
@@ -227,8 +227,8 @@ Expected: exits with code 0 and no output. If there are errors, fix them in the 
 - [ ] **Step 2: Run the production build**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun run build
+cd conecta-tcc/frontend
+npm run build
 ```
 
 Expected output (last lines):
@@ -241,11 +241,11 @@ dist/assets/index-XXXXXXXX.css    XX.XX kB │ gzip:  X.XX kB
 
 Exit code: 0. The `dist/` directory is created.
 
-- [ ] **Step 3: Verify the built app serves correctly with bun preview**
+- [ ] **Step 3: Verify the built app serves correctly with npm run preview**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun run preview &
+cd conecta-tcc/frontend
+npm run preview &
 sleep 2
 curl -s -o /dev/null -w "%{http_code}" http://localhost:4173
 kill %1
@@ -277,7 +277,7 @@ Create `frontend/vercel.json`:
 - [ ] **Step 2: Verify the file is valid JSON**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
+cd conecta-tcc/frontend
 node -e "JSON.parse(require('fs').readFileSync('vercel.json', 'utf8')); console.log('valid')"
 ```
 
@@ -286,7 +286,7 @@ Expected: `valid`
 - [ ] **Step 3: Commit**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
+cd conecta-tcc/frontend
 git add vercel.json
 git commit -m "chore: add vercel.json for SPA client-side routing rewrites"
 ```
@@ -295,12 +295,12 @@ git commit -m "chore: add vercel.json for SPA client-side routing rewrites"
 
 ### Task 5: Deploy frontend to Vercel
 
-> Prerequisite: Vercel CLI installed globally (`npm i -g vercel` or `bun add -g vercel`) and you are logged in (`vercel login`).
+> Prerequisite: Vercel CLI installed globally (`npm i -g vercel` or `npm install -g vercel`) and you are logged in (`vercel login`).
 
 - [ ] **Step 1: Install Vercel CLI (if not present)**
 
 ```bash
-bun add -g vercel
+npm install -g vercel
 vercel --version
 ```
 
@@ -309,7 +309,7 @@ Expected: prints Vercel CLI version, e.g. `Vercel CLI 37.x.x`.
 - [ ] **Step 2: Deploy from the frontend directory**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
+cd conecta-tcc/frontend
 vercel --prod
 ```
 
@@ -341,7 +341,7 @@ When prompted, enter: `https://your-api-domain.com`
 Then redeploy to pick up the new variable:
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
+cd conecta-tcc/frontend
 vercel --prod
 ```
 
@@ -384,7 +384,7 @@ LOG_LEVEL=error
 
 Generate `APP_KEY` locally:
 ```bash
-cd /home/supertgo/programas/conecta-tcc/backend
+cd conecta-tcc/backend
 php artisan key:generate --show
 ```
 
@@ -407,7 +407,7 @@ with:
 - [ ] **Step 3: Commit the cors.php update**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/backend
+cd conecta-tcc/backend
 git add config/cors.php
 git commit -m "chore: set production Vercel domain in CORS allowed_origins"
 ```

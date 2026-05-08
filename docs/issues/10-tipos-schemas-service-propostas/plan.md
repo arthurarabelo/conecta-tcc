@@ -24,7 +24,7 @@
 - [ ] **Step 1: Install dependencies (skip if already done in issue #08 or #09)**
 
 ```bash
-cd frontend && bun add -D vitest @vitest/coverage-v8 jsdom @testing-library/react @testing-library/jest-dom @testing-library/user-event msw
+cd frontend && npm install -D vitest @vitest/coverage-v8 jsdom @testing-library/react @testing-library/jest-dom @testing-library/user-event msw
 ```
 
 - [ ] **Step 2: Create vitest.config.ts (skip if it already exists)**
@@ -253,7 +253,7 @@ export const server = setupServer(...proposalHandlers)
 - [ ] **Step 6: Verify test setup works**
 
 ```bash
-cd frontend && bunx vitest run 2>&1 | tail -10
+cd frontend && npx vitest run 2>&1 | tail -10
 ```
 Expected: existing tests pass, no import errors
 
@@ -373,7 +373,7 @@ describe('proposalSchema', () => {
 - [ ] **Step 2: Run tests to verify they pass (schema already exists)**
 
 ```bash
-cd frontend && bunx vitest run src/features/proposals/schemas/proposalSchema.test.ts
+cd frontend && npx vitest run src/features/proposals/schemas/proposalSchema.test.ts
 ```
 Expected: PASS — 11 tests pass
 
@@ -515,7 +515,7 @@ describe('proposalsService', () => {
 - [ ] **Step 2: Run tests to verify they fail (before any changes — service already exists)**
 
 ```bash
-cd frontend && bunx vitest run src/services/proposals.service.test.ts
+cd frontend && npx vitest run src/services/proposals.service.test.ts
 ```
 Expected: PASS if MSW is set up correctly. If failing, check that `apiClient` baseURL matches `http://localhost:8000`.
 
@@ -532,7 +532,7 @@ env: {
 
 Then re-run:
 ```bash
-cd frontend && bunx vitest run src/services/proposals.service.test.ts
+cd frontend && npx vitest run src/services/proposals.service.test.ts
 ```
 Expected: PASS — 10 tests pass
 
@@ -762,7 +762,7 @@ describe('useApplyToProposal', () => {
 - [ ] **Step 2: Run tests to verify they pass**
 
 ```bash
-cd frontend && bunx vitest run src/features/proposals/hooks/proposals.hooks.test.tsx
+cd frontend && npx vitest run src/features/proposals/hooks/proposals.hooks.test.tsx
 ```
 Expected: PASS — all tests pass
 
@@ -771,7 +771,7 @@ If the `vi` global is not available (error: "vi is not defined"), add `globals: 
 - [ ] **Step 3: Run the full test suite to ensure nothing regressed**
 
 ```bash
-cd frontend && bunx vitest run
+cd frontend && npx vitest run
 ```
 Expected: all tests pass
 
@@ -792,14 +792,14 @@ git commit -m "test: add integration tests for proposal hooks with cache invalid
 - [ ] **Step 1: TypeScript compile check**
 
 ```bash
-cd frontend && bunx tsc --noEmit
+cd frontend && npx tsc --noEmit
 ```
 Expected: no errors
 
 - [ ] **Step 2: Run complete test suite with coverage**
 
 ```bash
-cd frontend && bunx vitest run --coverage 2>&1 | tail -30
+cd frontend && npx vitest run --coverage 2>&1 | tail -30
 ```
 Expected: all tests pass, coverage report generated
 

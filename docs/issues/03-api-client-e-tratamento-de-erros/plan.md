@@ -24,7 +24,7 @@ VITE_API_BASE_URL=http://localhost:8000
 
 - [ ] **Step 2: Verify `.env.example` already documents the variable**
 ```bash
-cat /home/supertgo/programas/conecta-tcc/frontend/.env.example
+cat conecta-tcc/frontend/.env.example
 ```
 Expected: file contains a line with `VITE_API_BASE_URL`.
 If it does not exist, create it with:
@@ -34,19 +34,19 @@ VITE_API_BASE_URL=http://localhost:8000
 
 - [ ] **Step 3: Confirm `src/constants/api.ts` reads the variable correctly**
 ```bash
-grep "VITE_API_BASE_URL" /home/supertgo/programas/conecta-tcc/frontend/src/constants/api.ts
+grep "VITE_API_BASE_URL" conecta-tcc/frontend/src/constants/api.ts
 ```
 Expected: `export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000'`
 
 - [ ] **Step 4: Add `.env.local` to `.gitignore` (it must not be committed)**
 ```bash
-grep -q "\.env\.local" /home/supertgo/programas/conecta-tcc/frontend/.gitignore 2>/dev/null || echo ".env.local" >> /home/supertgo/programas/conecta-tcc/frontend/.gitignore
+grep -q "\.env\.local" conecta-tcc/frontend/.gitignore 2>/dev/null || echo ".env.local" >> conecta-tcc/frontend/.gitignore
 ```
 Expected: no error; `.env.local` line exists in `.gitignore`.
 
 - [ ] **Step 5: Commit `.env.example` and `.gitignore` (never `.env.local`)**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add .env.example .gitignore && git commit -m "chore: add .env.example and ensure .env.local is gitignored"
+cd conecta-tcc/frontend && git add .env.example .gitignore && git commit -m "chore: add .env.example and ensure .env.local is gitignored"
 ```
 
 ---
@@ -163,7 +163,7 @@ describe('NotFoundError', () => {
 
 - [ ] **Step 2: Run tests — expect them to pass (classes already implemented)**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun test src/lib/error.test.ts
+cd conecta-tcc/frontend && npm test src/lib/error.test.ts
 ```
 Expected:
 ```
@@ -184,7 +184,7 @@ Test Files  1 passed (1)
 
 - [ ] **Step 3: Commit**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add src/lib/error.test.ts && git commit -m "test: add unit tests for AppError class hierarchy"
+cd conecta-tcc/frontend && git add src/lib/error.test.ts && git commit -m "test: add unit tests for AppError class hierarchy"
 ```
 
 ---
@@ -323,7 +323,7 @@ describe('parseAxiosError', () => {
 
 - [ ] **Step 2: Run tests — all should pass**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun test src/lib/parse-axios-error.test.ts
+cd conecta-tcc/frontend && npm test src/lib/parse-axios-error.test.ts
 ```
 Expected:
 ```
@@ -347,7 +347,7 @@ if (status === 422 && data?.errors) {
 
 - [ ] **Step 4: Commit**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add src/lib/parse-axios-error.test.ts && git commit -m "test: add unit tests for parseAxiosError covering all HTTP error cases"
+cd conecta-tcc/frontend && git add src/lib/parse-axios-error.test.ts && git commit -m "test: add unit tests for parseAxiosError covering all HTTP error cases"
 ```
 
 ---
@@ -417,7 +417,7 @@ describe('api-client: response interceptor', () => {
 
 - [ ] **Step 2: Run the api-client tests**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun test src/services/api-client.test.ts
+cd conecta-tcc/frontend && npm test src/services/api-client.test.ts
 ```
 Expected:
 ```
@@ -427,7 +427,7 @@ Test Files  1 passed (1)
 
 - [ ] **Step 3: Commit**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add src/services/api-client.test.ts && git commit -m "test: verify api-client interceptors are registered and reads env URL"
+cd conecta-tcc/frontend && git add src/services/api-client.test.ts && git commit -m "test: verify api-client interceptors are registered and reads env URL"
 ```
 
 ---
@@ -440,7 +440,7 @@ cd /home/supertgo/programas/conecta-tcc/frontend && git add src/services/api-cli
 
 - [ ] **Step 1: Start the backend**
 ```bash
-cd /home/supertgo/programas/conecta-tcc && php artisan serve --port=8000 &
+cd conecta-tcc/backend && php artisan serve --port=8000 &
 ```
 Expected: `INFO  Server running on [http://127.0.0.1:8000]`
 
@@ -514,7 +514,7 @@ Expected: returns 200 with empty body or `{"message": "Logged out"}`.
 
 - [ ] **Step 1: Run the full test suite**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun test
+cd conecta-tcc/frontend && npm test
 ```
 Expected:
 ```
@@ -525,11 +525,11 @@ Tests       25 passed (25)
 
 - [ ] **Step 2: Verify TypeScript compilation is clean**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && npx tsc --noEmit
+cd conecta-tcc/frontend && npx tsc --noEmit
 ```
 Expected: exits with code 0, no output.
 
 - [ ] **Step 3: Final commit**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add -A && git commit -m "test: complete api-client and error handling test coverage"
+cd conecta-tcc/frontend && git add -A && git commit -m "test: complete api-client and error handling test coverage"
 ```

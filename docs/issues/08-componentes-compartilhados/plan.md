@@ -21,7 +21,7 @@
 
 Run from `frontend/`:
 ```bash
-bun add -D vitest @vitest/coverage-v8 jsdom @testing-library/react @testing-library/jest-dom @testing-library/user-event
+npm install -D vitest @vitest/coverage-v8 jsdom @testing-library/react @testing-library/jest-dom @testing-library/user-event
 ```
 
 - [ ] **Step 2: Add test script to package.json**
@@ -67,7 +67,7 @@ import '@testing-library/jest-dom'
 
 Run from `frontend/`:
 ```bash
-bunx vitest run --reporter=verbose 2>&1 | head -20
+npx vitest run --reporter=verbose 2>&1 | head -20
 ```
 Expected: "No test files found" or zero test suites, no compilation errors.
 
@@ -131,7 +131,7 @@ describe('StatusBadge', () => {
 - [ ] **Step 2: Run tests to verify they fail**
 
 ```bash
-cd frontend && bunx vitest run src/components/shared/StatusBadge/StatusBadge.test.tsx
+cd frontend && npx vitest run src/components/shared/StatusBadge/StatusBadge.test.tsx
 ```
 Expected: FAIL — "Cannot find module '.'"
 
@@ -139,7 +139,7 @@ Expected: FAIL — "Cannot find module '.'"
 
 Check `frontend/src/components/ui/badge.tsx`. If it doesn't exist:
 ```bash
-cd frontend && bunx shadcn@latest add badge
+cd frontend && npx shadcn@latest add badge
 ```
 
 - [ ] **Step 4: Create StatusBadge component**
@@ -185,7 +185,7 @@ export function StatusBadge({ status }: StatusBadgeProps) {
 - [ ] **Step 5: Run tests to verify they pass**
 
 ```bash
-cd frontend && bunx vitest run src/components/shared/StatusBadge/StatusBadge.test.tsx
+cd frontend && npx vitest run src/components/shared/StatusBadge/StatusBadge.test.tsx
 ```
 Expected: PASS — 6 tests pass
 
@@ -291,7 +291,7 @@ describe('ProposalCard', () => {
 - [ ] **Step 2: Run tests to verify they fail**
 
 ```bash
-cd frontend && bunx vitest run src/components/shared/ProposalCard/ProposalCard.test.tsx
+cd frontend && npx vitest run src/components/shared/ProposalCard/ProposalCard.test.tsx
 ```
 Expected: FAIL — "Cannot find module '.'"
 
@@ -299,7 +299,7 @@ Expected: FAIL — "Cannot find module '.'"
 
 Check `frontend/src/components/ui/card.tsx` and `frontend/src/components/ui/avatar.tsx`. Install any missing:
 ```bash
-cd frontend && bunx shadcn@latest add card avatar badge
+cd frontend && npx shadcn@latest add card avatar badge
 ```
 
 - [ ] **Step 4: Create ProposalCard component**
@@ -389,7 +389,7 @@ export function ProposalCard({ proposal }: ProposalCardProps) {
 - [ ] **Step 5: Run tests to verify they pass**
 
 ```bash
-cd frontend && bunx vitest run src/components/shared/ProposalCard/ProposalCard.test.tsx
+cd frontend && npx vitest run src/components/shared/ProposalCard/ProposalCard.test.tsx
 ```
 Expected: PASS — 7 tests pass
 
@@ -413,7 +413,7 @@ The header is fixed at the top and renders different navigation items based on a
 - [ ] **Step 1: Install required Shadcn components**
 
 ```bash
-cd frontend && bunx shadcn@latest add dropdown-menu sheet separator
+cd frontend && npx shadcn@latest add dropdown-menu sheet separator
 ```
 
 - [ ] **Step 2: Create NavLink helper component**
@@ -794,14 +794,14 @@ declare module '@tanstack/react-router' {
 - [ ] **Step 2: Verify TypeScript compiles**
 
 ```bash
-cd frontend && bunx tsc --noEmit
+cd frontend && npx tsc --noEmit
 ```
 Expected: no errors
 
 - [ ] **Step 3: Run all tests to confirm nothing broke**
 
 ```bash
-cd frontend && bunx vitest run
+cd frontend && npx vitest run
 ```
 Expected: all tests pass
 

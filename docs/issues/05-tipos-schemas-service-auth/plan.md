@@ -19,13 +19,13 @@
 
 - [ ] **Step 1: Write failing test to confirm MSW is absent**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/services/auth.service.test.ts --reporter=verbose 2>&1 | head -20
+cd conecta-tcc/frontend && npx vitest run src/services/auth.service.test.ts --reporter=verbose 2>&1 | head -20
 ```
 Expected: FAIL — file not found or MSW not installed.
 
 - [ ] **Step 2: Install MSW**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun add -D msw
+cd conecta-tcc/frontend && npm install -D msw
 ```
 
 - [ ] **Step 3: Create MSW handlers for auth endpoints**
@@ -127,8 +127,8 @@ afterAll(() => server.close())
 
 - [ ] **Step 6: Commit**
 ```bash
-git -C /home/supertgo/programas/conecta-tcc add frontend/src/test/handlers.ts frontend/src/test/server.ts frontend/src/test/setup.ts
-git -C /home/supertgo/programas/conecta-tcc commit -m "test: add MSW v2 server setup with auth endpoint handlers"
+git -C conecta-tcc add frontend/src/test/handlers.ts frontend/src/test/server.ts frontend/src/test/setup.ts
+git -C conecta-tcc commit -m "test: add MSW v2 server setup with auth endpoint handlers"
 ```
 
 ---
@@ -220,7 +220,7 @@ describe('loginSchema', () => {
 
 - [ ] **Step 2: Run test — expect failure**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/features/auth/schemas/login-schema.test.ts --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/features/auth/schemas/login-schema.test.ts --reporter=verbose
 ```
 Expected: FAIL — no vitest config or import path errors.
 
@@ -237,14 +237,14 @@ No changes needed.
 
 - [ ] **Step 4: Run test — expect pass**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/features/auth/schemas/login-schema.test.ts --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/features/auth/schemas/login-schema.test.ts --reporter=verbose
 ```
 Expected: PASS all 9 tests.
 
 - [ ] **Step 5: Commit**
 ```bash
-git -C /home/supertgo/programas/conecta-tcc add frontend/src/features/auth/schemas/login-schema.test.ts
-git -C /home/supertgo/programas/conecta-tcc commit -m "test: unit tests for loginSchema email/password validation"
+git -C conecta-tcc add frontend/src/features/auth/schemas/login-schema.test.ts
+git -C conecta-tcc commit -m "test: unit tests for loginSchema email/password validation"
 ```
 
 ---
@@ -451,7 +451,7 @@ describe('registerSchema', () => {
 
 - [ ] **Step 2: Run test — expect failure**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/features/auth/schemas/register-schema.test.ts --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/features/auth/schemas/register-schema.test.ts --reporter=verbose
 ```
 Expected: FAIL — no vitest config or import errors.
 
@@ -461,14 +461,14 @@ The existing `frontend/src/features/auth/schemas/index.ts` already implements th
 
 - [ ] **Step 4: Run test — expect pass**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/features/auth/schemas/register-schema.test.ts --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/features/auth/schemas/register-schema.test.ts --reporter=verbose
 ```
 Expected: PASS all 17 tests.
 
 - [ ] **Step 5: Commit**
 ```bash
-git -C /home/supertgo/programas/conecta-tcc add frontend/src/features/auth/schemas/register-schema.test.ts
-git -C /home/supertgo/programas/conecta-tcc commit -m "test: unit tests for registerSchema all fields including password mismatch"
+git -C conecta-tcc add frontend/src/features/auth/schemas/register-schema.test.ts
+git -C conecta-tcc commit -m "test: unit tests for registerSchema all fields including password mismatch"
 ```
 
 ---
@@ -605,7 +605,7 @@ describe('authService', () => {
 
 - [ ] **Step 2: Run test — expect failure**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/services/auth.service.test.ts --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/services/auth.service.test.ts --reporter=verbose
 ```
 Expected: FAIL — no vitest config or MSW not installed yet.
 
@@ -628,14 +628,14 @@ This covers all fields from `GET /me → { data: User }`. The MSW handler return
 
 - [ ] **Step 4: Run test — expect pass**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/services/auth.service.test.ts --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/services/auth.service.test.ts --reporter=verbose
 ```
 Expected: PASS all 9 tests.
 
 - [ ] **Step 5: Commit**
 ```bash
-git -C /home/supertgo/programas/conecta-tcc add frontend/src/services/auth.service.test.ts
-git -C /home/supertgo/programas/conecta-tcc commit -m "test: integration tests for authService using MSW mocked endpoints"
+git -C conecta-tcc add frontend/src/services/auth.service.test.ts
+git -C conecta-tcc commit -m "test: integration tests for authService using MSW mocked endpoints"
 ```
 
 ---
@@ -780,7 +780,7 @@ describe('useMe', () => {
 
 - [ ] **Step 2: Run test — expect failure**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/features/auth/hooks/auth-hooks.test.tsx --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/features/auth/hooks/auth-hooks.test.tsx --reporter=verbose
 ```
 Expected: FAIL — no test infrastructure or import errors.
 
@@ -790,18 +790,18 @@ The hooks in `frontend/src/features/auth/hooks/index.ts` already call `authServi
 
 - [ ] **Step 4: Run test — expect pass**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/features/auth/hooks/auth-hooks.test.tsx --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/features/auth/hooks/auth-hooks.test.tsx --reporter=verbose
 ```
 Expected: PASS all 5 tests.
 
 - [ ] **Step 5: Run full suite**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run --reporter=verbose
 ```
 Expected: all tests PASS.
 
 - [ ] **Step 6: Commit**
 ```bash
-git -C /home/supertgo/programas/conecta-tcc add frontend/src/features/auth/hooks/auth-hooks.test.tsx
-git -C /home/supertgo/programas/conecta-tcc commit -m "test: integration tests for useLogin/useRegister/useMe hooks with MSW"
+git -C conecta-tcc add frontend/src/features/auth/hooks/auth-hooks.test.tsx
+git -C conecta-tcc commit -m "test: integration tests for useLogin/useRegister/useMe hooks with MSW"
 ```

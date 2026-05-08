@@ -211,7 +211,7 @@ describe('ApplicationCard', () => {
 - [ ] **Step 2: Run to verify failure**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun test src/features/proposals/components/ApplicationCard.test.tsx
+cd conecta-tcc/frontend && npm test src/features/proposals/components/ApplicationCard.test.tsx
 ```
 
 Expected: FAIL — module not found.
@@ -337,7 +337,7 @@ export function ApplicationCard({
 - [ ] **Step 4: Run to verify pass**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun test src/features/proposals/components/ApplicationCard.test.tsx
+cd conecta-tcc/frontend && npm test src/features/proposals/components/ApplicationCard.test.tsx
 ```
 
 Expected: PASS — 10 tests.
@@ -345,7 +345,7 @@ Expected: PASS — 10 tests.
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add src/features/proposals/components/ApplicationCard.tsx src/features/proposals/components/ApplicationCard.test.tsx && git commit -m "feat: add ApplicationCard with all authentication/status states"
+cd conecta-tcc/frontend && git add src/features/proposals/components/ApplicationCard.tsx src/features/proposals/components/ApplicationCard.test.tsx && git commit -m "feat: add ApplicationCard with all authentication/status states"
 ```
 
 ---
@@ -574,7 +574,7 @@ describe('ProposalDetailPage', () => {
 - [ ] **Step 3: Run to verify failure**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun test src/pages/proposal-detail/ProposalDetailPage.test.tsx
+cd conecta-tcc/frontend && npm test src/pages/proposal-detail/ProposalDetailPage.test.tsx
 ```
 
 Expected: FAIL — stub renders only `<h1>Proposta #42</h1>`, multiple assertions fail.
@@ -772,7 +772,7 @@ export default function ProposalDetailPage() {
 - [ ] **Step 6: Run to verify pass**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun test src/pages/proposal-detail/ProposalDetailPage.test.tsx
+cd conecta-tcc/frontend && npm test src/pages/proposal-detail/ProposalDetailPage.test.tsx
 ```
 
 Expected: PASS — 6 tests.
@@ -780,5 +780,5 @@ Expected: PASS — 6 tests.
 - [ ] **Step 7: Commit**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add src/pages/proposal-detail/index.tsx src/pages/proposal-detail/ProposalDetailPage.test.tsx src/test/server.ts src/main.tsx && git commit -m "feat: implement ProposalDetailPage with ApplicationCard and toast feedback"
+cd conecta-tcc/frontend && git add src/pages/proposal-detail/index.tsx src/pages/proposal-detail/ProposalDetailPage.test.tsx src/test/server.ts src/main.tsx && git commit -m "feat: implement ProposalDetailPage with ApplicationCard and toast feedback"
 ```

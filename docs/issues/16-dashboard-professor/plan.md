@@ -46,8 +46,8 @@ describe('KpiCard', () => {
 - [ ] **Step 2: Run tests — expect failure**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun test src/features/proposals/components/KpiCard.test.tsx
+cd conecta-tcc/frontend
+npm test src/features/proposals/components/KpiCard.test.tsx
 ```
 
 Expected: FAIL — `KpiCard` module not found.
@@ -81,8 +81,8 @@ export function KpiCard({ label, value }: KpiCardProps) {
 - [ ] **Step 4: Run tests — expect pass**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun test src/features/proposals/components/KpiCard.test.tsx
+cd conecta-tcc/frontend
+npm test src/features/proposals/components/KpiCard.test.tsx
 ```
 
 Expected: PASS — 3 tests green.
@@ -90,7 +90,7 @@ Expected: PASS — 3 tests green.
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
+cd conecta-tcc/frontend
 git add src/features/proposals/components/KpiCard.tsx src/features/proposals/components/KpiCard.test.tsx
 git commit -m "feat: add KpiCard component for dashboard metrics"
 ```
@@ -153,8 +153,8 @@ describe('RejectDialog', () => {
 - [ ] **Step 2: Run tests — expect failure**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun test src/features/applications/components/RejectDialog.test.tsx
+cd conecta-tcc/frontend
+npm test src/features/applications/components/RejectDialog.test.tsx
 ```
 
 Expected: FAIL — `RejectDialog` module not found.
@@ -229,8 +229,8 @@ export function RejectDialog({ onConfirm, isLoading }: RejectDialogProps) {
 - [ ] **Step 4: Run tests — expect pass**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun test src/features/applications/components/RejectDialog.test.tsx
+cd conecta-tcc/frontend
+npm test src/features/applications/components/RejectDialog.test.tsx
 ```
 
 Expected: PASS — all 5 tests green.
@@ -238,7 +238,7 @@ Expected: PASS — all 5 tests green.
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
+cd conecta-tcc/frontend
 git add src/features/applications/components/RejectDialog.tsx src/features/applications/components/RejectDialog.test.tsx
 git commit -m "feat: add RejectDialog component with feedback textarea"
 ```
@@ -341,8 +341,8 @@ describe('PendingApplicationCard', () => {
 - [ ] **Step 2: Run tests — expect failure**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun test src/features/applications/components/PendingApplicationCard.test.tsx
+cd conecta-tcc/frontend
+npm test src/features/applications/components/PendingApplicationCard.test.tsx
 ```
 
 Expected: FAIL — `PendingApplicationCard` module not found.
@@ -433,8 +433,8 @@ export function PendingApplicationCard({
 - [ ] **Step 4: Run tests — expect pass**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun test src/features/applications/components/PendingApplicationCard.test.tsx
+cd conecta-tcc/frontend
+npm test src/features/applications/components/PendingApplicationCard.test.tsx
 ```
 
 Expected: PASS — all 8 tests green.
@@ -442,7 +442,7 @@ Expected: PASS — all 8 tests green.
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
+cd conecta-tcc/frontend
 git add src/features/applications/components/PendingApplicationCard.tsx src/features/applications/components/PendingApplicationCard.test.tsx
 git commit -m "feat: add PendingApplicationCard with approve button and reject dialog"
 ```
@@ -496,8 +496,8 @@ describe('DeleteProposalDialog', () => {
 - [ ] **Step 2: Run tests — expect failure**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun test src/features/proposals/components/DeleteProposalDialog.test.tsx
+cd conecta-tcc/frontend
+npm test src/features/proposals/components/DeleteProposalDialog.test.tsx
 ```
 
 Expected: FAIL — `DeleteProposalDialog` module not found.
@@ -564,8 +564,8 @@ export function DeleteProposalDialog({ onConfirm, isLoading }: DeleteProposalDia
 - [ ] **Step 4: Run tests — expect pass**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun test src/features/proposals/components/DeleteProposalDialog.test.tsx
+cd conecta-tcc/frontend
+npm test src/features/proposals/components/DeleteProposalDialog.test.tsx
 ```
 
 Expected: PASS — all 4 tests green.
@@ -573,7 +573,7 @@ Expected: PASS — all 4 tests green.
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
+cd conecta-tcc/frontend
 git add src/features/proposals/components/DeleteProposalDialog.tsx src/features/proposals/components/DeleteProposalDialog.test.tsx
 git commit -m "feat: add DeleteProposalDialog component with confirmation dialog"
 ```
@@ -586,13 +586,13 @@ git commit -m "feat: add DeleteProposalDialog component with confirmation dialog
 - Modify: `frontend/src/pages/dashboard/index.tsx`
 - Create: `frontend/src/pages/dashboard/index.test.tsx`
 
-> This task assumes the Sonner toast library is installed. If not, install it: `bun add sonner` and add `<Toaster />` to `frontend/src/main.tsx`.
+> This task assumes the Sonner toast library is installed. If not, install it: `npm install sonner` and add `<Toaster />` to `frontend/src/main.tsx`.
 
 - [ ] **Step 1: Install Sonner (if not present)**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun add sonner
+cd conecta-tcc/frontend
+npm install sonner
 ```
 
 Then open `frontend/src/main.tsx` and add the Toaster after `<RouterProvider>`:
@@ -799,8 +799,8 @@ describe('DashboardPage', () => {
 - [ ] **Step 3: Run tests — expect failure**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun test src/pages/dashboard/index.test.tsx
+cd conecta-tcc/frontend
+npm test src/pages/dashboard/index.test.tsx
 ```
 
 Expected: FAIL — `DashboardPage` is still a stub.
@@ -1014,8 +1014,8 @@ export default function DashboardPage() {
 - [ ] **Step 5: Run tests — expect pass**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun test src/pages/dashboard/index.test.tsx
+cd conecta-tcc/frontend
+npm test src/pages/dashboard/index.test.tsx
 ```
 
 Expected: PASS — all 10 tests green.
@@ -1023,8 +1023,8 @@ Expected: PASS — all 10 tests green.
 - [ ] **Step 6: Verify TypeScript**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bunx tsc --noEmit
+cd conecta-tcc/frontend
+npx tsc --noEmit
 ```
 
 Expected: no errors.
@@ -1032,8 +1032,8 @@ Expected: no errors.
 - [ ] **Step 7: Run full test suite**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun test
+cd conecta-tcc/frontend
+npm test
 ```
 
 Expected: PASS — all tests across all files green.
@@ -1041,7 +1041,7 @@ Expected: PASS — all tests across all files green.
 - [ ] **Step 8: Commit**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
+cd conecta-tcc/frontend
 git add src/pages/dashboard/index.tsx src/pages/dashboard/index.test.tsx src/main.tsx
 git commit -m "feat: implement professor Dashboard with KPI cards, proposals table, and pending applications review"
 ```

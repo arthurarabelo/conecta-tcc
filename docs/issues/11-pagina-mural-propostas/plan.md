@@ -23,7 +23,7 @@
 - [ ] **Step 1: Install MSW and testing deps**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun add -d msw @testing-library/jest-dom @testing-library/react @testing-library/user-event vitest jsdom
+cd conecta-tcc/frontend && npm install --save-dev msw @testing-library/jest-dom @testing-library/react @testing-library/user-event vitest jsdom
 ```
 
 Expected: all packages appear in `devDependencies` in `package.json`.
@@ -111,7 +111,7 @@ Ensure `compilerOptions` in `frontend/tsconfig.json` contains:
 - [ ] **Step 7: Commit**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add package.json vite.config.ts src/test/setup.ts src/test/server.ts tsconfig.json && git commit -m "chore: add vitest + MSW test infrastructure"
+cd conecta-tcc/frontend && git add package.json vite.config.ts src/test/setup.ts src/test/server.ts tsconfig.json && git commit -m "chore: add vitest + MSW test infrastructure"
 ```
 
 ---
@@ -204,7 +204,7 @@ describe('ProposalFilters', () => {
 - [ ] **Step 2: Run to verify failure**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun test src/features/proposals/components/ProposalFilters.test.tsx
+cd conecta-tcc/frontend && npm test src/features/proposals/components/ProposalFilters.test.tsx
 ```
 
 Expected: FAIL — module not found.
@@ -328,7 +328,7 @@ export function ProposalFilters({
 - [ ] **Step 4: Run to verify pass**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun test src/features/proposals/components/ProposalFilters.test.tsx
+cd conecta-tcc/frontend && npm test src/features/proposals/components/ProposalFilters.test.tsx
 ```
 
 Expected: PASS — 4 tests.
@@ -336,7 +336,7 @@ Expected: PASS — 4 tests.
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add src/features/proposals/components/ProposalFilters.tsx src/features/proposals/components/ProposalFilters.test.tsx && git commit -m "feat: add ProposalFilters component with area, department and status filters"
+cd conecta-tcc/frontend && git add src/features/proposals/components/ProposalFilters.tsx src/features/proposals/components/ProposalFilters.test.tsx && git commit -m "feat: add ProposalFilters component with area, department and status filters"
 ```
 
 ---
@@ -539,7 +539,7 @@ describe('ProposalsPage', () => {
 - [ ] **Step 3: Run to verify failure**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun test src/pages/proposals/ProposalsPage.test.tsx
+cd conecta-tcc/frontend && npm test src/pages/proposals/ProposalsPage.test.tsx
 ```
 
 Expected: FAIL — `ProposalsPage` renders stub content, skeleton data-testid not found.
@@ -693,7 +693,7 @@ const proposalsRoute = createRoute({
 - [ ] **Step 6: Run to verify pass**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun test src/pages/proposals/ProposalsPage.test.tsx
+cd conecta-tcc/frontend && npm test src/pages/proposals/ProposalsPage.test.tsx
 ```
 
 Expected: PASS — 6 tests.
@@ -701,5 +701,5 @@ Expected: PASS — 6 tests.
 - [ ] **Step 7: Commit**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add src/pages/proposals/index.tsx src/pages/proposals/ProposalsPage.test.tsx src/test/server.ts src/router.tsx && git commit -m "feat: implement ProposalsPage with filters, skeleton, empty state and pagination"
+cd conecta-tcc/frontend && git add src/pages/proposals/index.tsx src/pages/proposals/ProposalsPage.test.tsx src/test/server.ts src/router.tsx && git commit -m "feat: implement ProposalsPage with filters, skeleton, empty state and pagination"
 ```

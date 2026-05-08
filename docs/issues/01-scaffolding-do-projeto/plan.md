@@ -4,7 +4,7 @@
 
 **Goal:** Bootstrap the frontend development environment with working dev server, test infrastructure, ESLint, Prettier, and a passing smoke test.
 
-**Architecture:** The project is already scaffolded with Vite 7 + React 19 + TanStack Router. This plan installs dependencies, adds Vitest with jsdom and React Testing Library, configures ESLint and Prettier, verifies the `@/` path alias works, and confirms both `bun dev` and `bun build` succeed without errors.
+**Architecture:** The project is already scaffolded with Vite 7 + React 19 + TanStack Router. This plan installs dependencies, adds Vitest with jsdom and React Testing Library, configures ESLint and Prettier, verifies the `@/` path alias works, and confirms both `npm run dev` and `npm run build` succeed without errors.
 
 **Tech Stack:** Vite 7, Vitest, @testing-library/react, @testing-library/user-event, jsdom, eslint-plugin-react-hooks, typescript-eslint, Prettier
 
@@ -13,29 +13,29 @@
 ### Task 1: Install Dependencies
 
 **Files:**
-- Modify: `frontend/package.json` (devDependencies section will be updated by bun)
+- Modify: `frontend/package.json` (devDependencies section will be updated by npm)
 
 - [ ] **Step 1: Install all dependencies**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun install
+cd conecta-tcc/frontend && npm install
 ```
-Expected: `bun install` completes with no errors and creates/updates `bun.lockb`.
+Expected: `npm install` completes with no errors and creates/updates `bun.lockb`.
 
 - [ ] **Step 2: Install test devDependencies**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun add -d vitest @testing-library/react @testing-library/user-event @testing-library/jest-dom jsdom typescript-eslint
+cd conecta-tcc/frontend && npm install --save-dev vitest @testing-library/react @testing-library/user-event @testing-library/jest-dom jsdom typescript-eslint
 ```
 Expected: packages added to `devDependencies` in `package.json`.
 
 - [ ] **Step 3: Verify node_modules are present**
 ```bash
-ls /home/supertgo/programas/conecta-tcc/frontend/node_modules/.bin/vitest
+ls conecta-tcc/frontend/node_modules/.bin/vitest
 ```
 Expected: path printed (file exists).
 
 - [ ] **Step 4: Commit**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add package.json bun.lockb && git commit -m "chore: install dev dependencies (vitest, RTL, typescript-eslint)"
+cd conecta-tcc/frontend && git add package.json bun.lockb && git commit -m "chore: install dev dependencies (vitest, RTL, typescript-eslint)"
 ```
 
 ---
@@ -146,7 +146,7 @@ Add `"types": ["@testing-library/jest-dom"]` under `compilerOptions` and ensure 
 
 - [ ] **Step 5: Commit**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add vite.config.ts src/test/setup.ts package.json tsconfig.json && git commit -m "chore: configure vitest with jsdom and React Testing Library"
+cd conecta-tcc/frontend && git add vite.config.ts src/test/setup.ts package.json tsconfig.json && git commit -m "chore: configure vitest with jsdom and React Testing Library"
 ```
 
 ---
@@ -182,7 +182,7 @@ describe('Smoke test', () => {
 
 - [ ] **Step 2: Run the smoke test and confirm it FAILS before setup is correct (expected: it should pass)**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun test
+cd conecta-tcc/frontend && npm test
 ```
 Expected output contains:
 ```
@@ -194,7 +194,7 @@ Test Files  1 passed (1)
 
 - [ ] **Step 3: Commit**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add src/test/smoke.test.tsx && git commit -m "test: add smoke test for component rendering and path alias"
+cd conecta-tcc/frontend && git add src/test/smoke.test.tsx && git commit -m "test: add smoke test for component rendering and path alias"
 ```
 
 ---
@@ -236,19 +236,19 @@ export default tseslint.config(
 
 - [ ] **Step 2: Install `globals` package (needed by eslint.config.js)**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun add -d globals
+cd conecta-tcc/frontend && npm install --save-dev globals
 ```
 Expected: `globals` added to `devDependencies`.
 
 - [ ] **Step 3: Run lint to verify config is valid**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun lint
+cd conecta-tcc/frontend && npm run lint
 ```
 Expected: exits with code 0 (no output or warnings only — no errors).
 
 - [ ] **Step 4: Commit**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add eslint.config.js package.json bun.lockb && git commit -m "chore: add eslint config with react-hooks and typescript-eslint rules"
+cd conecta-tcc/frontend && git add eslint.config.js package.json bun.lockb && git commit -m "chore: add eslint config with react-hooks and typescript-eslint rules"
 ```
 
 ---
@@ -275,7 +275,7 @@ cd /home/supertgo/programas/conecta-tcc/frontend && git add eslint.config.js pac
 
 - [ ] **Step 2: Run Prettier to verify it works**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun format
+cd conecta-tcc/frontend && npm run format
 ```
 Expected: formats files in `src/` with no errors.
 
@@ -289,7 +289,7 @@ bun.lockb
 
 - [ ] **Step 4: Commit**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add .prettierrc .prettierignore && git commit -m "chore: add prettier config with project code style"
+cd conecta-tcc/frontend && git add .prettierrc .prettierignore && git commit -m "chore: add prettier config with project code style"
 ```
 
 ---
@@ -319,7 +319,7 @@ If not, add it inside the `<head>` tag.
 
 - [ ] **Step 3: Commit**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add public/favicon.svg && git commit -m "chore: add Conecta TCC favicon SVG"
+cd conecta-tcc/frontend && git add public/favicon.svg && git commit -m "chore: add Conecta TCC favicon SVG"
 ```
 
 ---
@@ -330,7 +330,7 @@ cd /home/supertgo/programas/conecta-tcc/frontend && git add public/favicon.svg &
 
 - [ ] **Step 1: Run all tests**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun test
+cd conecta-tcc/frontend && npm test
 ```
 Expected:
 ```
@@ -340,23 +340,23 @@ Tests       2 passed (2)
 
 - [ ] **Step 2: Run lint**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun lint
+cd conecta-tcc/frontend && npm run lint
 ```
 Expected: exits with code 0.
 
 - [ ] **Step 3: Run build**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun build
+cd conecta-tcc/frontend && npm run build
 ```
 Expected: ends with `✓ built in` and creates `dist/` folder without TypeScript errors.
 
 - [ ] **Step 4: Verify dev server starts**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && timeout 10 bun dev || true
+cd conecta-tcc/frontend && timeout 10 npm run dev || true
 ```
 Expected: output contains `Local: http://localhost:5173/` before timeout.
 
 - [ ] **Step 5: Commit final state**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add -A && git commit -m "chore: scaffolding complete — dev/build/lint/test all passing"
+cd conecta-tcc/frontend && git add -A && git commit -m "chore: scaffolding complete — dev/build/lint/test all passing"
 ```

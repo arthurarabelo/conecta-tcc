@@ -213,7 +213,7 @@ describe('ProtectedRoute', () => {
 
 - [ ] **Step 2: Run test — expect failure**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/components/shared/ProtectedRoute.test.tsx --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/components/shared/ProtectedRoute.test.tsx --reporter=verbose
 ```
 Expected: FAIL — ProtectedRoute.tsx does not exist yet.
 
@@ -255,14 +255,14 @@ export function ProtectedRoute({ role, children }: ProtectedRouteProps) {
 
 - [ ] **Step 4: Run test — expect pass**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/components/shared/ProtectedRoute.test.tsx --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/components/shared/ProtectedRoute.test.tsx --reporter=verbose
 ```
 Expected: PASS all 10 tests.
 
 - [ ] **Step 5: Commit**
 ```bash
-git -C /home/supertgo/programas/conecta-tcc add frontend/src/components/shared/ProtectedRoute.tsx frontend/src/components/shared/ProtectedRoute.test.tsx
-git -C /home/supertgo/programas/conecta-tcc commit -m "feat: add ProtectedRoute component with role-based redirect logic"
+git -C conecta-tcc add frontend/src/components/shared/ProtectedRoute.tsx frontend/src/components/shared/ProtectedRoute.test.tsx
+git -C conecta-tcc commit -m "feat: add ProtectedRoute component with role-based redirect logic"
 ```
 
 ---
@@ -394,7 +394,7 @@ describe('DashboardPage route protection', () => {
 
 - [ ] **Step 3: Run tests — expect failure**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/pages/my-applications/my-applications-page.test.tsx src/pages/dashboard/dashboard-page.test.tsx --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/pages/my-applications/my-applications-page.test.tsx src/pages/dashboard/dashboard-page.test.tsx --reporter=verbose
 ```
 Expected: FAIL — pages don't use ProtectedRoute yet.
 
@@ -452,14 +452,14 @@ export default function DashboardPage() {
 
 - [ ] **Step 6: Run tests — expect pass**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/pages/my-applications/my-applications-page.test.tsx src/pages/dashboard/dashboard-page.test.tsx --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/pages/my-applications/my-applications-page.test.tsx src/pages/dashboard/dashboard-page.test.tsx --reporter=verbose
 ```
 Expected: PASS all 6 tests.
 
 - [ ] **Step 7: Commit**
 ```bash
-git -C /home/supertgo/programas/conecta-tcc add frontend/src/pages/my-applications/index.tsx frontend/src/pages/dashboard/index.tsx frontend/src/pages/my-applications/my-applications-page.test.tsx frontend/src/pages/dashboard/dashboard-page.test.tsx
-git -C /home/supertgo/programas/conecta-tcc commit -m "feat: wrap MyApplicationsPage and DashboardPage with ProtectedRoute"
+git -C conecta-tcc add frontend/src/pages/my-applications/index.tsx frontend/src/pages/dashboard/index.tsx frontend/src/pages/my-applications/my-applications-page.test.tsx frontend/src/pages/dashboard/dashboard-page.test.tsx
+git -C conecta-tcc commit -m "feat: wrap MyApplicationsPage and DashboardPage with ProtectedRoute"
 ```
 
 ---
@@ -640,7 +640,7 @@ describe('Route protection integration', () => {
 
 - [ ] **Step 2: Run test — expect failure**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/router.test.tsx --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/router.test.tsx --reporter=verbose
 ```
 Expected: FAIL — ProtectedRoute not yet wired in router context or import errors.
 
@@ -650,20 +650,20 @@ With ProtectedRoute implemented in Task 1 and the pages wired in Task 2, the int
 
 - [ ] **Step 4: Run test — expect pass**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run src/router.test.tsx --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/router.test.tsx --reporter=verbose
 ```
 Expected: PASS all 6 tests.
 
 - [ ] **Step 5: Run full suite**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run --reporter=verbose
 ```
 Expected: all tests PASS.
 
 - [ ] **Step 6: Commit**
 ```bash
-git -C /home/supertgo/programas/conecta-tcc add frontend/src/router.test.tsx
-git -C /home/supertgo/programas/conecta-tcc commit -m "test: router integration tests with createMemoryHistory for route protection"
+git -C conecta-tcc add frontend/src/router.test.tsx
+git -C conecta-tcc commit -m "test: router integration tests with createMemoryHistory for route protection"
 ```
 
 ---
@@ -681,12 +681,12 @@ export { ProtectedRoute } from './ProtectedRoute'
 
 - [ ] **Step 2: Verify all tests still pass**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bunx vitest run --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run --reporter=verbose
 ```
 Expected: all tests PASS.
 
 - [ ] **Step 3: Commit**
 ```bash
-git -C /home/supertgo/programas/conecta-tcc add frontend/src/components/shared/index.ts
-git -C /home/supertgo/programas/conecta-tcc commit -m "chore: add barrel export for shared components"
+git -C conecta-tcc add frontend/src/components/shared/index.ts
+git -C conecta-tcc commit -m "chore: add barrel export for shared components"
 ```

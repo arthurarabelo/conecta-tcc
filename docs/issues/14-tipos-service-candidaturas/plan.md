@@ -21,8 +21,8 @@
 - [ ] **Step 1: Install Vitest, RTL and MSW**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun add -d vitest @vitest/coverage-v8 @testing-library/react @testing-library/jest-dom @testing-library/user-event msw@^2 jsdom happy-dom
+cd conecta-tcc/frontend
+npm install --save-dev vitest @vitest/coverage-v8 @testing-library/react @testing-library/jest-dom @testing-library/user-event msw@^2 jsdom happy-dom
 ```
 
 Expected: packages added to `devDependencies` in `package.json`.
@@ -223,8 +223,8 @@ export const server = setupServer(...handlers)
 - [ ] **Step 6: Verify server file compiles**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bunx tsc --noEmit
+cd conecta-tcc/frontend
+npx tsc --noEmit
 ```
 
 Expected: no errors.
@@ -232,7 +232,7 @@ Expected: no errors.
 - [ ] **Step 7: Commit**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
+cd conecta-tcc/frontend
 git add src/test/server.ts src/test/setup.ts vite.config.ts package.json
 git commit -m "test: add MSW server and Vitest setup for application tests"
 ```
@@ -332,8 +332,8 @@ describe('applicationsService.reject', () => {
 - [ ] **Step 2: Run tests — expect failure (no test infrastructure yet)**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun test src/services/applications.service.test.ts
+cd conecta-tcc/frontend
+npm test src/services/applications.service.test.ts
 ```
 
 Expected: FAIL — module resolution errors because MSW/Vitest not yet fully configured (Task 1 must be done first). If Task 1 is complete, tests may fail with network errors because the `apiClient` base URL points to `localhost:8000` and MSW intercepts at that level.
@@ -350,8 +350,8 @@ API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000'
 - [ ] **Step 4: Run tests — expect pass**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun test src/services/applications.service.test.ts
+cd conecta-tcc/frontend
+npm test src/services/applications.service.test.ts
 ```
 
 Expected: PASS — all 7 tests green.
@@ -359,7 +359,7 @@ Expected: PASS — all 7 tests green.
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
+cd conecta-tcc/frontend
 git add src/services/applications.service.test.ts
 git commit -m "test: add unit tests for applicationsService (list, approve, reject, 403 handling)"
 ```
@@ -549,8 +549,8 @@ describe('useRejectApplication', () => {
 - [ ] **Step 2: Run tests — expect failure**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun test src/features/applications/hooks/index.test.tsx
+cd conecta-tcc/frontend
+npm test src/features/applications/hooks/index.test.tsx
 ```
 
 Expected: FAIL — either missing MSW setup (if Task 1 incomplete) or real network calls failing.
@@ -558,8 +558,8 @@ Expected: FAIL — either missing MSW setup (if Task 1 incomplete) or real netwo
 - [ ] **Step 3: Run tests — expect pass (after Task 1 is complete)**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun test src/features/applications/hooks/index.test.tsx
+cd conecta-tcc/frontend
+npm test src/features/applications/hooks/index.test.tsx
 ```
 
 Expected: PASS — all 9 tests green.
@@ -567,8 +567,8 @@ Expected: PASS — all 9 tests green.
 - [ ] **Step 4: Run all tests together**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun test
+cd conecta-tcc/frontend
+npm test
 ```
 
 Expected: PASS — all tests from Tasks 2 and 3 green.
@@ -576,7 +576,7 @@ Expected: PASS — all tests from Tasks 2 and 3 green.
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
+cd conecta-tcc/frontend
 git add src/features/applications/hooks/index.test.tsx
 git commit -m "test: add integration tests for useApproveApplication and useRejectApplication hooks"
 ```
@@ -621,8 +621,8 @@ describe('ApplicationStatus type', () => {
 - [ ] **Step 2: Run test — expect pass (the types already exist)**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
-bun test src/types/models.test.ts
+cd conecta-tcc/frontend
+npm test src/types/models.test.ts
 ```
 
 Expected: PASS — 4 tests green.
@@ -630,7 +630,7 @@ Expected: PASS — 4 tests green.
 - [ ] **Step 3: Commit**
 
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend
+cd conecta-tcc/frontend
 git add src/types/models.test.ts
 git commit -m "test: verify ApplicationStatus covers pending, approved, rejected"
 ```

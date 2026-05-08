@@ -22,31 +22,31 @@
 
 - [ ] **Step 1: Add button, input, label**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && npx shadcn@latest add button input label --yes
+cd conecta-tcc/frontend && npx shadcn@latest add button input label --yes
 ```
 Expected: files created at `src/components/ui/button.tsx`, `src/components/ui/input.tsx`, `src/components/ui/label.tsx`.
 
 - [ ] **Step 2: Add textarea and checkbox**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && npx shadcn@latest add textarea checkbox --yes
+cd conecta-tcc/frontend && npx shadcn@latest add textarea checkbox --yes
 ```
 Expected: files created at `src/components/ui/textarea.tsx`, `src/components/ui/checkbox.tsx`.
 
 - [ ] **Step 3: Add form (depends on label and input)**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && npx shadcn@latest add form --yes
+cd conecta-tcc/frontend && npx shadcn@latest add form --yes
 ```
 Expected: file created at `src/components/ui/form.tsx`.
 
 - [ ] **Step 4: Verify files exist**
 ```bash
-ls /home/supertgo/programas/conecta-tcc/frontend/src/components/ui/
+ls conecta-tcc/frontend/src/components/ui/
 ```
 Expected: output includes `button.tsx`, `input.tsx`, `label.tsx`, `textarea.tsx`, `checkbox.tsx`, `form.tsx`.
 
 - [ ] **Step 5: Commit**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add src/components/ui/ && git commit -m "feat: add shadcn form and input components (button, input, label, textarea, checkbox, form)"
+cd conecta-tcc/frontend && git add src/components/ui/ && git commit -m "feat: add shadcn form and input components (button, input, label, textarea, checkbox, form)"
 ```
 
 ---
@@ -62,25 +62,25 @@ cd /home/supertgo/programas/conecta-tcc/frontend && git add src/components/ui/ &
 
 - [ ] **Step 1: Add card, badge, separator**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && npx shadcn@latest add card badge separator --yes
+cd conecta-tcc/frontend && npx shadcn@latest add card badge separator --yes
 ```
 Expected: files created at `src/components/ui/card.tsx`, `src/components/ui/badge.tsx`, `src/components/ui/separator.tsx`.
 
 - [ ] **Step 2: Add avatar and skeleton**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && npx shadcn@latest add avatar skeleton --yes
+cd conecta-tcc/frontend && npx shadcn@latest add avatar skeleton --yes
 ```
 Expected: files created at `src/components/ui/avatar.tsx`, `src/components/ui/skeleton.tsx`.
 
 - [ ] **Step 3: Verify files exist**
 ```bash
-ls /home/supertgo/programas/conecta-tcc/frontend/src/components/ui/
+ls conecta-tcc/frontend/src/components/ui/
 ```
 Expected: output includes `card.tsx`, `badge.tsx`, `separator.tsx`, `avatar.tsx`, `skeleton.tsx`.
 
 - [ ] **Step 4: Commit**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add src/components/ui/ && git commit -m "feat: add shadcn display components (card, badge, separator, avatar, skeleton)"
+cd conecta-tcc/frontend && git add src/components/ui/ && git commit -m "feat: add shadcn display components (card, badge, separator, avatar, skeleton)"
 ```
 
 ---
@@ -96,25 +96,25 @@ cd /home/supertgo/programas/conecta-tcc/frontend && git add src/components/ui/ &
 
 - [ ] **Step 1: Add dialog and select**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && npx shadcn@latest add dialog select --yes
+cd conecta-tcc/frontend && npx shadcn@latest add dialog select --yes
 ```
 Expected: files created at `src/components/ui/dialog.tsx`, `src/components/ui/select.tsx`.
 
 - [ ] **Step 2: Add toast and dropdown-menu**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && npx shadcn@latest add toast dropdown-menu --yes
+cd conecta-tcc/frontend && npx shadcn@latest add toast dropdown-menu --yes
 ```
 Expected: files created at `src/components/ui/toast.tsx`, `src/components/ui/toaster.tsx` (shadcn toast adds both), `src/components/ui/dropdown-menu.tsx`.
 
 - [ ] **Step 3: Verify all 15 component files are present**
 ```bash
-ls /home/supertgo/programas/conecta-tcc/frontend/src/components/ui/
+ls conecta-tcc/frontend/src/components/ui/
 ```
 Expected: output includes all of: `avatar.tsx`, `badge.tsx`, `button.tsx`, `card.tsx`, `checkbox.tsx`, `dialog.tsx`, `dropdown-menu.tsx`, `form.tsx`, `input.tsx`, `label.tsx`, `select.tsx`, `separator.tsx`, `skeleton.tsx`, `textarea.tsx`, `toast.tsx`.
 
 - [ ] **Step 4: Commit**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add src/components/ui/ && git commit -m "feat: add shadcn overlay and navigation components (dialog, select, toast, dropdown-menu)"
+cd conecta-tcc/frontend && git add src/components/ui/ && git commit -m "feat: add shadcn overlay and navigation components (dialog, select, toast, dropdown-menu)"
 ```
 
 ---
@@ -167,7 +167,7 @@ describe('Button', () => {
 
 - [ ] **Step 2: Run tests — expect them to PASS (Button is already installed)**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun test src/components/ui/button.test.tsx
+cd conecta-tcc/frontend && npm test src/components/ui/button.test.tsx
 ```
 Expected:
 ```
@@ -182,7 +182,7 @@ Test Files  1 passed (1)
 
 - [ ] **Step 3: Commit**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add src/components/ui/button.test.tsx && git commit -m "test: add Button component unit tests"
+cd conecta-tcc/frontend && git add src/components/ui/button.test.tsx && git commit -m "test: add Button component unit tests"
 ```
 
 ---
@@ -194,13 +194,13 @@ cd /home/supertgo/programas/conecta-tcc/frontend && git add src/components/ui/bu
 
 - [ ] **Step 1: Verify `cn()` is used inside generated components**
 ```bash
-grep -l "cn(" /home/supertgo/programas/conecta-tcc/frontend/src/components/ui/*.tsx
+grep -l "cn(" conecta-tcc/frontend/src/components/ui/*.tsx
 ```
 Expected: every `.tsx` file in `src/components/ui/` is listed (all components import and use `cn` from `@/lib/utils`).
 
 - [ ] **Step 2: Verify `@/lib/utils` exports `cn` correctly**
 ```bash
-grep "from '@/lib/utils'" /home/supertgo/programas/conecta-tcc/frontend/src/components/ui/button.tsx
+grep "from '@/lib/utils'" conecta-tcc/frontend/src/components/ui/button.tsx
 ```
 Expected: line like `import { cn } from '@/lib/utils'`.
 
@@ -250,7 +250,7 @@ describe('Theme and cn() integration', () => {
 
 - [ ] **Step 4: Run theme integration tests**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun test src/components/ui/theme.test.tsx
+cd conecta-tcc/frontend && npm test src/components/ui/theme.test.tsx
 ```
 Expected:
 ```
@@ -264,13 +264,13 @@ Test Files  1 passed (1)
 
 - [ ] **Step 5: Verify colors.css has required theme variables**
 ```bash
-grep -c "color-primary\|color-destructive\|color-background\|color-foreground" /home/supertgo/programas/conecta-tcc/frontend/src/styles/colors.css
+grep -c "color-primary\|color-destructive\|color-background\|color-foreground" conecta-tcc/frontend/src/styles/colors.css
 ```
 Expected: number >= 4 (all four variables present in `src/styles/colors.css`).
 
 - [ ] **Step 6: Commit**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && git add src/components/ui/theme.test.tsx && git commit -m "test: add theme and cn() integration tests for shadcn components"
+cd conecta-tcc/frontend && git add src/components/ui/theme.test.tsx && git commit -m "test: add theme and cn() integration tests for shadcn components"
 ```
 
 ---
@@ -281,7 +281,7 @@ cd /home/supertgo/programas/conecta-tcc/frontend && git add src/components/ui/th
 
 - [ ] **Step 1: Run all tests**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun test
+cd conecta-tcc/frontend && npm test
 ```
 Expected:
 ```
@@ -291,12 +291,12 @@ Tests       11 passed (11)
 
 - [ ] **Step 2: Run build to confirm no TypeScript errors in generated components**
 ```bash
-cd /home/supertgo/programas/conecta-tcc/frontend && bun build
+cd conecta-tcc/frontend && npm run build
 ```
 Expected: ends with `✓ built in` — no TypeScript compilation errors.
 
 - [ ] **Step 3: Count generated components**
 ```bash
-ls /home/supertgo/programas/conecta-tcc/frontend/src/components/ui/*.tsx | wc -l
+ls conecta-tcc/frontend/src/components/ui/*.tsx | wc -l
 ```
 Expected: number >= 15 (all required components present).

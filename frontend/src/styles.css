@@ -1,0 +1,21 @@
+@import "tailwindcss";
+@import "./styles/colors.css";
+@import "./styles/typography.css";
+@import "./styles/theme.css";
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+  }
+}

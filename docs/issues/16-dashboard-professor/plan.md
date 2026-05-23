@@ -683,8 +683,8 @@ function mockData(proposals: Proposal[], pendingApps: Application[]) {
     links: { first: null, last: null, prev: null, next: null },
   }
   server.use(
-    http.get('http://localhost:8000/proposals', () => HttpResponse.json(proposalResponse)),
-    http.get('http://localhost:8000/applications', () => HttpResponse.json(appResponse)),
+    http.get('http://localhost:8000/api/proposals', () => HttpResponse.json(proposalResponse)),
+    http.get('http://localhost:8000/api/applications', () => HttpResponse.json(appResponse)),
   )
 }
 
@@ -740,7 +740,7 @@ describe('DashboardPage', () => {
     mockData([proposal1], [pendingApp])
     let approveCalledId: number | undefined
     server.use(
-      http.patch('http://localhost:8000/applications/:id/approve', ({ params }) => {
+      http.patch('http://localhost:8000/api/applications/:id/approve', ({ params }) => {
         approveCalledId = Number(params.id)
         const approved = { ...pendingApp, status: 'approved' as const }
         return HttpResponse.json({ data: approved })
@@ -756,7 +756,7 @@ describe('DashboardPage', () => {
     mockData([proposal1], [pendingApp])
     let capturedBody: unknown
     server.use(
-      http.patch('http://localhost:8000/applications/:id/reject', async ({ request }) => {
+      http.patch('http://localhost:8000/api/applications/:id/reject', async ({ request }) => {
         capturedBody = await request.json()
         const rejected = { ...pendingApp, status: 'rejected' as const, feedback: (capturedBody as { feedback: string }).feedback }
         return HttpResponse.json({ data: rejected })
@@ -782,7 +782,7 @@ describe('DashboardPage', () => {
     mockData([proposal1], [])
     let deleteCalledId: number | undefined
     server.use(
-      http.delete('http://localhost:8000/proposals/:id', ({ params }) => {
+      http.delete('http://localhost:8000/api/proposals/:id', ({ params }) => {
         deleteCalledId = Number(params.id)
         return new HttpResponse(null, { status: 204 })
       }),

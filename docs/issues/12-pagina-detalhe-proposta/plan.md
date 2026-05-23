@@ -365,7 +365,7 @@ Add to `frontend/src/test/server.ts` (append after the existing exports):
 ```typescript
 export function mockProposalDetail(proposal: Proposal) {
   server.use(
-    http.get(`http://localhost:8000/proposals/${proposal.id}`, () =>
+    http.get(`http://localhost:8000/api/proposals/${proposal.id}`, () =>
       HttpResponse.json({ data: proposal }),
     ),
   )
@@ -373,7 +373,7 @@ export function mockProposalDetail(proposal: Proposal) {
 
 export function mockApplicationsList(applications: import('@/types/models').Application[]) {
   server.use(
-    http.get('http://localhost:8000/applications', () =>
+    http.get('http://localhost:8000/api/applications', () =>
       HttpResponse.json({
         data: applications,
         meta: { current_page: 1, last_page: 1, per_page: 15, total: applications.length, from: applications.length ? 1 : null, to: applications.length ? applications.length : null },
@@ -385,7 +385,7 @@ export function mockApplicationsList(applications: import('@/types/models').Appl
 
 export function mockApplyToProposal(proposalId: number, result: import('@/types/models').Application) {
   server.use(
-    http.post(`http://localhost:8000/proposals/${proposalId}/apply`, () =>
+    http.post(`http://localhost:8000/api/proposals/${proposalId}/apply`, () =>
       HttpResponse.json({ data: result }, { status: 201 }),
     ),
   )
@@ -393,7 +393,7 @@ export function mockApplyToProposal(proposalId: number, result: import('@/types/
 
 export function mockProposalNotFound(id: number) {
   server.use(
-    http.get(`http://localhost:8000/proposals/${id}`, () =>
+    http.get(`http://localhost:8000/api/proposals/${id}`, () =>
       HttpResponse.json({ message: 'Recurso não encontrado' }, { status: 404 }),
     ),
   )

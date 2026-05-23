@@ -386,7 +386,7 @@ export function mockProposalsList(
   },
 ) {
   server.use(
-    http.get('http://localhost:8000/proposals', () =>
+    http.get('http://localhost:8000/api/proposals', () =>
       HttpResponse.json({ data: proposals, meta, links: { first: null, last: null, prev: null, next: null } }),
     ),
   )

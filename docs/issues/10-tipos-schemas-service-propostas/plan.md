@@ -136,7 +136,7 @@ export const MOCK_CLOSED_PROPOSAL = {
 
 export const proposalHandlers = [
   // GET /proposals — paginated list, supports ?status= filter
-  http.get('http://localhost:8000/proposals', ({ request }) => {
+  http.get('http://localhost:8000/api/proposals', ({ request }) => {
     const url = new URL(request.url)
     const status = url.searchParams.get('status')
 
@@ -155,8 +155,8 @@ export const proposalHandlers = [
         to: filtered.length > 0 ? filtered.length : null,
       },
       links: {
-        first: 'http://localhost:8000/proposals?page=1',
-        last: 'http://localhost:8000/proposals?page=1',
+        first: 'http://localhost:8000/api/proposals?page=1',
+        last: 'http://localhost:8000/api/proposals?page=1',
         prev: null,
         next: null,
       },
@@ -164,7 +164,7 @@ export const proposalHandlers = [
   }),
 
   // GET /proposals/:id
-  http.get('http://localhost:8000/proposals/:id', ({ params }) => {
+  http.get('http://localhost:8000/api/proposals/:id', ({ params }) => {
     const id = Number(params.id)
     const proposal = MOCK_PROPOSALS.find((p) => p.id === id)
 
@@ -176,7 +176,7 @@ export const proposalHandlers = [
   }),
 
   // POST /proposals
-  http.post('http://localhost:8000/proposals', async ({ request }) => {
+  http.post('http://localhost:8000/api/proposals', async ({ request }) => {
     const body = await request.json() as Record<string, unknown>
     const created = {
       id: 99,
@@ -190,7 +190,7 @@ export const proposalHandlers = [
   }),
 
   // PATCH /proposals/:id
-  http.patch('http://localhost:8000/proposals/:id', async ({ params, request }) => {
+  http.patch('http://localhost:8000/api/proposals/:id', async ({ params, request }) => {
     const id = Number(params.id)
     const body = await request.json() as Record<string, unknown>
     const proposal = MOCK_PROPOSALS.find((p) => p.id === id)
@@ -203,7 +203,7 @@ export const proposalHandlers = [
   }),
 
   // DELETE /proposals/:id
-  http.delete('http://localhost:8000/proposals/:id', ({ params }) => {
+  http.delete('http://localhost:8000/api/proposals/:id', ({ params }) => {
     const id = Number(params.id)
     const exists = MOCK_PROPOSALS.some((p) => p.id === id)
 
@@ -215,7 +215,7 @@ export const proposalHandlers = [
   }),
 
   // POST /proposals/:id/apply
-  http.post('http://localhost:8000/proposals/:id/apply', ({ params }) => {
+  http.post('http://localhost:8000/api/proposals/:id/apply', ({ params }) => {
     const proposalId = Number(params.id)
 
     if (proposalId === MOCK_CLOSED_PROPOSAL.id) {
@@ -425,7 +425,7 @@ describe('proposalsService', () => {
     it('includes filters in query params', async () => {
       let capturedUrl: string | null = null
       server.use(
-        http.get('http://localhost:8000/proposals', ({ request }) => {
+        http.get('http://localhost:8000/api/proposals', ({ request }) => {
           capturedUrl = request.url
           return HttpResponse.json({
             data: [],

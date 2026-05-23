@@ -396,7 +396,7 @@ function mockApplicationsList(apps: Application[]) {
     links: { first: null, last: null, prev: null, next: null },
   }
   server.use(
-    http.get('http://localhost:8000/applications', () => HttpResponse.json(response)),
+    http.get('http://localhost:8000/api/applications', () => HttpResponse.json(response)),
   )
 }
 

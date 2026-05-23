@@ -32,7 +32,7 @@ cd frontend && npm install -D msw
 import { http, HttpResponse } from 'msw'
 
 export const proposalHandlers = [
-  http.get('http://localhost:8000/proposals', () => {
+  http.get('http://localhost:8000/api/proposals', () => {
     return HttpResponse.json({
       data: [
         {
@@ -114,8 +114,8 @@ export const proposalHandlers = [
         to: 3,
       },
       links: {
-        first: 'http://localhost:8000/proposals?page=1',
-        last: 'http://localhost:8000/proposals?page=1',
+        first: 'http://localhost:8000/api/proposals?page=1',
+        last: 'http://localhost:8000/api/proposals?page=1',
         prev: null,
         next: null,
       },
@@ -234,7 +234,7 @@ describe('HomePage', () => {
   it('renders skeleton cards while loading proposals', () => {
     // Override server to delay indefinitely so the loading state persists
     server.use(
-      http.get('http://localhost:8000/proposals', async () => {
+      http.get('http://localhost:8000/api/proposals', async () => {
         await new Promise(() => {}) // never resolves
         return HttpResponse.json({})
       }),

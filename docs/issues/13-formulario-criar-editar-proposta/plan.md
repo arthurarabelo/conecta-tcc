@@ -680,7 +680,7 @@ Append to `frontend/src/test/server.ts`:
 ```typescript
 export function mockProposalUpdate(proposalId: number, result: Proposal) {
   server.use(
-    http.patch(`http://localhost:8000/proposals/${proposalId}`, () =>
+    http.patch(`http://localhost:8000/api/proposals/${proposalId}`, () =>
       HttpResponse.json({ data: result }),
     ),
   )
@@ -688,7 +688,7 @@ export function mockProposalUpdate(proposalId: number, result: Proposal) {
 
 export function mockProposalDelete(proposalId: number) {
   server.use(
-    http.delete(`http://localhost:8000/proposals/${proposalId}`, () =>
+    http.delete(`http://localhost:8000/api/proposals/${proposalId}`, () =>
       new HttpResponse(null, { status: 204 }),
     ),
   )

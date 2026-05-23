@@ -446,7 +446,7 @@ Expected: `INFO  Server running on [http://127.0.0.1:8000]`
 
 - [ ] **Step 2: Test POST /login with invalid credentials (expect 422 ValidationError)**
 ```bash
-curl -s -X POST http://localhost:8000/login \
+curl -s -X POST http://localhost:8000/api/login \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
   -d '{"email":"notexist@test.com","password":"wrong"}' | jq .
@@ -463,7 +463,7 @@ Expected response shape:
 
 - [ ] **Step 3: Test GET /me without token (expect 401)**
 ```bash
-curl -s -X GET http://localhost:8000/me \
+curl -s -X GET http://localhost:8000/api/me \
   -H "Accept: application/json" | jq .
 ```
 Expected:
@@ -475,7 +475,7 @@ Expected:
 
 - [ ] **Step 4: Test POST /login with valid credentials and extract token**
 ```bash
-curl -s -X POST http://localhost:8000/login \
+curl -s -X POST http://localhost:8000/api/login \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
   -d '{"email":"professor@example.com","password":"password"}' | jq .
@@ -491,7 +491,7 @@ Expected response shape:
 - [ ] **Step 5: Test GET /me with valid Bearer token**
 ```bash
 TOKEN="<token-from-step-4>"
-curl -s -X GET http://localhost:8000/me \
+curl -s -X GET http://localhost:8000/api/me \
   -H "Accept: application/json" \
   -H "Authorization: Bearer $TOKEN" | jq .
 ```
@@ -500,7 +500,7 @@ Expected: returns the authenticated user object wrapped in `{"data": {...}}`.
 - [ ] **Step 6: Test POST /logout clears the session**
 ```bash
 TOKEN="<token-from-step-4>"
-curl -s -X POST http://localhost:8000/logout \
+curl -s -X POST http://localhost:8000/api/logout \
   -H "Accept: application/json" \
   -H "Authorization: Bearer $TOKEN" | jq .
 ```

@@ -163,7 +163,7 @@ export const paginatedApplications: PaginatedResponse<Application> = {
 
 export const handlers = [
   // GET /proposals (default empty list — individual tests override with server.use())
-  http.get('http://localhost:8000/proposals', () => {
+  http.get('http://localhost:8000/api/proposals', () => {
     return HttpResponse.json({
       data: [],
       meta: { current_page: 1, last_page: 1, per_page: 15, total: 0, from: null, to: null },
@@ -172,17 +172,17 @@ export const handlers = [
   }),
 
   // DELETE /proposals/:id (default 204 — individual tests override with server.use())
-  http.delete('http://localhost:8000/proposals/:id', () => {
+  http.delete('http://localhost:8000/api/proposals/:id', () => {
     return new HttpResponse(null, { status: 204 })
   }),
 
   // GET /applications
-  http.get('http://localhost:8000/applications', () => {
+  http.get('http://localhost:8000/api/applications', () => {
     return HttpResponse.json(paginatedApplications)
   }),
 
   // GET /applications/:id
-  http.get('http://localhost:8000/applications/:id', ({ params }) => {
+  http.get('http://localhost:8000/api/applications/:id', ({ params }) => {
     const id = Number(params.id)
     if (id !== mockApplication.id) {
       return HttpResponse.json({ message: 'Not found' }, { status: 404 })
@@ -191,7 +191,7 @@ export const handlers = [
   }),
 
   // PATCH /applications/:id/approve
-  http.patch('http://localhost:8000/applications/:id/approve', ({ params }) => {
+  http.patch('http://localhost:8000/api/applications/:id/approve', ({ params }) => {
     const id = Number(params.id)
     if (id !== mockApplication.id) {
       return HttpResponse.json({ message: 'Not found' }, { status: 404 })
@@ -201,7 +201,7 @@ export const handlers = [
   }),
 
   // PATCH /applications/:id/reject
-  http.patch('http://localhost:8000/applications/:id/reject', async ({ params, request }) => {
+  http.patch('http://localhost:8000/api/applications/:id/reject', async ({ params, request }) => {
     const id = Number(params.id)
     if (id !== mockApplication.id) {
       return HttpResponse.json({ message: 'Not found' }, { status: 404 })
@@ -267,7 +267,7 @@ describe('applicationsService.list', () => {
     let capturedUrl: string | undefined
 
     server.use(
-      http.get('http://localhost:8000/applications', ({ request }) => {
+      http.get('http://localhost:8000/api/applications', ({ request }) => {
         capturedUrl = request.url
         return HttpResponse.json(paginatedApplications)
       }),
@@ -295,7 +295,7 @@ describe('applicationsService.approve', () => {
 
   it('throws ForbiddenError on 403 response', async () => {
     server.use(
-      http.patch('http://localhost:8000/applications/:id/approve', () => {
+      http.patch('http://localhost:8000/api/applications/:id/approve', () => {
         return HttpResponse.json({ message: 'Acesso negado' }, { status: 403 })
       }),
     )
@@ -319,7 +319,7 @@ describe('applicationsService.reject', () => {
 
   it('throws ForbiddenError on 403 response', async () => {
     server.use(
-      http.patch('http://localhost:8000/applications/:id/reject', () => {
+      http.patch('http://localhost:8000/api/applications/:id/reject', () => {
         return HttpResponse.json({ message: 'Acesso negado' }, { status: 403 })
       }),
     )
@@ -415,7 +415,7 @@ describe('useApplications', () => {
   it('passes status filter to the service', async () => {
     let capturedUrl: string | undefined
     server.use(
-      http.get('http://localhost:8000/applications', ({ request }) => {
+      http.get('http://localhost:8000/api/applications', ({ request }) => {
         capturedUrl = request.url
         return HttpResponse.json(paginatedApplications)
       }),
@@ -475,7 +475,7 @@ describe('useApproveApplication', () => {
 
   it('throws ForbiddenError when API returns 403', async () => {
     server.use(
-      http.patch('http://localhost:8000/applications/:id/approve', () => {
+      http.patch('http://localhost:8000/api/applications/:id/approve', () => {
         return HttpResponse.json({ message: 'Acesso negado' }, { status: 403 })
       }),
     )
@@ -495,7 +495,7 @@ describe('useRejectApplication', () => {
   it('calls reject with the correct id and payload', async () => {
     let capturedBody: unknown
     server.use(
-      http.patch('http://localhost:8000/applications/:id/reject', async ({ request }) => {
+      http.patch('http://localhost:8000/api/applications/:id/reject', async ({ request }) => {
         capturedBody = await request.json()
         const rejected = { ...mockApplication, status: 'rejected' as const, feedback: (capturedBody as { feedback: string }).feedback }
         return HttpResponse.json({ data: rejected })
@@ -529,7 +529,7 @@ describe('useRejectApplication', () => {
 
   it('throws ForbiddenError when API returns 403', async () => {
     server.use(
-      http.patch('http://localhost:8000/applications/:id/reject', () => {
+      http.patch('http://localhost:8000/api/applications/:id/reject', () => {
         return HttpResponse.json({ message: 'Acesso negado' }, { status: 403 })
       }),
     )

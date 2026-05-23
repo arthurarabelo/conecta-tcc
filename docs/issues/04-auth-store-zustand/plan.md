@@ -118,11 +118,11 @@ git -C conecta-tcc commit -m "test: configure vitest with jsdom and testing-libr
 ### Task 2: Unit tests for auth.store.ts
 
 **Files:**
-- Create: `frontend/src/store/auth.store.test.ts`
+- Create: `frontend/src/store/__tests__/auth.store.test.ts`
 
 - [ ] **Step 1: Write failing tests**
 ```ts
-// frontend/src/store/auth.store.test.ts
+// frontend/src/store/__tests__/auth.store.test.ts
 import { beforeEach, describe, expect, it } from 'vitest'
 import { useAuthStore } from '@/store/auth.store'
 import type { User } from '@/types/models'
@@ -250,7 +250,7 @@ describe('useAuthStore', () => {
 
 - [ ] **Step 2: Run test — expect failure**
 ```bash
-cd conecta-tcc/frontend && npx vitest run src/store/auth.store.test.ts --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/store/__tests__/auth.store.test.ts --reporter=verbose
 ```
 Expected: FAIL — test files not found or import errors (no test infrastructure yet).
 
@@ -303,13 +303,13 @@ export const useAuthStore = create<AuthState>()(
 
 - [ ] **Step 4: Run test — expect pass**
 ```bash
-cd conecta-tcc/frontend && npx vitest run src/store/auth.store.test.ts --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/store/__tests__/auth.store.test.ts --reporter=verbose
 ```
 Expected: PASS all 9 tests.
 
 - [ ] **Step 5: Commit**
 ```bash
-git -C conecta-tcc add frontend/src/store/auth.store.test.ts
+git -C conecta-tcc add frontend/src/store/__tests__/auth.store.test.ts
 git -C conecta-tcc commit -m "test: add unit tests for auth.store.ts setAuth/clearAuth/persist"
 ```
 
@@ -318,11 +318,11 @@ git -C conecta-tcc commit -m "test: add unit tests for auth.store.ts setAuth/cle
 ### Task 3: Unit tests for use-auth.ts hook
 
 **Files:**
-- Create: `frontend/src/hooks/use-auth.test.ts`
+- Create: `frontend/src/hooks/__tests__/use-auth.test.ts`
 
 - [ ] **Step 1: Write failing tests**
 ```ts
-// frontend/src/hooks/use-auth.test.ts
+// frontend/src/hooks/__tests__/use-auth.test.ts
 import { beforeEach, describe, expect, it } from 'vitest'
 import { renderHook, act } from '@testing-library/react'
 import { useAuth } from '@/hooks/use-auth'
@@ -431,7 +431,7 @@ describe('useAuth hook', () => {
 
 - [ ] **Step 2: Run test — expect failure**
 ```bash
-cd conecta-tcc/frontend && npx vitest run src/hooks/use-auth.test.ts --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/hooks/__tests__/use-auth.test.ts --reporter=verbose
 ```
 Expected: FAIL — no test infrastructure yet.
 
@@ -463,13 +463,13 @@ export function useAuth() {
 
 - [ ] **Step 4: Run test — expect pass**
 ```bash
-cd conecta-tcc/frontend && npx vitest run src/hooks/use-auth.test.ts --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/hooks/__tests__/use-auth.test.ts --reporter=verbose
 ```
 Expected: PASS all 6 tests.
 
 - [ ] **Step 5: Commit**
 ```bash
-git -C conecta-tcc add frontend/src/hooks/use-auth.test.ts
+git -C conecta-tcc add frontend/src/hooks/__tests__/use-auth.test.ts
 git -C conecta-tcc commit -m "test: add unit tests for useAuth hook isProfessor/isStudent"
 ```
 
@@ -478,11 +478,11 @@ git -C conecta-tcc commit -m "test: add unit tests for useAuth hook isProfessor/
 ### Task 4: Integration test — api-client.ts sends Authorization header after setAuth
 
 **Files:**
-- Create: `frontend/src/services/api-client.test.ts`
+- Create: `frontend/src/services/__tests__/api-client.test.ts`
 
 - [ ] **Step 1: Write failing test**
 ```ts
-// frontend/src/services/api-client.test.ts
+// frontend/src/services/__tests__/api-client.test.ts
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { useAuthStore } from '@/store/auth.store'
 import type { User } from '@/types/models'
@@ -573,7 +573,7 @@ describe('api-client Authorization header interceptor', () => {
 
 - [ ] **Step 2: Run test — expect failure**
 ```bash
-cd conecta-tcc/frontend && npx vitest run src/services/api-client.test.ts --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/services/__tests__/api-client.test.ts --reporter=verbose
 ```
 Expected: FAIL — no vitest config or import errors.
 
@@ -583,13 +583,13 @@ The existing `frontend/src/services/api-client.ts` reads `localStorage.getItem('
 
 - [ ] **Step 4: Run test — expect pass**
 ```bash
-cd conecta-tcc/frontend && npx vitest run src/services/api-client.test.ts --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/services/__tests__/api-client.test.ts --reporter=verbose
 ```
 Expected: PASS all 4 tests.
 
 - [ ] **Step 5: Commit**
 ```bash
-git -C conecta-tcc add frontend/src/services/api-client.test.ts
+git -C conecta-tcc add frontend/src/services/__tests__/api-client.test.ts
 git -C conecta-tcc commit -m "test: integration test for api-client Authorization header interceptor"
 ```
 

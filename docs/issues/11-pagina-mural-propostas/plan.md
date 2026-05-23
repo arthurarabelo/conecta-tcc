@@ -120,14 +120,14 @@ cd conecta-tcc/frontend && git add package.json vite.config.ts src/test/setup.ts
 
 **Files:**
 - Create: `frontend/src/features/proposals/components/ProposalFilters.tsx`
-- Create: `frontend/src/features/proposals/components/ProposalFilters.test.tsx`
+- Create: `frontend/src/features/proposals/components/__tests__/ProposalFilters.test.tsx`
 
 The component receives the current filter values and emits the full updated filter object via `onChange` whenever anything changes. Text search is client-side only (not sent to the API) so it is tracked as a separate prop `search` / `onSearchChange`.
 
 - [ ] **Step 1: Write the failing test**
 
 ```tsx
-// frontend/src/features/proposals/components/ProposalFilters.test.tsx
+// frontend/src/features/proposals/components/__tests__/ProposalFilters.test.tsx
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
@@ -204,7 +204,7 @@ describe('ProposalFilters', () => {
 - [ ] **Step 2: Run to verify failure**
 
 ```bash
-cd conecta-tcc/frontend && npm test src/features/proposals/components/ProposalFilters.test.tsx
+cd conecta-tcc/frontend && npm test src/features/proposals/components/__tests__/ProposalFilters.test.tsx
 ```
 
 Expected: FAIL — module not found.
@@ -328,7 +328,7 @@ export function ProposalFilters({
 - [ ] **Step 4: Run to verify pass**
 
 ```bash
-cd conecta-tcc/frontend && npm test src/features/proposals/components/ProposalFilters.test.tsx
+cd conecta-tcc/frontend && npm test src/features/proposals/components/__tests__/ProposalFilters.test.tsx
 ```
 
 Expected: PASS — 4 tests.
@@ -336,7 +336,7 @@ Expected: PASS — 4 tests.
 - [ ] **Step 5: Commit**
 
 ```bash
-cd conecta-tcc/frontend && git add src/features/proposals/components/ProposalFilters.tsx src/features/proposals/components/ProposalFilters.test.tsx && git commit -m "feat: add ProposalFilters component with area, department and status filters"
+cd conecta-tcc/frontend && git add src/features/proposals/components/ProposalFilters.tsx src/features/proposals/components/__tests__/ProposalFilters.test.tsx && git commit -m "feat: add ProposalFilters component with area, department and status filters"
 ```
 
 ---
@@ -345,7 +345,7 @@ cd conecta-tcc/frontend && git add src/features/proposals/components/ProposalFil
 
 **Files:**
 - Modify: `frontend/src/pages/proposals/index.tsx`
-- Create: `frontend/src/pages/proposals/ProposalsPage.test.tsx`
+- Create: `frontend/src/pages/proposals/__tests__/ProposalsPage.test.tsx`
 - Modify: `frontend/src/test/server.ts` (add handlers export helper)
 
 The page renders:
@@ -396,7 +396,7 @@ export function mockProposalsList(
 - [ ] **Step 2: Write the failing tests**
 
 ```tsx
-// frontend/src/pages/proposals/ProposalsPage.test.tsx
+// frontend/src/pages/proposals/__tests__/ProposalsPage.test.tsx
 import { describe, it, expect, beforeEach } from 'vitest'
 import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
@@ -539,7 +539,7 @@ describe('ProposalsPage', () => {
 - [ ] **Step 3: Run to verify failure**
 
 ```bash
-cd conecta-tcc/frontend && npm test src/pages/proposals/ProposalsPage.test.tsx
+cd conecta-tcc/frontend && npm test src/pages/proposals/__tests__/ProposalsPage.test.tsx
 ```
 
 Expected: FAIL — `ProposalsPage` renders stub content, skeleton data-testid not found.
@@ -693,7 +693,7 @@ const proposalsRoute = createRoute({
 - [ ] **Step 6: Run to verify pass**
 
 ```bash
-cd conecta-tcc/frontend && npm test src/pages/proposals/ProposalsPage.test.tsx
+cd conecta-tcc/frontend && npm test src/pages/proposals/__tests__/ProposalsPage.test.tsx
 ```
 
 Expected: PASS — 6 tests.
@@ -701,5 +701,5 @@ Expected: PASS — 6 tests.
 - [ ] **Step 7: Commit**
 
 ```bash
-cd conecta-tcc/frontend && git add src/pages/proposals/index.tsx src/pages/proposals/ProposalsPage.test.tsx src/test/server.ts src/router.tsx && git commit -m "feat: implement ProposalsPage with filters, skeleton, empty state and pagination"
+cd conecta-tcc/frontend && git add src/pages/proposals/index.tsx src/pages/proposals/__tests__/ProposalsPage.test.tsx src/test/server.ts src/router.tsx && git commit -m "feat: implement ProposalsPage with filters, skeleton, empty state and pagination"
 ```

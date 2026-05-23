@@ -242,11 +242,11 @@ git commit -m "test: add MSW server and Vitest setup for application tests"
 ### Task 2: Unit tests for applicationsService
 
 **Files:**
-- Create: `frontend/src/services/applications.service.test.ts`
+- Create: `frontend/src/services/__tests__/applications.service.test.ts`
 
 - [ ] **Step 1: Write failing tests**
 
-Create `frontend/src/services/applications.service.test.ts`:
+Create `frontend/src/services/__tests__/applications.service.test.ts`:
 
 ```ts
 import { describe, it, expect, beforeEach } from 'vitest'
@@ -333,7 +333,7 @@ describe('applicationsService.reject', () => {
 
 ```bash
 cd conecta-tcc/frontend
-npm test src/services/applications.service.test.ts
+npm test src/services/__tests__/applications.service.test.ts
 ```
 
 Expected: FAIL — module resolution errors because MSW/Vitest not yet fully configured (Task 1 must be done first). If Task 1 is complete, tests may fail with network errors because the `apiClient` base URL points to `localhost:8000` and MSW intercepts at that level.
@@ -351,7 +351,7 @@ API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000'
 
 ```bash
 cd conecta-tcc/frontend
-npm test src/services/applications.service.test.ts
+npm test src/services/__tests__/applications.service.test.ts
 ```
 
 Expected: PASS — all 7 tests green.
@@ -360,7 +360,7 @@ Expected: PASS — all 7 tests green.
 
 ```bash
 cd conecta-tcc/frontend
-git add src/services/applications.service.test.ts
+git add src/services/__tests__/applications.service.test.ts
 git commit -m "test: add unit tests for applicationsService (list, approve, reject, 403 handling)"
 ```
 
@@ -369,11 +369,11 @@ git commit -m "test: add unit tests for applicationsService (list, approve, reje
 ### Task 3: Integration tests for useApproveApplication and useRejectApplication hooks
 
 **Files:**
-- Create: `frontend/src/features/applications/hooks/index.test.tsx`
+- Create: `frontend/src/features/applications/hooks/__tests__/index.test.tsx`
 
 - [ ] **Step 1: Write failing tests**
 
-Create `frontend/src/features/applications/hooks/index.test.tsx`:
+Create `frontend/src/features/applications/hooks/__tests__/index.test.tsx`:
 
 ```tsx
 import { describe, it, expect, vi } from 'vitest'
@@ -550,7 +550,7 @@ describe('useRejectApplication', () => {
 
 ```bash
 cd conecta-tcc/frontend
-npm test src/features/applications/hooks/index.test.tsx
+npm test src/features/applications/hooks/__tests__/index.test.tsx
 ```
 
 Expected: FAIL — either missing MSW setup (if Task 1 incomplete) or real network calls failing.
@@ -559,7 +559,7 @@ Expected: FAIL — either missing MSW setup (if Task 1 incomplete) or real netwo
 
 ```bash
 cd conecta-tcc/frontend
-npm test src/features/applications/hooks/index.test.tsx
+npm test src/features/applications/hooks/__tests__/index.test.tsx
 ```
 
 Expected: PASS — all 9 tests green.
@@ -577,7 +577,7 @@ Expected: PASS — all tests from Tasks 2 and 3 green.
 
 ```bash
 cd conecta-tcc/frontend
-git add src/features/applications/hooks/index.test.tsx
+git add src/features/applications/hooks/__tests__/index.test.tsx
 git commit -m "test: add integration tests for useApproveApplication and useRejectApplication hooks"
 ```
 
@@ -586,11 +586,11 @@ git commit -m "test: add integration tests for useApproveApplication and useReje
 ### Task 4: Verify ApplicationStatus covers all three states
 
 **Files:**
-- Create: `frontend/src/types/models.test.ts`
+- Create: `frontend/src/types/__tests__/models.test.ts`
 
 - [ ] **Step 1: Write the test**
 
-Create `frontend/src/types/models.test.ts`:
+Create `frontend/src/types/__tests__/models.test.ts`:
 
 ```ts
 import { describe, it, expectTypeOf } from 'vitest'
@@ -622,7 +622,7 @@ describe('ApplicationStatus type', () => {
 
 ```bash
 cd conecta-tcc/frontend
-npm test src/types/models.test.ts
+npm test src/types/__tests__/models.test.ts
 ```
 
 Expected: PASS — 4 tests green.
@@ -631,6 +631,6 @@ Expected: PASS — 4 tests green.
 
 ```bash
 cd conecta-tcc/frontend
-git add src/types/models.test.ts
+git add src/types/__tests__/models.test.ts
 git commit -m "test: verify ApplicationStatus covers pending, approved, rejected"
 ```

@@ -186,12 +186,12 @@ Expected: file exists
 ### Task 3: Write failing tests for HomePage
 
 **Files:**
-- Create: `frontend/src/pages/home/home.test.tsx`
+- Create: `frontend/src/pages/home/__tests__/home.test.tsx`
 
 - [ ] **Step 1: Write the tests**
 
 ```tsx
-// frontend/src/pages/home/home.test.tsx
+// frontend/src/pages/home/__tests__/home.test.tsx
 import { render, screen, waitFor } from '@testing-library/react'
 import { http, HttpResponse } from 'msw'
 import { createMemoryHistory, createRouter, createRoute, createRootRoute, RouterProvider } from '@tanstack/react-router'
@@ -269,7 +269,7 @@ describe('HomePage', () => {
 - [ ] **Step 2: Run tests to verify they fail**
 
 ```bash
-cd frontend && npx vitest run src/pages/home/home.test.tsx
+cd frontend && npx vitest run src/pages/home/__tests__/home.test.tsx
 ```
 Expected: FAIL — errors about missing component implementations
 
@@ -438,7 +438,7 @@ export default function HomePage() {
 - [ ] **Step 2: Run tests to verify they pass**
 
 ```bash
-cd frontend && npx vitest run src/pages/home/home.test.tsx
+cd frontend && npx vitest run src/pages/home/__tests__/home.test.tsx
 ```
 Expected: PASS — 6 tests pass
 

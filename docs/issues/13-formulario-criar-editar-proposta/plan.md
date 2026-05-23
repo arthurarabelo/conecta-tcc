@@ -14,14 +14,14 @@
 
 **Files:**
 - Create: `frontend/src/features/proposals/components/ProposalForm.tsx`
-- Create: `frontend/src/features/proposals/components/ProposalForm.test.tsx`
+- Create: `frontend/src/features/proposals/components/__tests__/ProposalForm.test.tsx`
 
 `ProposalForm` wraps React Hook Form. It validates with `proposalSchema` from `@/features/proposals/schemas`. In create mode the submit button reads "Criar proposta". In edit mode it reads "Salvar alterações" and the form begins pre-populated. A delete button is shown only in edit mode.
 
 - [ ] **Step 1: Write the failing tests**
 
 ```tsx
-// frontend/src/features/proposals/components/ProposalForm.test.tsx
+// frontend/src/features/proposals/components/__tests__/ProposalForm.test.tsx
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
@@ -190,7 +190,7 @@ describe('ProposalForm', () => {
 - [ ] **Step 2: Run to verify failure**
 
 ```bash
-cd conecta-tcc/frontend && npm test src/features/proposals/components/ProposalForm.test.tsx
+cd conecta-tcc/frontend && npm test src/features/proposals/components/__tests__/ProposalForm.test.tsx
 ```
 
 Expected: FAIL — module not found.
@@ -478,7 +478,7 @@ export function ProposalForm({ mode, proposal, onSuccess, onDeleted }: ProposalF
 - [ ] **Step 4: Run to verify pass**
 
 ```bash
-cd conecta-tcc/frontend && npm test src/features/proposals/components/ProposalForm.test.tsx
+cd conecta-tcc/frontend && npm test src/features/proposals/components/__tests__/ProposalForm.test.tsx
 ```
 
 Expected: PASS — 6 tests.
@@ -486,7 +486,7 @@ Expected: PASS — 6 tests.
 - [ ] **Step 5: Commit**
 
 ```bash
-cd conecta-tcc/frontend && git add src/features/proposals/components/ProposalForm.tsx src/features/proposals/components/ProposalForm.test.tsx && git commit -m "feat: add ProposalForm with create/edit modes and delete confirmation dialog"
+cd conecta-tcc/frontend && git add src/features/proposals/components/ProposalForm.tsx src/features/proposals/components/__tests__/ProposalForm.test.tsx && git commit -m "feat: add ProposalForm with create/edit modes and delete confirmation dialog"
 ```
 
 ---
@@ -669,7 +669,7 @@ cd conecta-tcc/frontend && git add src/pages/proposal-create/index.tsx src/route
 
 **Files:**
 - Create: `frontend/src/pages/proposal-edit/index.tsx`
-- Create: `frontend/src/pages/proposal-edit/ProposalEditPage.test.tsx`
+- Create: `frontend/src/pages/proposal-edit/__tests__/ProposalEditPage.test.tsx`
 
 The edit page fetches the proposal by `$id`, checks that `proposal.professor_id === user.id`, and redirects to `/dashboard` if the check fails. Then it renders `ProposalForm` in edit mode.
 
@@ -698,7 +698,7 @@ export function mockProposalDelete(proposalId: number) {
 - [ ] **Step 2: Write the failing tests**
 
 ```tsx
-// frontend/src/pages/proposal-edit/ProposalEditPage.test.tsx
+// frontend/src/pages/proposal-edit/__tests__/ProposalEditPage.test.tsx
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -853,7 +853,7 @@ describe('ProposalEditPage', () => {
 - [ ] **Step 3: Run to verify failure**
 
 ```bash
-cd conecta-tcc/frontend && npm test src/pages/proposal-edit/ProposalEditPage.test.tsx
+cd conecta-tcc/frontend && npm test src/pages/proposal-edit/__tests__/ProposalEditPage.test.tsx
 ```
 
 Expected: FAIL — `src/pages/proposal-edit/index.tsx` not found.
@@ -936,7 +936,7 @@ export default function ProposalEditPage() {
 - [ ] **Step 5: Run to verify pass**
 
 ```bash
-cd conecta-tcc/frontend && npm test src/pages/proposal-edit/ProposalEditPage.test.tsx
+cd conecta-tcc/frontend && npm test src/pages/proposal-edit/__tests__/ProposalEditPage.test.tsx
 ```
 
 Expected: PASS — 4 tests.
@@ -944,7 +944,7 @@ Expected: PASS — 4 tests.
 - [ ] **Step 6: Commit**
 
 ```bash
-cd conecta-tcc/frontend && git add src/pages/proposal-edit/index.tsx src/pages/proposal-edit/ProposalEditPage.test.tsx src/test/server.ts && git commit -m "feat: add ProposalEditPage with ownership guard, edit form and delete flow"
+cd conecta-tcc/frontend && git add src/pages/proposal-edit/index.tsx src/pages/proposal-edit/__tests__/ProposalEditPage.test.tsx src/test/server.ts && git commit -m "feat: add ProposalEditPage with ownership guard, edit form and delete flow"
 ```
 
 ---

@@ -14,11 +14,11 @@
 
 **Files:**
 - Create: `frontend/src/features/proposals/components/KpiCard.tsx`
-- Create: `frontend/src/features/proposals/components/KpiCard.test.tsx`
+- Create: `frontend/src/features/proposals/components/__tests__/KpiCard.test.tsx`
 
 - [ ] **Step 1: Write failing tests**
 
-Create `frontend/src/features/proposals/components/KpiCard.test.tsx`:
+Create `frontend/src/features/proposals/components/__tests__/KpiCard.test.tsx`:
 
 ```tsx
 import { describe, it, expect } from 'vitest'
@@ -47,7 +47,7 @@ describe('KpiCard', () => {
 
 ```bash
 cd conecta-tcc/frontend
-npm test src/features/proposals/components/KpiCard.test.tsx
+npm test src/features/proposals/components/__tests__/KpiCard.test.tsx
 ```
 
 Expected: FAIL — `KpiCard` module not found.
@@ -82,7 +82,7 @@ export function KpiCard({ label, value }: KpiCardProps) {
 
 ```bash
 cd conecta-tcc/frontend
-npm test src/features/proposals/components/KpiCard.test.tsx
+npm test src/features/proposals/components/__tests__/KpiCard.test.tsx
 ```
 
 Expected: PASS — 3 tests green.
@@ -91,7 +91,7 @@ Expected: PASS — 3 tests green.
 
 ```bash
 cd conecta-tcc/frontend
-git add src/features/proposals/components/KpiCard.tsx src/features/proposals/components/KpiCard.test.tsx
+git add src/features/proposals/components/KpiCard.tsx src/features/proposals/components/__tests__/KpiCard.test.tsx
 git commit -m "feat: add KpiCard component for dashboard metrics"
 ```
 
@@ -101,11 +101,11 @@ git commit -m "feat: add KpiCard component for dashboard metrics"
 
 **Files:**
 - Create: `frontend/src/features/applications/components/RejectDialog.tsx`
-- Create: `frontend/src/features/applications/components/RejectDialog.test.tsx`
+- Create: `frontend/src/features/applications/components/__tests__/RejectDialog.test.tsx`
 
 - [ ] **Step 1: Write failing tests**
 
-Create `frontend/src/features/applications/components/RejectDialog.test.tsx`:
+Create `frontend/src/features/applications/components/__tests__/RejectDialog.test.tsx`:
 
 ```tsx
 import { describe, it, expect, vi } from 'vitest'
@@ -154,7 +154,7 @@ describe('RejectDialog', () => {
 
 ```bash
 cd conecta-tcc/frontend
-npm test src/features/applications/components/RejectDialog.test.tsx
+npm test src/features/applications/components/__tests__/RejectDialog.test.tsx
 ```
 
 Expected: FAIL — `RejectDialog` module not found.
@@ -230,7 +230,7 @@ export function RejectDialog({ onConfirm, isLoading }: RejectDialogProps) {
 
 ```bash
 cd conecta-tcc/frontend
-npm test src/features/applications/components/RejectDialog.test.tsx
+npm test src/features/applications/components/__tests__/RejectDialog.test.tsx
 ```
 
 Expected: PASS — all 5 tests green.
@@ -239,7 +239,7 @@ Expected: PASS — all 5 tests green.
 
 ```bash
 cd conecta-tcc/frontend
-git add src/features/applications/components/RejectDialog.tsx src/features/applications/components/RejectDialog.test.tsx
+git add src/features/applications/components/RejectDialog.tsx src/features/applications/components/__tests__/RejectDialog.test.tsx
 git commit -m "feat: add RejectDialog component with feedback textarea"
 ```
 
@@ -249,11 +249,11 @@ git commit -m "feat: add RejectDialog component with feedback textarea"
 
 **Files:**
 - Create: `frontend/src/features/applications/components/PendingApplicationCard.tsx`
-- Create: `frontend/src/features/applications/components/PendingApplicationCard.test.tsx`
+- Create: `frontend/src/features/applications/components/__tests__/PendingApplicationCard.test.tsx`
 
 - [ ] **Step 1: Write failing tests**
 
-Create `frontend/src/features/applications/components/PendingApplicationCard.test.tsx`:
+Create `frontend/src/features/applications/components/__tests__/PendingApplicationCard.test.tsx`:
 
 ```tsx
 import { describe, it, expect, vi } from 'vitest'
@@ -342,7 +342,7 @@ describe('PendingApplicationCard', () => {
 
 ```bash
 cd conecta-tcc/frontend
-npm test src/features/applications/components/PendingApplicationCard.test.tsx
+npm test src/features/applications/components/__tests__/PendingApplicationCard.test.tsx
 ```
 
 Expected: FAIL — `PendingApplicationCard` module not found.
@@ -434,7 +434,7 @@ export function PendingApplicationCard({
 
 ```bash
 cd conecta-tcc/frontend
-npm test src/features/applications/components/PendingApplicationCard.test.tsx
+npm test src/features/applications/components/__tests__/PendingApplicationCard.test.tsx
 ```
 
 Expected: PASS — all 8 tests green.
@@ -443,7 +443,7 @@ Expected: PASS — all 8 tests green.
 
 ```bash
 cd conecta-tcc/frontend
-git add src/features/applications/components/PendingApplicationCard.tsx src/features/applications/components/PendingApplicationCard.test.tsx
+git add src/features/applications/components/PendingApplicationCard.tsx src/features/applications/components/__tests__/PendingApplicationCard.test.tsx
 git commit -m "feat: add PendingApplicationCard with approve button and reject dialog"
 ```
 
@@ -453,11 +453,11 @@ git commit -m "feat: add PendingApplicationCard with approve button and reject d
 
 **Files:**
 - Create: `frontend/src/features/proposals/components/DeleteProposalDialog.tsx`
-- Create: `frontend/src/features/proposals/components/DeleteProposalDialog.test.tsx`
+- Create: `frontend/src/features/proposals/components/__tests__/DeleteProposalDialog.test.tsx`
 
 - [ ] **Step 1: Write failing tests**
 
-Create `frontend/src/features/proposals/components/DeleteProposalDialog.test.tsx`:
+Create `frontend/src/features/proposals/components/__tests__/DeleteProposalDialog.test.tsx`:
 
 ```tsx
 import { describe, it, expect, vi } from 'vitest'
@@ -497,7 +497,7 @@ describe('DeleteProposalDialog', () => {
 
 ```bash
 cd conecta-tcc/frontend
-npm test src/features/proposals/components/DeleteProposalDialog.test.tsx
+npm test src/features/proposals/components/__tests__/DeleteProposalDialog.test.tsx
 ```
 
 Expected: FAIL — `DeleteProposalDialog` module not found.
@@ -565,7 +565,7 @@ export function DeleteProposalDialog({ onConfirm, isLoading }: DeleteProposalDia
 
 ```bash
 cd conecta-tcc/frontend
-npm test src/features/proposals/components/DeleteProposalDialog.test.tsx
+npm test src/features/proposals/components/__tests__/DeleteProposalDialog.test.tsx
 ```
 
 Expected: PASS — all 4 tests green.
@@ -574,7 +574,7 @@ Expected: PASS — all 4 tests green.
 
 ```bash
 cd conecta-tcc/frontend
-git add src/features/proposals/components/DeleteProposalDialog.tsx src/features/proposals/components/DeleteProposalDialog.test.tsx
+git add src/features/proposals/components/DeleteProposalDialog.tsx src/features/proposals/components/__tests__/DeleteProposalDialog.test.tsx
 git commit -m "feat: add DeleteProposalDialog component with confirmation dialog"
 ```
 
@@ -584,7 +584,7 @@ git commit -m "feat: add DeleteProposalDialog component with confirmation dialog
 
 **Files:**
 - Modify: `frontend/src/pages/dashboard/index.tsx`
-- Create: `frontend/src/pages/dashboard/index.test.tsx`
+- Create: `frontend/src/pages/dashboard/__tests__/index.test.tsx`
 
 > This task assumes the Sonner toast library is installed. If not, install it: `npm install sonner` and add `<Toaster />` to `frontend/src/main.tsx`.
 
@@ -612,7 +612,7 @@ import { Toaster } from 'sonner'
 
 - [ ] **Step 2: Write failing tests**
 
-Create `frontend/src/pages/dashboard/index.test.tsx`:
+Create `frontend/src/pages/dashboard/__tests__/index.test.tsx`:
 
 ```tsx
 import { describe, it, expect, vi } from 'vitest'
@@ -800,7 +800,7 @@ describe('DashboardPage', () => {
 
 ```bash
 cd conecta-tcc/frontend
-npm test src/pages/dashboard/index.test.tsx
+npm test src/pages/dashboard/__tests__/index.test.tsx
 ```
 
 Expected: FAIL — `DashboardPage` is still a stub.
@@ -1015,7 +1015,7 @@ export default function DashboardPage() {
 
 ```bash
 cd conecta-tcc/frontend
-npm test src/pages/dashboard/index.test.tsx
+npm test src/pages/dashboard/__tests__/index.test.tsx
 ```
 
 Expected: PASS — all 10 tests green.
@@ -1042,6 +1042,6 @@ Expected: PASS — all tests across all files green.
 
 ```bash
 cd conecta-tcc/frontend
-git add src/pages/dashboard/index.tsx src/pages/dashboard/index.test.tsx src/main.tsx
+git add src/pages/dashboard/index.tsx src/pages/dashboard/__tests__/index.test.tsx src/main.tsx
 git commit -m "feat: implement professor Dashboard with KPI cards, proposals table, and pending applications review"
 ```

@@ -14,11 +14,11 @@
 
 **Files:**
 - Create: `frontend/src/components/shared/ProtectedRoute.tsx`
-- Create: `frontend/src/components/shared/ProtectedRoute.test.tsx`
+- Create: `frontend/src/components/shared/__tests__/ProtectedRoute.test.tsx`
 
 - [ ] **Step 1: Write failing tests**
 ```tsx
-// frontend/src/components/shared/ProtectedRoute.test.tsx
+// frontend/src/components/shared/__tests__/ProtectedRoute.test.tsx
 import { describe, expect, it, vi, beforeEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { ProtectedRoute } from './ProtectedRoute'
@@ -213,7 +213,7 @@ describe('ProtectedRoute', () => {
 
 - [ ] **Step 2: Run test — expect failure**
 ```bash
-cd conecta-tcc/frontend && npx vitest run src/components/shared/ProtectedRoute.test.tsx --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/components/shared/__tests__/ProtectedRoute.test.tsx --reporter=verbose
 ```
 Expected: FAIL — ProtectedRoute.tsx does not exist yet.
 
@@ -255,13 +255,13 @@ export function ProtectedRoute({ role, children }: ProtectedRouteProps) {
 
 - [ ] **Step 4: Run test — expect pass**
 ```bash
-cd conecta-tcc/frontend && npx vitest run src/components/shared/ProtectedRoute.test.tsx --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/components/shared/__tests__/ProtectedRoute.test.tsx --reporter=verbose
 ```
 Expected: PASS all 10 tests.
 
 - [ ] **Step 5: Commit**
 ```bash
-git -C conecta-tcc add frontend/src/components/shared/ProtectedRoute.tsx frontend/src/components/shared/ProtectedRoute.test.tsx
+git -C conecta-tcc add frontend/src/components/shared/ProtectedRoute.tsx frontend/src/components/shared/__tests__/ProtectedRoute.test.tsx
 git -C conecta-tcc commit -m "feat: add ProtectedRoute component with role-based redirect logic"
 ```
 
@@ -275,7 +275,7 @@ git -C conecta-tcc commit -m "feat: add ProtectedRoute component with role-based
 
 - [ ] **Step 1: Write failing tests for MyApplicationsPage protection**
 ```tsx
-// frontend/src/pages/my-applications/my-applications-page.test.tsx
+// frontend/src/pages/my-applications/__tests__/my-applications-page.test.tsx
 import { describe, expect, it, vi, beforeEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
 
@@ -335,7 +335,7 @@ describe('MyApplicationsPage route protection', () => {
 
 - [ ] **Step 2: Write failing tests for DashboardPage protection**
 ```tsx
-// frontend/src/pages/dashboard/dashboard-page.test.tsx
+// frontend/src/pages/dashboard/__tests__/dashboard-page.test.tsx
 import { describe, expect, it, vi, beforeEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
 
@@ -394,7 +394,7 @@ describe('DashboardPage route protection', () => {
 
 - [ ] **Step 3: Run tests — expect failure**
 ```bash
-cd conecta-tcc/frontend && npx vitest run src/pages/my-applications/my-applications-page.test.tsx src/pages/dashboard/dashboard-page.test.tsx --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/pages/my-applications/__tests__/my-applications-page.test.tsx src/pages/dashboard/__tests__/dashboard-page.test.tsx --reporter=verbose
 ```
 Expected: FAIL — pages don't use ProtectedRoute yet.
 
@@ -452,13 +452,13 @@ export default function DashboardPage() {
 
 - [ ] **Step 6: Run tests — expect pass**
 ```bash
-cd conecta-tcc/frontend && npx vitest run src/pages/my-applications/my-applications-page.test.tsx src/pages/dashboard/dashboard-page.test.tsx --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/pages/my-applications/__tests__/my-applications-page.test.tsx src/pages/dashboard/__tests__/dashboard-page.test.tsx --reporter=verbose
 ```
 Expected: PASS all 6 tests.
 
 - [ ] **Step 7: Commit**
 ```bash
-git -C conecta-tcc add frontend/src/pages/my-applications/index.tsx frontend/src/pages/dashboard/index.tsx frontend/src/pages/my-applications/my-applications-page.test.tsx frontend/src/pages/dashboard/dashboard-page.test.tsx
+git -C conecta-tcc add frontend/src/pages/my-applications/index.tsx frontend/src/pages/dashboard/index.tsx frontend/src/pages/my-applications/__tests__/my-applications-page.test.tsx frontend/src/pages/dashboard/__tests__/dashboard-page.test.tsx
 git -C conecta-tcc commit -m "feat: wrap MyApplicationsPage and DashboardPage with ProtectedRoute"
 ```
 
@@ -467,11 +467,11 @@ git -C conecta-tcc commit -m "feat: wrap MyApplicationsPage and DashboardPage wi
 ### Task 3: Router-level integration test with createMemoryHistory
 
 **Files:**
-- Create: `frontend/src/router.test.tsx`
+- Create: `frontend/src/__tests__/router.test.tsx`
 
 - [ ] **Step 1: Write failing tests**
 ```tsx
-// frontend/src/router.test.tsx
+// frontend/src/__tests__/router.test.tsx
 import { describe, expect, it, vi, beforeEach } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import {
@@ -640,7 +640,7 @@ describe('Route protection integration', () => {
 
 - [ ] **Step 2: Run test — expect failure**
 ```bash
-cd conecta-tcc/frontend && npx vitest run src/router.test.tsx --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/__tests__/router.test.tsx --reporter=verbose
 ```
 Expected: FAIL — ProtectedRoute not yet wired in router context or import errors.
 
@@ -650,7 +650,7 @@ With ProtectedRoute implemented in Task 1 and the pages wired in Task 2, the int
 
 - [ ] **Step 4: Run test — expect pass**
 ```bash
-cd conecta-tcc/frontend && npx vitest run src/router.test.tsx --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/__tests__/router.test.tsx --reporter=verbose
 ```
 Expected: PASS all 6 tests.
 
@@ -662,7 +662,7 @@ Expected: all tests PASS.
 
 - [ ] **Step 6: Commit**
 ```bash
-git -C conecta-tcc add frontend/src/router.test.tsx
+git -C conecta-tcc add frontend/src/__tests__/router.test.tsx
 git -C conecta-tcc commit -m "test: router integration tests with createMemoryHistory for route protection"
 ```
 

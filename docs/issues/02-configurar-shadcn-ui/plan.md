@@ -122,7 +122,7 @@ cd conecta-tcc/frontend && git add src/components/ui/ && git commit -m "feat: ad
 ### Task 4: Write Failing Test — Button Component
 
 **Files:**
-- Create: `frontend/src/components/ui/button.test.tsx`
+- Create: `frontend/src/components/ui/__tests__/button.test.tsx`
 
 - [ ] **Step 1: Write the failing test first (TDD)**
 
@@ -167,11 +167,11 @@ describe('Button', () => {
 
 - [ ] **Step 2: Run tests — expect them to PASS (Button is already installed)**
 ```bash
-cd conecta-tcc/frontend && npm test src/components/ui/button.test.tsx
+cd conecta-tcc/frontend && npm test src/components/ui/__tests__/button.test.tsx
 ```
 Expected:
 ```
-✓ src/components/ui/button.test.tsx (5)
+✓ src/components/ui/__tests__/button.test.tsx (5)
   ✓ Button > renders with text content
   ✓ Button > applies the default variant class
   ✓ Button > applies the destructive variant class
@@ -182,7 +182,7 @@ Test Files  1 passed (1)
 
 - [ ] **Step 3: Commit**
 ```bash
-cd conecta-tcc/frontend && git add src/components/ui/button.test.tsx && git commit -m "test: add Button component unit tests"
+cd conecta-tcc/frontend && git add src/components/ui/__tests__/button.test.tsx && git commit -m "test: add Button component unit tests"
 ```
 
 ---
@@ -190,7 +190,7 @@ cd conecta-tcc/frontend && git add src/components/ui/button.test.tsx && git comm
 ### Task 5: Verify Theme Variables and cn() Usage
 
 **Files:**
-- Create: `frontend/src/components/ui/theme.test.tsx`
+- Create: `frontend/src/components/ui/__tests__/theme.test.tsx`
 
 - [ ] **Step 1: Verify `cn()` is used inside generated components**
 ```bash
@@ -250,11 +250,11 @@ describe('Theme and cn() integration', () => {
 
 - [ ] **Step 4: Run theme integration tests**
 ```bash
-cd conecta-tcc/frontend && npm test src/components/ui/theme.test.tsx
+cd conecta-tcc/frontend && npm test src/components/ui/__tests__/theme.test.tsx
 ```
 Expected:
 ```
-✓ src/components/ui/theme.test.tsx (4)
+✓ src/components/ui/__tests__/theme.test.tsx (4)
   ✓ Theme and cn() integration > renders Card with composed children
   ✓ Theme and cn() integration > renders Badge with variant
   ✓ Theme and cn() integration > cn() merges conflicting tailwind classes correctly
@@ -270,7 +270,7 @@ Expected: number >= 4 (all four variables present in `src/styles/colors.css`).
 
 - [ ] **Step 6: Commit**
 ```bash
-cd conecta-tcc/frontend && git add src/components/ui/theme.test.tsx && git commit -m "test: add theme and cn() integration tests for shadcn components"
+cd conecta-tcc/frontend && git add src/components/ui/__tests__/theme.test.tsx && git commit -m "test: add theme and cn() integration tests for shadcn components"
 ```
 
 ---

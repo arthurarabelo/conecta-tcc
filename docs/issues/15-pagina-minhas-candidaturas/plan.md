@@ -101,11 +101,11 @@ git commit -m "feat: add StatusBadge and ProtectedRoute shared components"
 
 **Files:**
 - Create: `frontend/src/features/applications/components/ApplicationCard.tsx`
-- Create: `frontend/src/features/applications/components/ApplicationCard.test.tsx`
+- Create: `frontend/src/features/applications/components/__tests__/ApplicationCard.test.tsx`
 
 - [ ] **Step 1: Write failing tests**
 
-Create `frontend/src/features/applications/components/ApplicationCard.test.tsx`:
+Create `frontend/src/features/applications/components/__tests__/ApplicationCard.test.tsx`:
 
 ```tsx
 import { describe, it, expect } from 'vitest'
@@ -224,7 +224,7 @@ describe('ApplicationCard', () => {
 
 ```bash
 cd conecta-tcc/frontend
-npm test src/features/applications/components/ApplicationCard.test.tsx
+npm test src/features/applications/components/__tests__/ApplicationCard.test.tsx
 ```
 
 Expected: FAIL — `ApplicationCard` module not found.
@@ -296,7 +296,7 @@ export function ApplicationCard({ application }: ApplicationCardProps) {
 
 ```bash
 cd conecta-tcc/frontend
-npm test src/features/applications/components/ApplicationCard.test.tsx
+npm test src/features/applications/components/__tests__/ApplicationCard.test.tsx
 ```
 
 Expected: PASS — all 11 tests green.
@@ -305,7 +305,7 @@ Expected: PASS — all 11 tests green.
 
 ```bash
 cd conecta-tcc/frontend
-git add src/features/applications/components/ApplicationCard.tsx src/features/applications/components/ApplicationCard.test.tsx
+git add src/features/applications/components/ApplicationCard.tsx src/features/applications/components/__tests__/ApplicationCard.test.tsx
 git commit -m "feat: add ApplicationCard component with area badge, status, feedback, and proposal link"
 ```
 
@@ -315,11 +315,11 @@ git commit -m "feat: add ApplicationCard component with area badge, status, feed
 
 **Files:**
 - Modify: `frontend/src/pages/my-applications/index.tsx`
-- Create: `frontend/src/pages/my-applications/index.test.tsx`
+- Create: `frontend/src/pages/my-applications/__tests__/index.test.tsx`
 
 - [ ] **Step 1: Write failing tests**
 
-Create `frontend/src/pages/my-applications/index.test.tsx`:
+Create `frontend/src/pages/my-applications/__tests__/index.test.tsx`:
 
 ```tsx
 import { describe, it, expect, beforeEach } from 'vitest'
@@ -396,7 +396,7 @@ function mockApplicationsList(apps: Application[]) {
     links: { first: null, last: null, prev: null, next: null },
   }
   server.use(
-    http.get('http://localhost:8000/applications', () => HttpResponse.json(response)),
+    http.get('http://localhost:8000/api/applications', () => HttpResponse.json(response)),
   )
 }
 
@@ -472,7 +472,7 @@ describe('MyApplicationsPage', () => {
 
 ```bash
 cd conecta-tcc/frontend
-npm test src/pages/my-applications/index.test.tsx
+npm test src/pages/my-applications/__tests__/index.test.tsx
 ```
 
 Expected: FAIL — the page renders only `<h1>Minhas Candidaturas</h1>` and has no skeletons, cards, or counts.
@@ -582,7 +582,7 @@ export default function MyApplicationsPage() {
 
 ```bash
 cd conecta-tcc/frontend
-npm test src/pages/my-applications/index.test.tsx
+npm test src/pages/my-applications/__tests__/index.test.tsx
 ```
 
 Expected: PASS — all 8 tests green.
@@ -600,6 +600,6 @@ Expected: no errors.
 
 ```bash
 cd conecta-tcc/frontend
-git add src/pages/my-applications/index.tsx src/pages/my-applications/index.test.tsx
+git add src/pages/my-applications/index.tsx src/pages/my-applications/__tests__/index.test.tsx
 git commit -m "feat: implement MyApplicationsPage with status counts, skeletons, and empty state"
 ```

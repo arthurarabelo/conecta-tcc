@@ -19,7 +19,7 @@
 
 - [ ] **Step 1: Write failing test to confirm MSW is absent**
 ```bash
-cd conecta-tcc/frontend && npx vitest run src/services/auth.service.test.ts --reporter=verbose 2>&1 | head -20
+cd conecta-tcc/frontend && npx vitest run src/services/__tests__/auth.service.test.ts --reporter=verbose 2>&1 | head -20
 ```
 Expected: FAIL — file not found or MSW not installed.
 
@@ -136,11 +136,11 @@ git -C conecta-tcc commit -m "test: add MSW v2 server setup with auth endpoint h
 ### Task 2: Unit tests for loginSchema
 
 **Files:**
-- Create: `frontend/src/features/auth/schemas/login-schema.test.ts`
+- Create: `frontend/src/features/auth/schemas/__tests__/login-schema.test.ts`
 
 - [ ] **Step 1: Write failing tests**
 ```ts
-// frontend/src/features/auth/schemas/login-schema.test.ts
+// frontend/src/features/auth/schemas/__tests__/login-schema.test.ts
 import { describe, expect, it } from 'vitest'
 import { loginSchema } from '@/features/auth/schemas'
 
@@ -220,7 +220,7 @@ describe('loginSchema', () => {
 
 - [ ] **Step 2: Run test — expect failure**
 ```bash
-cd conecta-tcc/frontend && npx vitest run src/features/auth/schemas/login-schema.test.ts --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/features/auth/schemas/__tests__/login-schema.test.ts --reporter=verbose
 ```
 Expected: FAIL — no vitest config or import path errors.
 
@@ -237,13 +237,13 @@ No changes needed.
 
 - [ ] **Step 4: Run test — expect pass**
 ```bash
-cd conecta-tcc/frontend && npx vitest run src/features/auth/schemas/login-schema.test.ts --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/features/auth/schemas/__tests__/login-schema.test.ts --reporter=verbose
 ```
 Expected: PASS all 9 tests.
 
 - [ ] **Step 5: Commit**
 ```bash
-git -C conecta-tcc add frontend/src/features/auth/schemas/login-schema.test.ts
+git -C conecta-tcc add frontend/src/features/auth/schemas/__tests__/login-schema.test.ts
 git -C conecta-tcc commit -m "test: unit tests for loginSchema email/password validation"
 ```
 
@@ -252,11 +252,11 @@ git -C conecta-tcc commit -m "test: unit tests for loginSchema email/password va
 ### Task 3: Unit tests for registerSchema
 
 **Files:**
-- Create: `frontend/src/features/auth/schemas/register-schema.test.ts`
+- Create: `frontend/src/features/auth/schemas/__tests__/register-schema.test.ts`
 
 - [ ] **Step 1: Write failing tests**
 ```ts
-// frontend/src/features/auth/schemas/register-schema.test.ts
+// frontend/src/features/auth/schemas/__tests__/register-schema.test.ts
 import { describe, expect, it } from 'vitest'
 import { registerSchema } from '@/features/auth/schemas'
 
@@ -451,7 +451,7 @@ describe('registerSchema', () => {
 
 - [ ] **Step 2: Run test — expect failure**
 ```bash
-cd conecta-tcc/frontend && npx vitest run src/features/auth/schemas/register-schema.test.ts --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/features/auth/schemas/__tests__/register-schema.test.ts --reporter=verbose
 ```
 Expected: FAIL — no vitest config or import errors.
 
@@ -461,13 +461,13 @@ The existing `frontend/src/features/auth/schemas/index.ts` already implements th
 
 - [ ] **Step 4: Run test — expect pass**
 ```bash
-cd conecta-tcc/frontend && npx vitest run src/features/auth/schemas/register-schema.test.ts --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/features/auth/schemas/__tests__/register-schema.test.ts --reporter=verbose
 ```
 Expected: PASS all 17 tests.
 
 - [ ] **Step 5: Commit**
 ```bash
-git -C conecta-tcc add frontend/src/features/auth/schemas/register-schema.test.ts
+git -C conecta-tcc add frontend/src/features/auth/schemas/__tests__/register-schema.test.ts
 git -C conecta-tcc commit -m "test: unit tests for registerSchema all fields including password mismatch"
 ```
 
@@ -476,11 +476,11 @@ git -C conecta-tcc commit -m "test: unit tests for registerSchema all fields inc
 ### Task 4: Integration tests for authService using MSW
 
 **Files:**
-- Create: `frontend/src/services/auth.service.test.ts`
+- Create: `frontend/src/services/__tests__/auth.service.test.ts`
 
 - [ ] **Step 1: Write failing tests**
 ```ts
-// frontend/src/services/auth.service.test.ts
+// frontend/src/services/__tests__/auth.service.test.ts
 import { beforeEach, describe, expect, it } from 'vitest'
 import { authService } from '@/services/auth.service'
 import { useAuthStore } from '@/store/auth.store'
@@ -605,7 +605,7 @@ describe('authService', () => {
 
 - [ ] **Step 2: Run test — expect failure**
 ```bash
-cd conecta-tcc/frontend && npx vitest run src/services/auth.service.test.ts --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/services/__tests__/auth.service.test.ts --reporter=verbose
 ```
 Expected: FAIL — no vitest config or MSW not installed yet.
 
@@ -628,13 +628,13 @@ This covers all fields from `GET /me → { data: User }`. The MSW handler return
 
 - [ ] **Step 4: Run test — expect pass**
 ```bash
-cd conecta-tcc/frontend && npx vitest run src/services/auth.service.test.ts --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/services/__tests__/auth.service.test.ts --reporter=verbose
 ```
 Expected: PASS all 9 tests.
 
 - [ ] **Step 5: Commit**
 ```bash
-git -C conecta-tcc add frontend/src/services/auth.service.test.ts
+git -C conecta-tcc add frontend/src/services/__tests__/auth.service.test.ts
 git -C conecta-tcc commit -m "test: integration tests for authService using MSW mocked endpoints"
 ```
 
@@ -643,11 +643,11 @@ git -C conecta-tcc commit -m "test: integration tests for authService using MSW 
 ### Task 5: Integration tests for useLogin and useRegister hooks
 
 **Files:**
-- Create: `frontend/src/features/auth/hooks/auth-hooks.test.tsx`
+- Create: `frontend/src/features/auth/hooks/__tests__/auth-hooks.test.tsx`
 
 - [ ] **Step 1: Write failing tests**
 ```tsx
-// frontend/src/features/auth/hooks/auth-hooks.test.tsx
+// frontend/src/features/auth/hooks/__tests__/auth-hooks.test.tsx
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { renderHook, act, waitFor } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -780,7 +780,7 @@ describe('useMe', () => {
 
 - [ ] **Step 2: Run test — expect failure**
 ```bash
-cd conecta-tcc/frontend && npx vitest run src/features/auth/hooks/auth-hooks.test.tsx --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/features/auth/hooks/__tests__/auth-hooks.test.tsx --reporter=verbose
 ```
 Expected: FAIL — no test infrastructure or import errors.
 
@@ -790,7 +790,7 @@ The hooks in `frontend/src/features/auth/hooks/index.ts` already call `authServi
 
 - [ ] **Step 4: Run test — expect pass**
 ```bash
-cd conecta-tcc/frontend && npx vitest run src/features/auth/hooks/auth-hooks.test.tsx --reporter=verbose
+cd conecta-tcc/frontend && npx vitest run src/features/auth/hooks/__tests__/auth-hooks.test.tsx --reporter=verbose
 ```
 Expected: PASS all 5 tests.
 
@@ -802,6 +802,6 @@ Expected: all tests PASS.
 
 - [ ] **Step 6: Commit**
 ```bash
-git -C conecta-tcc add frontend/src/features/auth/hooks/auth-hooks.test.tsx
+git -C conecta-tcc add frontend/src/features/auth/hooks/__tests__/auth-hooks.test.tsx
 git -C conecta-tcc commit -m "test: integration tests for useLogin/useRegister/useMe hooks with MSW"
 ```

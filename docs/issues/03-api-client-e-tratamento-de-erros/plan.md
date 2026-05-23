@@ -54,7 +54,7 @@ cd conecta-tcc/frontend && git add .env.example .gitignore && git commit -m "cho
 ### Task 2: Unit Tests — AppError Class Hierarchy
 
 **Files:**
-- Create: `frontend/src/lib/error.test.ts`
+- Create: `frontend/src/lib/__tests__/error.test.ts`
 
 - [ ] **Step 1: Write failing tests for AppError hierarchy (TDD — write first)**
 
@@ -163,11 +163,11 @@ describe('NotFoundError', () => {
 
 - [ ] **Step 2: Run tests — expect them to pass (classes already implemented)**
 ```bash
-cd conecta-tcc/frontend && npm test src/lib/error.test.ts
+cd conecta-tcc/frontend && npm test src/lib/__tests__/error.test.ts
 ```
 Expected:
 ```
-✓ src/lib/error.test.ts (11)
+✓ src/lib/__tests__/error.test.ts (11)
   ✓ AppError > sets message, status and name correctly
   ✓ ValidationError > sets status to 422 and stores field errors
   ✓ ValidationError > firstError() returns the first error for a field
@@ -184,7 +184,7 @@ Test Files  1 passed (1)
 
 - [ ] **Step 3: Commit**
 ```bash
-cd conecta-tcc/frontend && git add src/lib/error.test.ts && git commit -m "test: add unit tests for AppError class hierarchy"
+cd conecta-tcc/frontend && git add src/lib/__tests__/error.test.ts && git commit -m "test: add unit tests for AppError class hierarchy"
 ```
 
 ---
@@ -192,7 +192,7 @@ cd conecta-tcc/frontend && git add src/lib/error.test.ts && git commit -m "test:
 ### Task 3: Unit Tests — parseAxiosError
 
 **Files:**
-- Create: `frontend/src/lib/parse-axios-error.test.ts`
+- Create: `frontend/src/lib/__tests__/parse-axios-error.test.ts`
 
 - [ ] **Step 1: Write failing tests for `parseAxiosError` using `vi.mock('axios')`**
 
@@ -323,11 +323,11 @@ describe('parseAxiosError', () => {
 
 - [ ] **Step 2: Run tests — all should pass**
 ```bash
-cd conecta-tcc/frontend && npm test src/lib/parse-axios-error.test.ts
+cd conecta-tcc/frontend && npm test src/lib/__tests__/parse-axios-error.test.ts
 ```
 Expected:
 ```
-✓ src/lib/parse-axios-error.test.ts (11)
+✓ src/lib/__tests__/parse-axios-error.test.ts (11)
 Test Files  1 passed (1)
 ```
 If any test fails, inspect `src/lib/error.ts` and fix the edge case in `parseAxiosError` (e.g., the 422-without-errors fallback must produce a plain AppError with status 422).
@@ -347,7 +347,7 @@ if (status === 422 && data?.errors) {
 
 - [ ] **Step 4: Commit**
 ```bash
-cd conecta-tcc/frontend && git add src/lib/parse-axios-error.test.ts && git commit -m "test: add unit tests for parseAxiosError covering all HTTP error cases"
+cd conecta-tcc/frontend && git add src/lib/__tests__/parse-axios-error.test.ts && git commit -m "test: add unit tests for parseAxiosError covering all HTTP error cases"
 ```
 
 ---
@@ -355,7 +355,7 @@ cd conecta-tcc/frontend && git add src/lib/parse-axios-error.test.ts && git comm
 ### Task 4: Verify api-client.ts Configuration
 
 **Files:**
-- Create: `frontend/src/services/api-client.test.ts`
+- Create: `frontend/src/services/__tests__/api-client.test.ts`
 
 - [ ] **Step 1: Write tests for the api-client interceptors**
 
@@ -417,17 +417,17 @@ describe('api-client: response interceptor', () => {
 
 - [ ] **Step 2: Run the api-client tests**
 ```bash
-cd conecta-tcc/frontend && npm test src/services/api-client.test.ts
+cd conecta-tcc/frontend && npm test src/services/__tests__/api-client.test.ts
 ```
 Expected:
 ```
-✓ src/services/api-client.test.ts (3)
+✓ src/services/__tests__/api-client.test.ts (3)
 Test Files  1 passed (1)
 ```
 
 - [ ] **Step 3: Commit**
 ```bash
-cd conecta-tcc/frontend && git add src/services/api-client.test.ts && git commit -m "test: verify api-client interceptors are registered and reads env URL"
+cd conecta-tcc/frontend && git add src/services/__tests__/api-client.test.ts && git commit -m "test: verify api-client interceptors are registered and reads env URL"
 ```
 
 ---
@@ -446,7 +446,7 @@ Expected: `INFO  Server running on [http://127.0.0.1:8000]`
 
 - [ ] **Step 2: Test POST /login with invalid credentials (expect 422 ValidationError)**
 ```bash
-curl -s -X POST http://localhost:8000/login \
+curl -s -X POST http://localhost:8000/api/login \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
   -d '{"email":"notexist@test.com","password":"wrong"}' | jq .
@@ -463,7 +463,7 @@ Expected response shape:
 
 - [ ] **Step 3: Test GET /me without token (expect 401)**
 ```bash
-curl -s -X GET http://localhost:8000/me \
+curl -s -X GET http://localhost:8000/api/me \
   -H "Accept: application/json" | jq .
 ```
 Expected:
@@ -475,7 +475,7 @@ Expected:
 
 - [ ] **Step 4: Test POST /login with valid credentials and extract token**
 ```bash
-curl -s -X POST http://localhost:8000/login \
+curl -s -X POST http://localhost:8000/api/login \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
   -d '{"email":"professor@example.com","password":"password"}' | jq .
@@ -491,7 +491,7 @@ Expected response shape:
 - [ ] **Step 5: Test GET /me with valid Bearer token**
 ```bash
 TOKEN="<token-from-step-4>"
-curl -s -X GET http://localhost:8000/me \
+curl -s -X GET http://localhost:8000/api/me \
   -H "Accept: application/json" \
   -H "Authorization: Bearer $TOKEN" | jq .
 ```
@@ -500,7 +500,7 @@ Expected: returns the authenticated user object wrapped in `{"data": {...}}`.
 - [ ] **Step 6: Test POST /logout clears the session**
 ```bash
 TOKEN="<token-from-step-4>"
-curl -s -X POST http://localhost:8000/logout \
+curl -s -X POST http://localhost:8000/api/logout \
   -H "Accept: application/json" \
   -H "Authorization: Bearer $TOKEN" | jq .
 ```

@@ -84,14 +84,14 @@ git commit -m "chore: add vitest and react testing library"
 
 **Files:**
 - Create: `frontend/src/components/shared/StatusBadge/index.tsx`
-- Create: `frontend/src/components/shared/StatusBadge/StatusBadge.test.tsx`
+- Create: `frontend/src/components/shared/StatusBadge/__tests__/StatusBadge.test.tsx`
 
 The component maps `ApplicationStatus` to a colored Shadcn `Badge`. Shadcn Badge doesn't ship a native "yellow" or "green" variant out of the box in New York style — we use `className` overrides with Tailwind to apply the exact colours.
 
 - [ ] **Step 1: Write the failing tests**
 
 ```tsx
-// frontend/src/components/shared/StatusBadge/StatusBadge.test.tsx
+// frontend/src/components/shared/StatusBadge/__tests__/StatusBadge.test.tsx
 import { render, screen } from '@testing-library/react'
 import { StatusBadge } from '.'
 
@@ -131,7 +131,7 @@ describe('StatusBadge', () => {
 - [ ] **Step 2: Run tests to verify they fail**
 
 ```bash
-cd frontend && npx vitest run src/components/shared/StatusBadge/StatusBadge.test.tsx
+cd frontend && npx vitest run src/components/shared/StatusBadge/__tests__/StatusBadge.test.tsx
 ```
 Expected: FAIL — "Cannot find module '.'"
 
@@ -185,7 +185,7 @@ export function StatusBadge({ status }: StatusBadgeProps) {
 - [ ] **Step 5: Run tests to verify they pass**
 
 ```bash
-cd frontend && npx vitest run src/components/shared/StatusBadge/StatusBadge.test.tsx
+cd frontend && npx vitest run src/components/shared/StatusBadge/__tests__/StatusBadge.test.tsx
 ```
 Expected: PASS — 6 tests pass
 
@@ -202,14 +202,14 @@ git commit -m "feat: add StatusBadge component with application status mapping"
 
 **Files:**
 - Create: `frontend/src/components/shared/ProposalCard/index.tsx`
-- Create: `frontend/src/components/shared/ProposalCard/ProposalCard.test.tsx`
+- Create: `frontend/src/components/shared/ProposalCard/__tests__/ProposalCard.test.tsx`
 
 The card shows area badge, open/closed badge, title, 3-line description, professor avatar+name, and remaining slots. It links to `/propostas/:id` using TanStack Router's `<Link>`. Tests must wrap the component in a minimal TanStack Router context.
 
 - [ ] **Step 1: Write the failing tests**
 
 ```tsx
-// frontend/src/components/shared/ProposalCard/ProposalCard.test.tsx
+// frontend/src/components/shared/ProposalCard/__tests__/ProposalCard.test.tsx
 import { render, screen } from '@testing-library/react'
 import { createMemoryHistory, createRouter, createRoute, createRootRoute, RouterProvider } from '@tanstack/react-router'
 import { ProposalCard } from '.'
@@ -291,7 +291,7 @@ describe('ProposalCard', () => {
 - [ ] **Step 2: Run tests to verify they fail**
 
 ```bash
-cd frontend && npx vitest run src/components/shared/ProposalCard/ProposalCard.test.tsx
+cd frontend && npx vitest run src/components/shared/ProposalCard/__tests__/ProposalCard.test.tsx
 ```
 Expected: FAIL — "Cannot find module '.'"
 
@@ -389,7 +389,7 @@ export function ProposalCard({ proposal }: ProposalCardProps) {
 - [ ] **Step 5: Run tests to verify they pass**
 
 ```bash
-cd frontend && npx vitest run src/components/shared/ProposalCard/ProposalCard.test.tsx
+cd frontend && npx vitest run src/components/shared/ProposalCard/__tests__/ProposalCard.test.tsx
 ```
 Expected: PASS — 7 tests pass
 

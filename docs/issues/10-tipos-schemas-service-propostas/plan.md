@@ -136,7 +136,7 @@ export const MOCK_CLOSED_PROPOSAL = {
 
 export const proposalHandlers = [
   // GET /proposals — paginated list, supports ?status= filter
-  http.get('http://localhost:8000/proposals', ({ request }) => {
+  http.get('http://localhost:8000/api/proposals', ({ request }) => {
     const url = new URL(request.url)
     const status = url.searchParams.get('status')
 
@@ -155,8 +155,8 @@ export const proposalHandlers = [
         to: filtered.length > 0 ? filtered.length : null,
       },
       links: {
-        first: 'http://localhost:8000/proposals?page=1',
-        last: 'http://localhost:8000/proposals?page=1',
+        first: 'http://localhost:8000/api/proposals?page=1',
+        last: 'http://localhost:8000/api/proposals?page=1',
         prev: null,
         next: null,
       },
@@ -164,7 +164,7 @@ export const proposalHandlers = [
   }),
 
   // GET /proposals/:id
-  http.get('http://localhost:8000/proposals/:id', ({ params }) => {
+  http.get('http://localhost:8000/api/proposals/:id', ({ params }) => {
     const id = Number(params.id)
     const proposal = MOCK_PROPOSALS.find((p) => p.id === id)
 
@@ -176,7 +176,7 @@ export const proposalHandlers = [
   }),
 
   // POST /proposals
-  http.post('http://localhost:8000/proposals', async ({ request }) => {
+  http.post('http://localhost:8000/api/proposals', async ({ request }) => {
     const body = await request.json() as Record<string, unknown>
     const created = {
       id: 99,
@@ -190,7 +190,7 @@ export const proposalHandlers = [
   }),
 
   // PATCH /proposals/:id
-  http.patch('http://localhost:8000/proposals/:id', async ({ params, request }) => {
+  http.patch('http://localhost:8000/api/proposals/:id', async ({ params, request }) => {
     const id = Number(params.id)
     const body = await request.json() as Record<string, unknown>
     const proposal = MOCK_PROPOSALS.find((p) => p.id === id)
@@ -203,7 +203,7 @@ export const proposalHandlers = [
   }),
 
   // DELETE /proposals/:id
-  http.delete('http://localhost:8000/proposals/:id', ({ params }) => {
+  http.delete('http://localhost:8000/api/proposals/:id', ({ params }) => {
     const id = Number(params.id)
     const exists = MOCK_PROPOSALS.some((p) => p.id === id)
 
@@ -215,7 +215,7 @@ export const proposalHandlers = [
   }),
 
   // POST /proposals/:id/apply
-  http.post('http://localhost:8000/proposals/:id/apply', ({ params }) => {
+  http.post('http://localhost:8000/api/proposals/:id/apply', ({ params }) => {
     const proposalId = Number(params.id)
 
     if (proposalId === MOCK_CLOSED_PROPOSAL.id) {
@@ -269,12 +269,12 @@ git commit -m "test: set up comprehensive MSW handlers for proposals endpoints"
 ### Task 2: proposalSchema unit tests
 
 **Files:**
-- Create: `frontend/src/features/proposals/schemas/proposalSchema.test.ts`
+- Create: `frontend/src/features/proposals/schemas/__tests__/proposalSchema.test.ts`
 
 - [ ] **Step 1: Write the failing tests**
 
 ```ts
-// frontend/src/features/proposals/schemas/proposalSchema.test.ts
+// frontend/src/features/proposals/schemas/__tests__/proposalSchema.test.ts
 import { describe, expect, it } from 'vitest'
 import { proposalSchema } from '.'
 
@@ -373,14 +373,14 @@ describe('proposalSchema', () => {
 - [ ] **Step 2: Run tests to verify they pass (schema already exists)**
 
 ```bash
-cd frontend && npx vitest run src/features/proposals/schemas/proposalSchema.test.ts
+cd frontend && npx vitest run src/features/proposals/schemas/__tests__/proposalSchema.test.ts
 ```
 Expected: PASS — 11 tests pass
 
 - [ ] **Step 3: Commit**
 
 ```bash
-git add frontend/src/features/proposals/schemas/proposalSchema.test.ts
+git add frontend/src/features/proposals/schemas/__tests__/proposalSchema.test.ts
 git commit -m "test: add unit tests for proposalSchema Zod validation"
 ```
 
@@ -389,14 +389,14 @@ git commit -m "test: add unit tests for proposalSchema Zod validation"
 ### Task 3: proposalsService integration tests
 
 **Files:**
-- Create: `frontend/src/services/proposals.service.test.ts`
+- Create: `frontend/src/services/__tests__/proposals.service.test.ts`
 
 These tests call the actual service functions. MSW intercepts the Axios HTTP calls. The `apiClient` uses `baseURL: 'http://localhost:8000'`, so MSW handlers must use that same origin.
 
 - [ ] **Step 1: Write the failing tests**
 
 ```ts
-// frontend/src/services/proposals.service.test.ts
+// frontend/src/services/__tests__/proposals.service.test.ts
 import { describe, expect, it } from 'vitest'
 import { http, HttpResponse } from 'msw'
 import { server } from '@/test/server'
@@ -425,7 +425,7 @@ describe('proposalsService', () => {
     it('includes filters in query params', async () => {
       let capturedUrl: string | null = null
       server.use(
-        http.get('http://localhost:8000/proposals', ({ request }) => {
+        http.get('http://localhost:8000/api/proposals', ({ request }) => {
           capturedUrl = request.url
           return HttpResponse.json({
             data: [],
@@ -515,7 +515,7 @@ describe('proposalsService', () => {
 - [ ] **Step 2: Run tests to verify they fail (before any changes — service already exists)**
 
 ```bash
-cd frontend && npx vitest run src/services/proposals.service.test.ts
+cd frontend && npx vitest run src/services/__tests__/proposals.service.test.ts
 ```
 Expected: PASS if MSW is set up correctly. If failing, check that `apiClient` baseURL matches `http://localhost:8000`.
 
@@ -532,14 +532,14 @@ env: {
 
 Then re-run:
 ```bash
-cd frontend && npx vitest run src/services/proposals.service.test.ts
+cd frontend && npx vitest run src/services/__tests__/proposals.service.test.ts
 ```
 Expected: PASS — 10 tests pass
 
 - [ ] **Step 4: Commit**
 
 ```bash
-git add frontend/src/services/proposals.service.test.ts
+git add frontend/src/services/__tests__/proposals.service.test.ts
 git commit -m "test: add integration tests for proposalsService using MSW"
 ```
 
@@ -548,14 +548,14 @@ git commit -m "test: add integration tests for proposalsService using MSW"
 ### Task 4: proposals hooks integration tests
 
 **Files:**
-- Create: `frontend/src/features/proposals/hooks/proposals.hooks.test.tsx`
+- Create: `frontend/src/features/proposals/hooks/__tests__/proposals.hooks.test.tsx`
 
 Hooks that use TanStack Query require a `QueryClient` wrapper. We use `renderHook` from `@testing-library/react` and pass a `wrapper` that provides `QueryClientProvider`. Each test gets a fresh `QueryClient` with `retry: false` to prevent retries masking real errors.
 
 - [ ] **Step 1: Write the failing tests**
 
 ```tsx
-// frontend/src/features/proposals/hooks/proposals.hooks.test.tsx
+// frontend/src/features/proposals/hooks/__tests__/proposals.hooks.test.tsx
 import { renderHook, waitFor, act } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { describe, expect, it } from 'vitest'
@@ -762,7 +762,7 @@ describe('useApplyToProposal', () => {
 - [ ] **Step 2: Run tests to verify they pass**
 
 ```bash
-cd frontend && npx vitest run src/features/proposals/hooks/proposals.hooks.test.tsx
+cd frontend && npx vitest run src/features/proposals/hooks/__tests__/proposals.hooks.test.tsx
 ```
 Expected: PASS — all tests pass
 
@@ -778,7 +778,7 @@ Expected: all tests pass
 - [ ] **Step 4: Commit**
 
 ```bash
-git add frontend/src/features/proposals/hooks/proposals.hooks.test.tsx
+git add frontend/src/features/proposals/hooks/__tests__/proposals.hooks.test.tsx
 git commit -m "test: add integration tests for proposal hooks with cache invalidation checks"
 ```
 

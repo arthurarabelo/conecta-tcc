@@ -11,7 +11,6 @@ import {
 
 vi.mock('axios')
 
-// Helper to create a mock Axios error
 function makeAxiosError(status: number, data: unknown) {
   const err = new Error('Request failed') as Error & {
     isAxiosError: boolean

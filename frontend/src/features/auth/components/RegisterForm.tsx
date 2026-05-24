@@ -10,8 +10,6 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { ArrowRight, AlertCircle } from 'lucide-react'
 
@@ -22,6 +20,9 @@ const DEPARTMENTS = [
   { id: 4, name: 'Engenharia Elétrica' },
   { id: 5, name: 'Matemática' },
 ] as const
+
+const inputClass = 'mt-1 w-full rounded-md border border-border bg-card px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring'
+const labelClass = 'text-xs font-semibold uppercase tracking-wider text-muted-foreground'
 
 export function RegisterForm() {
   const { mutate, isPending, isError, error } = useRegister()
@@ -59,26 +60,19 @@ export function RegisterForm() {
         )}
 
         <div className="grid grid-cols-2 gap-2 p-1 rounded-lg bg-secondary">
-          <button
-            type="button"
-            aria-label="Aluno"
-            onClick={() => form.setValue('role', 'student')}
-            className={`px-3 py-2 text-sm font-semibold rounded-md transition-colors ${
-              selectedRole === 'student' ? 'bg-card shadow-sm' : 'text-muted-foreground'
-            }`}
-          >
-            Aluno
-          </button>
-          <button
-            type="button"
-            aria-label="Professor"
-            onClick={() => form.setValue('role', 'professor')}
-            className={`px-3 py-2 text-sm font-semibold rounded-md transition-colors ${
-              selectedRole === 'professor' ? 'bg-card shadow-sm' : 'text-muted-foreground'
-            }`}
-          >
-            Professor
-          </button>
+          {(['student', 'professor'] as const).map((r) => (
+            <button
+              key={r}
+              type="button"
+              aria-label={r === 'student' ? 'Aluno' : 'Professor'}
+              onClick={() => form.setValue('role', r)}
+              className={`px-3 py-2 text-sm font-semibold rounded-md transition-colors ${
+                selectedRole === r ? 'bg-card shadow-soft' : 'text-muted-foreground'
+              }`}
+            >
+              {r === 'student' ? 'Aluno' : 'Professor'}
+            </button>
+          ))}
         </div>
 
         <FormField
@@ -86,9 +80,14 @@ export function RegisterForm() {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nome completo</FormLabel>
+              <FormLabel className={labelClass}>Nome completo</FormLabel>
               <FormControl>
-                <Input placeholder="Seu nome completo" autoComplete="name" {...field} />
+                <input
+                  placeholder="Seu nome completo"
+                  autoComplete="name"
+                  className={inputClass}
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -100,12 +99,13 @@ export function RegisterForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>E-mail</FormLabel>
+              <FormLabel className={labelClass}>E-mail</FormLabel>
               <FormControl>
-                <Input
+                <input
                   type="email"
                   placeholder="seu.nome@ufmg.br"
                   autoComplete="email"
+                  className={inputClass}
                   {...field}
                 />
               </FormControl>
@@ -119,9 +119,14 @@ export function RegisterForm() {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Senha</FormLabel>
+              <FormLabel className={labelClass}>Senha</FormLabel>
               <FormControl>
-                <Input type="password" autoComplete="new-password" {...field} />
+                <input
+                  type="password"
+                  autoComplete="new-password"
+                  className={inputClass}
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -133,9 +138,14 @@ export function RegisterForm() {
           name="password_confirmation"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Confirmar senha</FormLabel>
+              <FormLabel className={labelClass}>Confirmar senha</FormLabel>
               <FormControl>
-                <Input type="password" autoComplete="new-password" {...field} />
+                <input
+                  type="password"
+                  autoComplete="new-password"
+                  className={inputClass}
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -147,10 +157,10 @@ export function RegisterForm() {
           name="department_id"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Departamento</FormLabel>
+              <FormLabel className={labelClass}>Departamento</FormLabel>
               <FormControl>
                 <select
-                  className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm focus:outline-none focus:ring-1 focus:ring-ring"
+                  className={inputClass}
                   value={field.value}
                   onChange={(e) => field.onChange(Number(e.target.value))}
                 >
@@ -171,11 +181,12 @@ export function RegisterForm() {
           name="profile_link"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Link do perfil (opcional)</FormLabel>
+              <FormLabel className={labelClass}>Link do perfil (opcional)</FormLabel>
               <FormControl>
-                <Input
+                <input
                   type="url"
                   placeholder="https://lattes.cnpq.br/..."
+                  className={inputClass}
                   {...field}
                 />
               </FormControl>
@@ -184,16 +195,20 @@ export function RegisterForm() {
           )}
         />
 
-        <Button type="submit" className="w-full" disabled={isPending}>
+        <button
+          type="submit"
+          disabled={isPending}
+          className="group inline-flex w-full items-center justify-center gap-2 rounded-md bg-foreground px-4 py-3 text-sm font-semibold text-background hover:opacity-90 disabled:opacity-50 disabled:pointer-events-none transition-opacity"
+        >
           {isPending ? (
             'Cadastrando...'
           ) : (
             <>
               Criar conta
-              <ArrowRight className="ml-2 h-4 w-4" />
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </>
           )}
-        </Button>
+        </button>
       </form>
     </Form>
   )

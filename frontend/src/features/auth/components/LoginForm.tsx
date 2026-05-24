@@ -10,8 +10,6 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { ArrowRight, AlertCircle } from 'lucide-react'
 
@@ -42,12 +40,15 @@ export function LoginForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>E-mail</FormLabel>
+              <FormLabel className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                E-mail
+              </FormLabel>
               <FormControl>
-                <Input
+                <input
                   type="email"
                   placeholder="seu.nome@ufmg.br"
                   autoComplete="email"
+                  className="mt-1 w-full rounded-md border border-border bg-card px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
                   {...field}
                 />
               </FormControl>
@@ -61,11 +62,14 @@ export function LoginForm() {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Senha</FormLabel>
+              <FormLabel className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Senha
+              </FormLabel>
               <FormControl>
-                <Input
+                <input
                   type="password"
                   autoComplete="current-password"
+                  className="mt-1 w-full rounded-md border border-border bg-card px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
                   {...field}
                 />
               </FormControl>
@@ -74,16 +78,20 @@ export function LoginForm() {
           )}
         />
 
-        <Button type="submit" className="w-full" disabled={isPending}>
+        <button
+          type="submit"
+          disabled={isPending}
+          className="group inline-flex w-full items-center justify-center gap-2 rounded-md bg-foreground px-4 py-3 text-sm font-semibold text-background hover:opacity-90 disabled:opacity-50 disabled:pointer-events-none transition-opacity"
+        >
           {isPending ? (
             'Entrando...'
           ) : (
             <>
               Entrar
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </>
           )}
-        </Button>
+        </button>
       </form>
     </Form>
   )

@@ -23,7 +23,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen grid md:grid-cols-2">
-      <div className="relative hidden md:flex flex-col justify-between p-12 bg-gradient-to-br from-slate-900 to-slate-700 text-white overflow-hidden">
+      <div className="relative hidden md:flex flex-col justify-between p-12 bg-gradient-hero text-white overflow-hidden">
         <div
           className="absolute inset-0 opacity-[0.08]"
           style={{

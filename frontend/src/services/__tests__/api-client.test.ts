@@ -5,7 +5,7 @@ import type { User } from '@/types/models'
 describe('api-client: VITE_API_BASE_URL', () => {
   it('reads VITE_API_BASE_URL from import.meta.env', async () => {
     const { API_BASE_URL } = await import('@/constants/api')
-    expect(API_BASE_URL).toBe('http://localhost:8000')
+    expect(API_BASE_URL).toBe('http://localhost:8000/api')
   })
 })
 

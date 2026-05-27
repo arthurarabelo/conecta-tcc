@@ -7,9 +7,12 @@
   --radius-2xl: 1.5rem;
   --radius-full: 9999px;
 
+  /* Gradients */
+  --gradient-hero: linear-gradient(135deg, oklch(0.28 0.07 255) 0%, oklch(0.35 0.09 270) 60%, oklch(0.45 0.12 30) 100%);
+
   /* Shadows */
-  --shadow-soft: 0 2px 8px 0 hsl(222.2 84% 4.9% / 0.06);
-  --shadow-elegant: 0 4px 24px 0 hsl(222.2 84% 4.9% / 0.1);
+  --shadow-soft: 0 4px 20px -8px oklch(0.22 0.045 250 / 0.15);
+  --shadow-elegant: 0 20px 60px -20px oklch(0.22 0.045 250 / 0.25);
 
   /* Spacing scale (overrides if needed) */
   --spacing-container: 80rem; /* max-w-7xl = 1280px */

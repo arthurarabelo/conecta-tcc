@@ -1,46 +1,36 @@
 @theme {
-  /* Base */
-  --color-background: hsl(0 0% 100%);
-  --color-foreground: hsl(222.2 84% 4.9%);
+  /* Editorial academic palette: warm paper + deep ink + ochre accent */
+  --color-background: oklch(0.985 0.012 85);
+  --color-foreground: oklch(0.22 0.045 250);
 
-  /* Card */
-  --color-card: hsl(0 0% 100%);
-  --color-card-foreground: hsl(222.2 84% 4.9%);
+  --color-card: oklch(1 0 0);
+  --color-card-foreground: oklch(0.22 0.045 250);
 
-  /* Popover */
-  --color-popover: hsl(0 0% 100%);
-  --color-popover-foreground: hsl(222.2 84% 4.9%);
+  --color-popover: oklch(1 0 0);
+  --color-popover-foreground: oklch(0.22 0.045 250);
 
-  /* Primary */
-  --color-primary: hsl(221.2 83.2% 53.3%);
-  --color-primary-foreground: hsl(210 40% 98%);
+  --color-primary: oklch(0.28 0.07 255);
+  --color-primary-foreground: oklch(0.985 0.012 85);
 
-  /* Secondary */
-  --color-secondary: hsl(210 40% 96.1%);
-  --color-secondary-foreground: hsl(222.2 47.4% 11.2%);
+  --color-secondary: oklch(0.95 0.02 85);
+  --color-secondary-foreground: oklch(0.28 0.07 255);
 
-  /* Muted */
-  --color-muted: hsl(210 40% 96.1%);
-  --color-muted-foreground: hsl(215.4 16.3% 46.9%);
+  --color-muted: oklch(0.94 0.015 85);
+  --color-muted-foreground: oklch(0.5 0.03 255);
 
-  /* Accent */
-  --color-accent: hsl(210 40% 96.1%);
-  --color-accent-foreground: hsl(222.2 47.4% 11.2%);
+  --color-accent: oklch(0.78 0.14 65);
+  --color-accent-foreground: oklch(0.22 0.045 250);
 
-  /* Destructive */
-  --color-destructive: hsl(0 84.2% 60.2%);
-  --color-destructive-foreground: hsl(210 40% 98%);
+  --color-destructive: oklch(0.55 0.22 25);
+  --color-destructive-foreground: oklch(0.985 0.012 85);
 
-  /* Success */
-  --color-success: hsl(142.1 76.2% 36.3%);
-  --color-success-foreground: hsl(355.7 100% 97.3%);
+  --color-success: oklch(0.62 0.14 155);
+  --color-success-foreground: oklch(0.985 0.012 85);
 
-  /* Warning */
-  --color-warning: hsl(47.9 95.8% 53.1%);
-  --color-warning-foreground: hsl(26 83.3% 14.1%);
+  --color-warning: oklch(0.78 0.14 75);
+  --color-warning-foreground: oklch(0.22 0.045 250);
 
-  /* Border / Input / Ring */
-  --color-border: hsl(214.3 31.8% 91.4%);
-  --color-input: hsl(214.3 31.8% 91.4%);
-  --color-ring: hsl(221.2 83.2% 53.3%);
+  --color-border: oklch(0.88 0.02 85);
+  --color-input: oklch(0.9 0.02 85);
+  --color-ring: oklch(0.78 0.14 65);
 }

@@ -1,3 +1,4 @@
+// frontend/src/router.tsx
 import {
   createRouter,
   createRoute,
@@ -5,6 +6,8 @@ import {
   Outlet,
 } from '@tanstack/react-router'
 import { lazy, Suspense } from 'react'
+import { SiteHeader } from '@/components/shared/SiteHeader'
+import { ErrorBoundary } from '@/components/shared/ErrorBoundary'
 
 const HomePage = lazy(() => import('@/pages/home'))
 const LoginPage = lazy(() => import('@/pages/login'))
@@ -15,9 +18,14 @@ const DashboardPage = lazy(() => import('@/pages/dashboard'))
 
 const rootRoute = createRootRoute({
   component: () => (
-    <Suspense fallback={<div className="flex h-screen items-center justify-center">Carregando...</div>}>
-      <Outlet />
-    </Suspense>
+    <ErrorBoundary>
+      <SiteHeader />
+      <main>
+        <Suspense fallback={<div className="flex h-screen items-center justify-center">Carregando...</div>}>
+          <Outlet />
+        </Suspense>
+      </main>
+    </ErrorBoundary>
   ),
 })
 

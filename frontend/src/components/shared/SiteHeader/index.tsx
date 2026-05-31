@@ -1,30 +1,17 @@
 import { useState } from 'react'
 import { Link } from '@tanstack/react-router'
-import { GraduationCap, Menu, LogOut, User } from 'lucide-react'
+import { GraduationCap, Menu } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { useAuth } from '@/hooks/use-auth'
-import { useLogout } from '@/features/auth/hooks'
 import { ROUTES } from '@/constants/routes'
-import { getInitials } from '@/lib/utils'
 import { NavLink } from './NavLink'
+import { UserMenu } from './UserMenu'
+import { AuthButtons } from './AuthButtons'
 
 export function SiteHeader() {
-  const { user, isAuthenticated, isStudent, isProfessor } = useAuth()
-  const logout = useLogout()
+  const { isAuthenticated, isStudent, isProfessor } = useAuth()
   const [mobileOpen, setMobileOpen] = useState(false)
-
-  function handleLogout() {
-    logout.mutate()
-  }
 
   const navLinks = (
     <>
@@ -58,35 +45,7 @@ export function SiteHeader() {
         <nav className="hidden md:flex items-center gap-6">{navLinks}</nav>
 
         <div className="hidden md:flex items-center gap-2">
-          {!isAuthenticated ? (
-            <Button asChild size="sm">
-              <Link to={ROUTES.login}>Entrar</Link>
-            </Button>
-          ) : (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="flex items-center gap-2 h-9 px-2">
-                  <Avatar className="h-7 w-7">
-                    <AvatarFallback className="text-xs">
-                      {user ? getInitials(user.name) : <User className="h-4 w-4" />}
-                    </AvatarFallback>
-                  </Avatar>
-                  <span className="text-sm font-medium">{user?.name}</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuSeparator />
-                <DropdownMenuItem
-                  onClick={handleLogout}
-                  disabled={logout.isPending}
-                  className="text-destructive focus:text-destructive cursor-pointer"
-                >
-                  <LogOut className="mr-2 h-4 w-4" />
-                  Sair
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          )}
+          {isAuthenticated ? <UserMenu variant="desktop" /> : <AuthButtons variant="desktop" />}
         </div>
 
         <div className="flex md:hidden">
@@ -101,26 +60,10 @@ export function SiteHeader() {
               <div className="flex flex-col gap-4 pt-6">
                 <nav className="flex flex-col gap-3">{navLinks}</nav>
                 <div className="border-t pt-4">
-                  {!isAuthenticated ? (
-                    <Button asChild className="w-full" size="sm">
-                      <Link to={ROUTES.login} onClick={() => setMobileOpen(false)}>
-                        Entrar
-                      </Link>
-                    </Button>
+                  {isAuthenticated ? (
+                    <UserMenu variant="mobile" />
                   ) : (
-                    <div className="flex flex-col gap-2">
-                      <p className="text-sm font-medium">{user?.name}</p>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={handleLogout}
-                        disabled={logout.isPending}
-                        className="w-full justify-start text-destructive border-destructive hover:text-destructive"
-                      >
-                        <LogOut className="mr-2 h-4 w-4" />
-                        Sair
-                      </Button>
-                    </div>
+                    <AuthButtons variant="mobile" onNavigate={() => setMobileOpen(false)} />
                   )}
                 </div>
               </div>

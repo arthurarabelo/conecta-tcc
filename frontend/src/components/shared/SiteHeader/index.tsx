@@ -14,17 +14,8 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { useAuth } from '@/hooks/use-auth'
 import { useLogout } from '@/features/auth/hooks'
 import { ROUTES } from '@/constants/routes'
+import { getInitials } from '@/lib/utils'
 import { NavLink } from './NavLink'
-
-function getInitials(name: string): string {
-  return name
-    .split(' ')
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((n) => n[0])
-    .join('')
-    .toUpperCase()
-}
 
 export function SiteHeader() {
   const { user, isAuthenticated, isStudent, isProfessor } = useAuth()

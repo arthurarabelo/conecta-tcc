@@ -24,3 +24,13 @@ export function formatDateLong(dateString: string): string {
 export function remainingSlots(maxSlots: number, approvedCount: number): number {
   return Math.max(0, maxSlots - approvedCount)
 }
+
+export function getInitials(name: string): string {
+  return name
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((n) => n[0])
+    .join('')
+    .toUpperCase()
+}

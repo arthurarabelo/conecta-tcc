@@ -3,22 +3,12 @@ import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Users } from 'lucide-react'
-import { remainingSlots } from '@/lib/utils'
+import { getInitials, remainingSlots } from '@/lib/utils'
 import { ROUTES } from '@/constants/routes'
 import type { Proposal } from '@/types/models'
 
 interface ProposalCardProps {
   proposal: Proposal
-}
-
-function getInitials(name: string): string {
-  return name
-    .split(' ')
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((n) => n[0])
-    .join('')
-    .toUpperCase()
 }
 
 export function ProposalCard({ proposal }: ProposalCardProps) {

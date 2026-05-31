@@ -1,4 +1,3 @@
-// frontend/src/components/shared/SiteHeader/index.tsx
 import { useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { GraduationCap, Menu, LogOut, User } from 'lucide-react'
@@ -60,16 +59,13 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-14 items-center justify-between px-4">
-        {/* Logo */}
         <Link to={ROUTES.home} className="flex items-center gap-2 font-bold text-foreground">
           <GraduationCap className="h-5 w-5 text-primary" />
           <span>Conecta TCC</span>
         </Link>
 
-        {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-6">{navLinks}</nav>
 
-        {/* Desktop right */}
         <div className="hidden md:flex items-center gap-2">
           {!isAuthenticated ? (
             <Button asChild size="sm">
@@ -102,7 +98,6 @@ export function SiteHeader() {
           )}
         </div>
 
-        {/* Mobile hamburger */}
         <div className="flex md:hidden">
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>

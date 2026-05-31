@@ -1,4 +1,3 @@
-// frontend/src/components/shared/SiteHeader/NavLink.tsx
 import { Link } from '@tanstack/react-router'
 import { cn } from '@/lib/utils'
 

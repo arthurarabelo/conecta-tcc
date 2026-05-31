@@ -1,4 +1,3 @@
-// frontend/src/components/shared/ProposalCard/__tests__/ProposalCard.test.tsx
 import { render, screen } from '@testing-library/react'
 import { createMemoryHistory, createRouter, createRootRoute, RouterProvider } from '@tanstack/react-router'
 import { ProposalCard } from '..'

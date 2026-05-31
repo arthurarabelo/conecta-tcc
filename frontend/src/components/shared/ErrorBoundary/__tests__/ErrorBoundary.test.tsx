@@ -7,7 +7,6 @@ function Boom({ message }: { message?: string }): never {
 }
 
 describe('ErrorBoundary', () => {
-  // React logs caught errors to console.error; silence it to keep test output clean.
   beforeEach(() => {
     vi.spyOn(console, 'error').mockImplementation(() => {})
   })

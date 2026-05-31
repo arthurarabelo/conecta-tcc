@@ -1,4 +1,3 @@
-// frontend/src/components/shared/ErrorBoundary/index.tsx
 import { Component, type ErrorInfo, type ReactNode } from 'react'
 import { AlertTriangle } from 'lucide-react'
 import { Button } from '@/components/ui/button'

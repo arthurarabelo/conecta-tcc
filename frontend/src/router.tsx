@@ -1,4 +1,3 @@
-// frontend/src/router.tsx
 import {
   createRouter,
   createRoute,

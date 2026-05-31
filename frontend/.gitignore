@@ -3,5 +3,3 @@ dist
 .env
 .env.local
 *.local
-tcc-connect-main/
-tcc-connect-main.zip

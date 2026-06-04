@@ -4,6 +4,21 @@ import userEvent from '@testing-library/user-event'
 import { ProposalFilters } from '../ProposalFilters'
 import type { ProposalFiltersValue } from '../ProposalFilters'
 
+vi.mock('@/features/proposals/hooks', () => ({
+  useKnowledgeAreas: () => ({
+    data: [
+      { id: 1, name: 'Inteligência Artificial', code: 'IA' },
+      { id: 2, name: 'Banco de Dados', code: 'BD' },
+    ],
+  }),
+  useDepartments: () => ({
+    data: [
+      { id: 1, name: 'DCC', code: 'DCC' },
+      { id: 2, name: 'DEE', code: 'DEE' },
+    ],
+  }),
+}))
+
 const defaultFilters: ProposalFiltersValue = {
   area_id: undefined,
   department_id: undefined,

@@ -8,6 +8,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Checkbox } from '@/components/ui/checkbox'
+import { useDepartments, useKnowledgeAreas } from '@/features/proposals/hooks'
 
 export interface ProposalFiltersValue {
   area_id?: number
@@ -22,25 +23,15 @@ interface ProposalFiltersProps {
   onSearchChange: (value: string) => void
 }
 
-const AREAS = [
-  { id: 1, name: 'Inteligência Artificial' },
-  { id: 2, name: 'Banco de Dados' },
-  { id: 3, name: 'Redes' },
-  { id: 4, name: 'Compiladores' },
-  { id: 5, name: 'IHC' },
-]
-
-const DEPARTMENTS = [
-  { id: 1, name: 'DCC' },
-  { id: 2, name: 'DEE' },
-]
-
 export function ProposalFilters({
   filters,
   onChange,
   search,
   onSearchChange,
 }: ProposalFiltersProps) {
+  const { data: areas = [] } = useKnowledgeAreas()
+  const { data: departments = [] } = useDepartments()
+
   return (
     <div className="flex flex-wrap gap-4 items-end">
       <div className="flex flex-col gap-1.5 flex-1 min-w-48">
@@ -65,7 +56,7 @@ export function ProposalFilters({
             <SelectValue placeholder="Todas as áreas" />
           </SelectTrigger>
           <SelectContent>
-            {AREAS.map((a) => (
+            {areas.map((a) => (
               <SelectItem key={a.id} value={a.id.toString()}>
                 {a.name}
               </SelectItem>
@@ -86,7 +77,7 @@ export function ProposalFilters({
             <SelectValue placeholder="Todos os departamentos" />
           </SelectTrigger>
           <SelectContent>
-            {DEPARTMENTS.map((d) => (
+            {departments.map((d) => (
               <SelectItem key={d.id} value={d.id.toString()}>
                 {d.name}
               </SelectItem>

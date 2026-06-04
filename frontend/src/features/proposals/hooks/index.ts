@@ -62,3 +62,5 @@ export function useApplyToProposal() {
     },
   })
 }
+
+export { useDepartments, useKnowledgeAreas } from './useReferenceData'

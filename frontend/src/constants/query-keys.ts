@@ -12,4 +12,10 @@ export const QUERY_KEYS = {
     list: (filters?: object) => ['applications', 'list', filters] as const,
     detail: (id: number) => ['applications', 'detail', id] as const,
   },
+  departments: {
+    all: ['departments'] as const,
+  },
+  knowledgeAreas: {
+    all: ['knowledgeAreas'] as const,
+  },
 } as const

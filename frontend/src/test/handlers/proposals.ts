@@ -89,6 +89,26 @@ export const proposalHandlers = [
     return new HttpResponse(null, { status: 204 })
   }),
 
+  http.get('http://localhost:8000/api/departments', () => {
+    return HttpResponse.json([
+      { id: 1, name: 'Ciência da Computação', code: 'CC' },
+      { id: 2, name: 'Engenharia de Software', code: 'ES' },
+      { id: 3, name: 'Sistemas de Informação', code: 'SI' },
+      { id: 4, name: 'Engenharia Elétrica', code: 'EE' },
+      { id: 5, name: 'Matemática', code: 'MAT' },
+    ])
+  }),
+
+  http.get('http://localhost:8000/api/knowledge-areas', () => {
+    return HttpResponse.json([
+      { id: 1, name: 'Inteligência Artificial', code: 'IA' },
+      { id: 2, name: 'Banco de Dados', code: 'BD' },
+      { id: 3, name: 'Redes de Computadores', code: 'RC' },
+      { id: 4, name: 'Engenharia de Software', code: 'ES' },
+      { id: 5, name: 'IHC', code: 'IHC' },
+    ])
+  }),
+
   http.post('http://localhost:8000/api/proposals/:id/apply', ({ params }) => {
     const proposalId = Number(params.id)
     if (proposalId === MOCK_CLOSED_PROPOSAL.id) {

@@ -11,12 +11,20 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/proposals', [ProposalController::class, 'index']);
 Route::get('/proposals/{proposal}', [ProposalController::class, 'show']);
 
-Route::get('/departments', function () {
-    return response()->json(App\Models\Department::orderBy('name')->get());
+Route::get('/departments', function (Illuminate\Http\Request $request) {
+    $allowed = ['id', 'name', 'code'];
+    $sortBy  = in_array($request->query('sort_by'), $allowed) ? $request->query('sort_by') : 'name';
+    $order   = $request->query('order', 'asc') === 'desc' ? 'desc' : 'asc';
+
+    return response()->json(App\Models\Department::orderBy($sortBy, $order)->get());
 });
 
-Route::get('/knowledge-areas', function () {
-    return response()->json(App\Models\KnowledgeArea::orderBy('name')->get());
+Route::get('/knowledge-areas', function (Illuminate\Http\Request $request) {
+    $allowed = ['id', 'name'];
+    $sortBy  = in_array($request->query('sort_by'), $allowed) ? $request->query('sort_by') : 'name';
+    $order   = $request->query('order', 'asc') === 'desc' ? 'desc' : 'asc';
+
+    return response()->json(App\Models\KnowledgeArea::orderBy($sortBy, $order)->get());
 });
 
 Route::middleware('auth:sanctum')->group(function () {

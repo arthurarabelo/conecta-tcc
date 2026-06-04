@@ -11,6 +11,14 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/proposals', [ProposalController::class, 'index']);
 Route::get('/proposals/{proposal}', [ProposalController::class, 'show']);
 
+Route::get('/departments', function () {
+    return response()->json(App\Models\Department::orderBy('name')->get());
+});
+
+Route::get('/knowledge-areas', function () {
+    return response()->json(App\Models\KnowledgeArea::orderBy('name')->get());
+});
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);

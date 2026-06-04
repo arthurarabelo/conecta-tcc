@@ -12,7 +12,7 @@ export function AuthButtons({ variant, onNavigate }: AuthButtonsProps) {
 
   return (
     <Button asChild size="sm" className={isMobile ? 'w-full' : undefined}>
-      <Link to={ROUTES.login} onClick={onNavigate}>
+      <Link to={ROUTES.login} search={{ mode: undefined, role: undefined }} onClick={onNavigate}>
         Entrar
       </Link>
     </Button>

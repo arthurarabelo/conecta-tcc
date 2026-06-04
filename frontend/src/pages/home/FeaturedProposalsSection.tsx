@@ -35,6 +35,7 @@ export function FeaturedProposalsSection() {
           </div>
           <Link
             to={ROUTES.proposals.list}
+            search={{ area_id: undefined, department_id: undefined, status: undefined, page: undefined, search: '' }}
             className="text-sm font-semibold text-foreground underline-offset-4 hover:underline hidden sm:inline"
           >
             Ver todas
@@ -51,7 +52,7 @@ export function FeaturedProposalsSection() {
         </div>
 
         <div className="mt-6 text-center sm:hidden">
-          <Link to={ROUTES.proposals.list} className="text-sm font-semibold underline-offset-4 hover:underline">
+          <Link to={ROUTES.proposals.list} search={{ area_id: undefined, department_id: undefined, status: undefined, page: undefined, search: '' }} className="text-sm font-semibold underline-offset-4 hover:underline">
             Ver todas as propostas
           </Link>
         </div>

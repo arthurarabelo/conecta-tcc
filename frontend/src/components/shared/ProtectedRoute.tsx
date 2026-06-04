@@ -17,7 +17,7 @@ export function ProtectedRoute({ role, children }: ProtectedRouteProps) {
 
   useEffect(() => {
     if (shouldRedirectToLogin) {
-      navigate({ to: '/entrar' })
+      navigate({ to: '/entrar', search: { mode: undefined, role: undefined } })
     } else if (shouldRedirectToHome) {
       navigate({ to: '/' })
     }

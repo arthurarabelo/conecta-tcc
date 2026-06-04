@@ -11,7 +11,9 @@ import { ErrorBoundary } from '@/components/shared/ErrorBoundary'
 const HomePage = lazy(() => import('@/pages/home'))
 const LoginPage = lazy(() => import('@/pages/login'))
 const ProposalsPage = lazy(() => import('@/pages/proposals'))
+const ProposalCreatePage = lazy(() => import('@/pages/proposal-create'))
 const ProposalDetailPage = lazy(() => import('@/pages/proposal-detail'))
+const ProposalEditPage = lazy(() => import('@/pages/proposal-edit'))
 const MyApplicationsPage = lazy(() => import('@/pages/my-applications'))
 const DashboardPage = lazy(() => import('@/pages/dashboard'))
 
@@ -38,18 +40,41 @@ const loginRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/entrar',
   component: LoginPage,
+  validateSearch: (search: Record<string, unknown>) => ({
+    mode: (search.mode as 'login' | 'register' | undefined) ?? undefined,
+    role: (search.role as 'professor' | 'student' | undefined) ?? undefined,
+  }),
 })
 
 const proposalsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/propostas',
   component: ProposalsPage,
+  validateSearch: (search: Record<string, unknown>) => ({
+    area_id: search.area_id ? Number(search.area_id) : undefined,
+    department_id: search.department_id ? Number(search.department_id) : undefined,
+    status: search.status as 'open' | 'closed' | undefined,
+    page: search.page ? Number(search.page) : undefined,
+    search: (search.search as string) ?? '',
+  }),
+})
+
+const proposalCreateRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/propostas/nova',
+  component: ProposalCreatePage,
 })
 
 const proposalDetailRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/propostas/$id',
   component: ProposalDetailPage,
+})
+
+const proposalEditRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/propostas/$id/editar',
+  component: ProposalEditPage,
 })
 
 const myApplicationsRoute = createRoute({
@@ -68,7 +93,9 @@ const routeTree = rootRoute.addChildren([
   homeRoute,
   loginRoute,
   proposalsRoute,
+  proposalCreateRoute,
   proposalDetailRoute,
+  proposalEditRoute,
   myApplicationsRoute,
   dashboardRoute,
 ])

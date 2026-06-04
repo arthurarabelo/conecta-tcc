@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Api\ApplicationController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\DepartmentController;
+use App\Http\Controllers\Api\KnowledgeAreaController;
 use App\Http\Controllers\Api\ProposalController;
 use Illuminate\Support\Facades\Route;
 
@@ -10,6 +12,9 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/proposals', [ProposalController::class, 'index']);
 Route::get('/proposals/{proposal}', [ProposalController::class, 'show']);
+
+Route::get('/departments', [DepartmentController::class, 'index']);
+Route::get('/knowledge-areas', [KnowledgeAreaController::class, 'index']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);

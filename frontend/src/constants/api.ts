@@ -21,4 +21,10 @@ export const API_ENDPOINTS = {
     approve: (id: number) => `/applications/${id}/approve`,
     reject: (id: number) => `/applications/${id}/reject`,
   },
+  departments: {
+    list: '/departments',
+  },
+  knowledgeAreas: {
+    list: '/knowledge-areas',
+  },
 } as const

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate, Link } from '@tanstack/react-router'
+import { useNavigate, useSearch, Link } from '@tanstack/react-router'
 import { GraduationCap } from 'lucide-react'
 import { useAuth } from '@/hooks/use-auth'
 import { LoginForm } from '@/features/auth/components/LoginForm'
@@ -9,7 +9,8 @@ import { ROUTES } from '@/constants/routes'
 type Mode = 'login' | 'register'
 
 export default function LoginPage() {
-  const [mode, setMode] = useState<Mode>('login')
+  const search = useSearch({ from: '/entrar' })
+  const [mode, setMode] = useState<Mode>(search.mode ?? 'login')
   const { isAuthenticated } = useAuth()
   const navigate = useNavigate()
 
@@ -61,7 +62,7 @@ export default function LoginPage() {
           </p>
 
           <div className="mt-8">
-            {mode === 'login' ? <LoginForm /> : <RegisterForm />}
+            {mode === 'login' ? <LoginForm /> : <RegisterForm initialRole={search.role} />}
           </div>
 
           <div className="mt-6 text-center text-sm text-muted-foreground">

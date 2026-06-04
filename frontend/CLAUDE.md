@@ -11,6 +11,19 @@ npx tsc --noEmit
 
 Both must pass (zero test failures, zero type errors) before any commit.
 
+## Page component structure
+
+Pages that have loading or empty/not-found states must extract those states into named components in the same page folder — never inline skeletons or empty-state markup directly in the page file.
+
+```
+src/pages/some-page/
+├── index.tsx              ← page logic only; imports state components
+├── SomePageSkeleton.tsx   ← loading skeleton
+└── SomePageNotFound.tsx   ← not-found / empty state
+```
+
+Name components after the page: `ProposalDetailSkeleton`, `ProposalNotFound`, `ProposalsSkeleton`, `ProposalsEmpty`, etc. Use named exports.
+
 ## Architecture rules
 
 - **No hardcoded domain data** (lists, enums, reference values) — always fetch from the API.

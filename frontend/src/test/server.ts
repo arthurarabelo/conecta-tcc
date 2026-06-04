@@ -1,6 +1,6 @@
 import { setupServer } from 'msw/node'
 import { http, HttpResponse } from 'msw'
-import { authHandlers } from './handlers'
+import { authHandlers, BASE_URL } from './handlers'
 import { proposalHandlers } from './handlers/proposals'
 import type { PaginatedResponse } from '@/types/api'
 import type { Proposal, Application } from '@/types/models'
@@ -17,7 +17,7 @@ export function mockProposalsList(
   },
 ) {
   server.use(
-    http.get('http://localhost:8000/api/proposals', () =>
+    http.get(`${BASE_URL}/proposals`, () =>
       HttpResponse.json({ data: proposals, meta, links: { first: null, last: null, prev: null, next: null } }),
     ),
   )
@@ -25,15 +25,15 @@ export function mockProposalsList(
 
 export function mockProposalDetail(proposal: Proposal) {
   server.use(
-    http.get(`http://localhost:8000/api/proposals/${proposal.id}`, () =>
-      HttpResponse.json({ data: proposal }),
+    http.get(`${BASE_URL}/proposals/${proposal.id}`, () =>
+      HttpResponse.json(proposal),
     ),
   )
 }
 
 export function mockApplicationsList(applications: Application[]) {
   server.use(
-    http.get('http://localhost:8000/api/applications', () =>
+    http.get(`${BASE_URL}/applications`, () =>
       HttpResponse.json({
         data: applications,
         meta: { current_page: 1, last_page: 1, per_page: 15, total: applications.length, from: applications.length ? 1 : null, to: applications.length ? applications.length : null },
@@ -45,7 +45,7 @@ export function mockApplicationsList(applications: Application[]) {
 
 export function mockApplyToProposal(proposalId: number, result: Application) {
   server.use(
-    http.post(`http://localhost:8000/api/proposals/${proposalId}/apply`, () =>
+    http.post(`${BASE_URL}/proposals/${proposalId}/apply`, () =>
       HttpResponse.json({ data: result }, { status: 201 }),
     ),
   )
@@ -53,7 +53,7 @@ export function mockApplyToProposal(proposalId: number, result: Application) {
 
 export function mockProposalNotFound(id: number) {
   server.use(
-    http.get(`http://localhost:8000/api/proposals/${id}`, () =>
+    http.get(`${BASE_URL}/proposals/${id}`, () =>
       HttpResponse.json({ message: 'Recurso não encontrado' }, { status: 404 }),
     ),
   )
@@ -61,15 +61,15 @@ export function mockProposalNotFound(id: number) {
 
 export function mockProposalUpdate(proposalId: number, result: Proposal) {
   server.use(
-    http.patch(`http://localhost:8000/api/proposals/${proposalId}`, () =>
-      HttpResponse.json({ data: result }),
+    http.patch(`${BASE_URL}/proposals/${proposalId}`, () =>
+      HttpResponse.json(result),
     ),
   )
 }
 
 export function mockProposalDelete(proposalId: number) {
   server.use(
-    http.delete(`http://localhost:8000/api/proposals/${proposalId}`, () =>
+    http.delete(`${BASE_URL}/proposals/${proposalId}`, () =>
       new HttpResponse(null, { status: 204 }),
     ),
   )

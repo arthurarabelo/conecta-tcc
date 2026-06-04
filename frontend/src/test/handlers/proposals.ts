@@ -1,4 +1,5 @@
 import { http, HttpResponse } from 'msw'
+import { BASE_URL } from '@/test/handlers'
 
 export const MOCK_PROPOSALS = [
   {
@@ -50,7 +51,7 @@ export const MOCK_CLOSED_PROPOSAL = {
 }
 
 export const proposalHandlers = [
-  http.get('http://localhost:8000/api/proposals', ({ request }) => {
+  http.get(`${BASE_URL}/proposals`, ({ request }) => {
     const url = new URL(request.url)
     const status = url.searchParams.get('status')
     const filtered = status ? MOCK_PROPOSALS.filter((p) => p.status === status) : MOCK_PROPOSALS
@@ -61,35 +62,35 @@ export const proposalHandlers = [
     })
   }),
 
-  http.get('http://localhost:8000/api/proposals/:id', ({ params }) => {
+  http.get(`${BASE_URL}/proposals/:id`, ({ params }) => {
     const id = Number(params.id)
     const proposal = MOCK_PROPOSALS.find((p) => p.id === id)
     if (!proposal) return HttpResponse.json({ message: 'Not found' }, { status: 404 })
-    return HttpResponse.json({ data: proposal })
+    return HttpResponse.json(proposal)
   }),
 
-  http.post('http://localhost:8000/api/proposals', async ({ request }) => {
+  http.post(`${BASE_URL}/proposals`, async ({ request }) => {
     const body = await request.json() as Record<string, unknown>
     const created = { id: 99, professor_id: 10, ...body, status: 'open', applications_count: 0, approved_applications_count: 0 }
-    return HttpResponse.json({ data: created }, { status: 201 })
+    return HttpResponse.json(created, { status: 201 })
   }),
 
-  http.patch('http://localhost:8000/api/proposals/:id', async ({ params, request }) => {
+  http.patch(`${BASE_URL}/proposals/:id`, async ({ params, request }) => {
     const id = Number(params.id)
     const body = await request.json() as Record<string, unknown>
     const proposal = MOCK_PROPOSALS.find((p) => p.id === id)
     if (!proposal) return HttpResponse.json({ message: 'Not found' }, { status: 404 })
-    return HttpResponse.json({ data: { ...proposal, ...body } })
+    return HttpResponse.json({ ...proposal, ...body })
   }),
 
-  http.delete('http://localhost:8000/api/proposals/:id', ({ params }) => {
+  http.delete(`${BASE_URL}/proposals/:id`, ({ params }) => {
     const id = Number(params.id)
     const exists = MOCK_PROPOSALS.some((p) => p.id === id)
     if (!exists) return HttpResponse.json({ message: 'Not found' }, { status: 404 })
     return new HttpResponse(null, { status: 204 })
   }),
 
-  http.get('http://localhost:8000/api/departments', () => {
+  http.get(`${BASE_URL}/departments`, () => {
     return HttpResponse.json([
       { id: 1, name: 'Ciência da Computação', code: 'CC' },
       { id: 2, name: 'Engenharia de Software', code: 'ES' },
@@ -99,7 +100,7 @@ export const proposalHandlers = [
     ])
   }),
 
-  http.get('http://localhost:8000/api/knowledge-areas', () => {
+  http.get(`${BASE_URL}/knowledge-areas`, () => {
     return HttpResponse.json([
       { id: 1, name: 'Inteligência Artificial', code: 'IA' },
       { id: 2, name: 'Banco de Dados', code: 'BD' },
@@ -109,7 +110,7 @@ export const proposalHandlers = [
     ])
   }),
 
-  http.post('http://localhost:8000/api/proposals/:id/apply', ({ params }) => {
+  http.post(`${BASE_URL}/proposals/:id/apply`, ({ params }) => {
     const proposalId = Number(params.id)
     if (proposalId === MOCK_CLOSED_PROPOSAL.id) {
       return HttpResponse.json({ message: 'Esta proposta está fechada' }, { status: 422 })

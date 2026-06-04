@@ -40,6 +40,10 @@ const loginRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/entrar',
   component: LoginPage,
+  validateSearch: (search: Record<string, unknown>) => ({
+    mode: (search.mode as 'login' | 'register' | undefined) ?? undefined,
+    role: (search.role as 'professor' | 'student' | undefined) ?? undefined,
+  }),
 })
 
 const proposalsRoute = createRoute({

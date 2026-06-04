@@ -1,13 +1,18 @@
 import { useMemo, useState } from 'react'
-import { useSearch, useNavigate } from '@tanstack/react-router'
-import { Skeleton } from '@/components/ui/skeleton'
+import { useSearch, useNavigate, Link } from '@tanstack/react-router'
+import { Plus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { ProposalCard } from '@/components/shared/ProposalCard'
 import { ProposalFilters } from '@/features/proposals/components/ProposalFilters'
 import { useProposals } from '@/features/proposals/hooks'
+import { useAuth } from '@/hooks/use-auth'
 import type { ProposalFiltersValue } from '@/features/proposals/components/ProposalFilters'
+import { ProposalsSkeleton } from './ProposalsSkeleton'
+import { ProposalsEmpty } from './ProposalsEmpty'
+import { ROUTES } from '@/constants/routes'
 
 export default function ProposalsPage() {
+  const { isProfessor } = useAuth()
   const search = useSearch({ from: '/propostas' })
   const navigate = useNavigate({ from: '/propostas' })
 
@@ -25,7 +30,11 @@ export default function ProposalsPage() {
     if (!data?.data) return []
     const lower = searchText.toLowerCase()
     if (!lower) return data.data
-    return data.data.filter((p) => p.title.toLowerCase().includes(lower))
+    return data.data.filter(
+      (p) =>
+        p.title.toLowerCase().includes(lower) ||
+        (p.professor?.name ?? '').toLowerCase().includes(lower),
+    )
   }, [data, searchText])
 
   function handleFiltersChange(newFilters: ProposalFiltersValue) {
@@ -59,7 +68,17 @@ export default function ProposalsPage() {
 
   return (
     <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-6">Mural de Propostas</h1>
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-3xl font-bold">Mural de Propostas</h1>
+          {isProfessor && (
+            <Button asChild>
+              <Link to={ROUTES.proposals.create}>
+                <Plus className="h-4 w-4 mr-2" />
+                Nova proposta
+              </Link>
+            </Button>
+          )}
+        </div>
 
         <div className="mb-6">
           <ProposalFilters
@@ -71,18 +90,9 @@ export default function ProposalsPage() {
         </div>
 
         {isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} data-testid="proposal-card-skeleton" className="rounded-lg border p-4">
-                <Skeleton className="h-4 w-3/4 mb-2" />
-                <Skeleton className="h-4 w-1/2 mb-4" />
-                <Skeleton className="h-20 w-full mb-2" />
-                <Skeleton className="h-4 w-1/3" />
-              </div>
-            ))}
-          </div>
+          <ProposalsSkeleton />
         ) : filteredProposals.length === 0 ? (
-          <p className="text-muted-foreground text-center py-16">Nenhuma proposta encontrada.</p>
+          <ProposalsEmpty />
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {filteredProposals.map((proposal) => (

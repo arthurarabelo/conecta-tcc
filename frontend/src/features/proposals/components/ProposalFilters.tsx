@@ -88,15 +88,18 @@ export function ProposalFilters({
         </Select>
       </div>
 
-      <div className="flex items-center gap-2 pb-0.5">
-        <Checkbox
-          id="only-open"
-          checked={filters.status === 'open'}
-          onCheckedChange={(checked) =>
-            onChange({ ...filters, status: checked ? 'open' : undefined })
-          }
-        />
-        <Label htmlFor="only-open">Só abertas</Label>
+      <div className="flex flex-col gap-1.5">
+        <span className="invisible text-sm leading-none">_</span>
+        <div className="flex h-10 items-center gap-2">
+          <Checkbox
+            id="only-open"
+            checked={filters.status === 'open'}
+            onCheckedChange={(checked) =>
+              onChange({ ...filters, status: checked ? 'open' : undefined })
+            }
+          />
+          <Label htmlFor="only-open">Só abertas</Label>
+        </div>
       </div>
     </div>
   )

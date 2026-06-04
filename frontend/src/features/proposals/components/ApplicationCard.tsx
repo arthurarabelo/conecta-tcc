@@ -32,7 +32,7 @@ export function ApplicationCard({
   function renderAction() {
     if (!user) {
       return (
-        <Link to={ROUTES.login} className="w-full">
+        <Link to={ROUTES.login} search={{ mode: undefined, role: undefined }} className="w-full">
           <Button className="w-full" variant="outline">
             Entrar para se candidatar
           </Button>

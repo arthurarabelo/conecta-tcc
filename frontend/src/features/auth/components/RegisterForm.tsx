@@ -24,7 +24,11 @@ const DEPARTMENTS = [
 const inputClass = 'mt-1 w-full rounded-md border border-border bg-card px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring'
 const labelClass = 'text-xs font-semibold uppercase tracking-wider text-muted-foreground'
 
-export function RegisterForm() {
+interface RegisterFormProps {
+  initialRole?: 'professor' | 'student'
+}
+
+export function RegisterForm({ initialRole }: RegisterFormProps) {
   const { mutate, isPending, isError, error } = useRegister()
 
   const form = useForm<RegisterFormValues>({
@@ -34,7 +38,7 @@ export function RegisterForm() {
       email: '',
       password: '',
       password_confirmation: '',
-      role: 'student',
+      role: initialRole ?? 'student',
       department_id: 1,
       profile_link: '',
     },

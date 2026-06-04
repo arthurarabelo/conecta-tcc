@@ -37,7 +37,7 @@ describe('ProtectedRoute', () => {
 
     it('redirects to /entrar', () => {
       render(<ProtectedRoute><div>Content</div></ProtectedRoute>)
-      expect(mockNavigate).toHaveBeenCalledWith({ to: '/entrar' })
+      expect(mockNavigate).toHaveBeenCalledWith({ to: '/entrar', search: { mode: undefined, role: undefined } })
     })
 
     it('renders nothing', () => {
@@ -47,7 +47,7 @@ describe('ProtectedRoute', () => {
 
     it('redirects to /entrar even when role is specified', () => {
       render(<ProtectedRoute role="student"><div>Content</div></ProtectedRoute>)
-      expect(mockNavigate).toHaveBeenCalledWith({ to: '/entrar' })
+      expect(mockNavigate).toHaveBeenCalledWith({ to: '/entrar', search: { mode: undefined, role: undefined } })
     })
   })
 

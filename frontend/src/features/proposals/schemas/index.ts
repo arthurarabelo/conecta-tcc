@@ -8,8 +8,8 @@ export const proposalSchema = z.object({
     .number({ message: 'Vagas obrigatórias' })
     .int()
     .min(1, 'Deve haver ao menos 1 vaga'),
-  department_id: z.coerce.number({ message: 'Departamento obrigatório' }).positive(),
-  area_id: z.coerce.number({ message: 'Área obrigatória' }).positive(),
+  department_id: z.coerce.number().min(1, 'Selecione um departamento'),
+  area_id: z.coerce.number().min(1, 'Selecione uma área'),
 })
 
 export type ProposalFormValues = z.infer<typeof proposalSchema>

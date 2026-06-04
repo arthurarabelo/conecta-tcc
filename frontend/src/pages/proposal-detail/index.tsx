@@ -1,10 +1,9 @@
 import { useParams, Link } from '@tanstack/react-router'
 import { useMemo } from 'react'
 import { toast } from 'sonner'
-import { ExternalLink, ArrowLeft } from 'lucide-react'
+import { ExternalLink, ArrowLeft, Pencil } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Skeleton } from '@/components/ui/skeleton'
 import { Separator } from '@/components/ui/separator'
 import { useProposal, useApplyToProposal } from '@/features/proposals/hooks'
 import { useApplications } from '@/features/applications/hooks'
@@ -12,6 +11,8 @@ import { ApplicationCard } from '@/features/proposals/components/ApplicationCard
 import { useAuthStore } from '@/store/auth.store'
 import { NotFoundError } from '@/lib/error'
 import { ROUTES } from '@/constants/routes'
+import { ProposalDetailSkeleton } from './ProposalDetailSkeleton'
+import { ProposalNotFound } from './ProposalNotFound'
 
 export default function ProposalDetailPage() {
   const { id } = useParams({ from: '/propostas/$id' })
@@ -41,43 +42,29 @@ export default function ProposalDetailPage() {
 
   const isLoading = loadingProposal || loadingApplications
 
-  if (isLoading) {
-    return (
-      <main className="container mx-auto px-4 py-8">
-        <div className="flex gap-2 mb-6">
-          {[1, 2, 3].map((i) => (
-            <Skeleton key={i} data-testid="detail-skeleton" className="h-6 w-24 rounded-full" />
-          ))}
-        </div>
-        <Skeleton data-testid="detail-skeleton" className="h-10 w-3/4 mb-4" />
-        <Skeleton data-testid="detail-skeleton" className="h-5 w-1/3 mb-8" />
-        <Skeleton data-testid="detail-skeleton" className="h-40 w-full mb-4" />
-        <Skeleton data-testid="detail-skeleton" className="h-20 w-full" />
-      </main>
-    )
-  }
+  if (isLoading) return <ProposalDetailSkeleton />
 
-  if (error instanceof NotFoundError || !proposal) {
-    return (
-      <main className="container mx-auto px-4 py-16 text-center">
-        <h1 className="text-2xl font-bold mb-2">Proposta não encontrada</h1>
-        <p className="text-muted-foreground mb-6">Esta proposta não existe ou foi removida.</p>
-        <Link to={ROUTES.proposals.list} search={{ area_id: undefined, department_id: undefined, status: undefined, page: undefined, search: '' }}>
-          <Button variant="outline">Ver mural de propostas</Button>
-        </Link>
-      </main>
-    )
-  }
+  if (error instanceof NotFoundError || !proposal) return <ProposalNotFound />
 
   return (
     <main className="container mx-auto px-4 py-8">
-      <Link
-        to={ROUTES.proposals.list}
-        search={{ area_id: undefined, department_id: undefined, status: undefined, page: undefined, search: '' }}
-        className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-6"
-      >
-        <ArrowLeft className="h-4 w-4" /> Mural de Propostas
-      </Link>
+      <div className="flex items-center justify-between mb-6">
+        <Link
+          to={ROUTES.proposals.list}
+          search={{ area_id: undefined, department_id: undefined, status: undefined, page: undefined, search: '' }}
+          className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
+        >
+          <ArrowLeft className="h-4 w-4" /> Mural de Propostas
+        </Link>
+        {user && proposal.professor_id === user.id && (
+          <Button asChild variant="outline" size="sm">
+            <Link to={ROUTES.proposals.edit(proposal.id)}>
+              <Pencil className="h-4 w-4 mr-2" />
+              Editar
+            </Link>
+          </Button>
+        )}
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">

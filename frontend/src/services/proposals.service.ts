@@ -31,26 +31,18 @@ export const proposalsService = {
   },
 
   async show(id: number): Promise<Proposal> {
-    const { data } = await apiClient.get<{ data: Proposal }>(
-      API_ENDPOINTS.proposals.show(id),
-    )
-    return data.data
+    const { data } = await apiClient.get<Proposal>(API_ENDPOINTS.proposals.show(id))
+    return data
   },
 
   async create(payload: CreateProposalPayload): Promise<Proposal> {
-    const { data } = await apiClient.post<{ data: Proposal }>(
-      API_ENDPOINTS.proposals.store,
-      payload,
-    )
-    return data.data
+    const { data } = await apiClient.post<Proposal>(API_ENDPOINTS.proposals.store, payload)
+    return data
   },
 
   async update(id: number, payload: UpdateProposalPayload): Promise<Proposal> {
-    const { data } = await apiClient.patch<{ data: Proposal }>(
-      API_ENDPOINTS.proposals.update(id),
-      payload,
-    )
-    return data.data
+    const { data } = await apiClient.patch<Proposal>(API_ENDPOINTS.proposals.update(id), payload)
+    return data
   },
 
   async remove(id: number): Promise<void> {

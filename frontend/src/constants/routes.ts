@@ -4,6 +4,8 @@ export const ROUTES = {
   proposals: {
     list: '/propostas',
     detail: (id: number | string) => `/propostas/${id}`,
+    create: '/propostas/nova',
+    edit: (id: number | string) => `/propostas/${id}/editar`,
   },
   myApplications: '/minhas-candidaturas',
   dashboard: '/dashboard',

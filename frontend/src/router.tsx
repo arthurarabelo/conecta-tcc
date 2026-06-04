@@ -11,7 +11,9 @@ import { ErrorBoundary } from '@/components/shared/ErrorBoundary'
 const HomePage = lazy(() => import('@/pages/home'))
 const LoginPage = lazy(() => import('@/pages/login'))
 const ProposalsPage = lazy(() => import('@/pages/proposals'))
+const ProposalCreatePage = lazy(() => import('@/pages/proposal-create'))
 const ProposalDetailPage = lazy(() => import('@/pages/proposal-detail'))
+const ProposalEditPage = lazy(() => import('@/pages/proposal-edit'))
 const MyApplicationsPage = lazy(() => import('@/pages/my-applications'))
 const DashboardPage = lazy(() => import('@/pages/dashboard'))
 
@@ -53,10 +55,22 @@ const proposalsRoute = createRoute({
   }),
 })
 
+const proposalCreateRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/propostas/nova',
+  component: ProposalCreatePage,
+})
+
 const proposalDetailRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/propostas/$id',
   component: ProposalDetailPage,
+})
+
+const proposalEditRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/propostas/$id/editar',
+  component: ProposalEditPage,
 })
 
 const myApplicationsRoute = createRoute({
@@ -75,7 +89,9 @@ const routeTree = rootRoute.addChildren([
   homeRoute,
   loginRoute,
   proposalsRoute,
+  proposalCreateRoute,
   proposalDetailRoute,
+  proposalEditRoute,
   myApplicationsRoute,
   dashboardRoute,
 ])

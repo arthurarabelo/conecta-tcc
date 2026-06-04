@@ -13,7 +13,7 @@ export interface Department {
 export interface KnowledgeArea {
   id: number
   name: string
-  code: string
+  code?: string
 }
 
 export interface User {

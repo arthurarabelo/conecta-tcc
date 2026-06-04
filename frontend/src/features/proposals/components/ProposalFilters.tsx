@@ -47,15 +47,16 @@ export function ProposalFilters({
       <div className="flex flex-col gap-1.5 min-w-40">
         <Label htmlFor="area-select">Área</Label>
         <Select
-          value={filters.area_id?.toString() ?? ''}
+          value={filters.area_id?.toString() ?? 'all'}
           onValueChange={(val) =>
-            onChange({ ...filters, area_id: val ? Number(val) : undefined })
+            onChange({ ...filters, area_id: val === 'all' ? undefined : Number(val) })
           }
         >
           <SelectTrigger id="area-select" aria-label="Área">
-            <SelectValue placeholder="Todas as áreas" />
+            <SelectValue />
           </SelectTrigger>
           <SelectContent>
+            <SelectItem value="all">Todas as áreas</SelectItem>
             {areas.map((a) => (
               <SelectItem key={a.id} value={a.id.toString()}>
                 {a.name}
@@ -68,15 +69,16 @@ export function ProposalFilters({
       <div className="flex flex-col gap-1.5 min-w-40">
         <Label htmlFor="dept-select">Departamento</Label>
         <Select
-          value={filters.department_id?.toString() ?? ''}
+          value={filters.department_id?.toString() ?? 'all'}
           onValueChange={(val) =>
-            onChange({ ...filters, department_id: val ? Number(val) : undefined })
+            onChange({ ...filters, department_id: val === 'all' ? undefined : Number(val) })
           }
         >
           <SelectTrigger id="dept-select" aria-label="Departamento">
-            <SelectValue placeholder="Todos os departamentos" />
+            <SelectValue />
           </SelectTrigger>
           <SelectContent>
+            <SelectItem value="all">Todos os departamentos</SelectItem>
             {departments.map((d) => (
               <SelectItem key={d.id} value={d.id.toString()}>
                 {d.name}

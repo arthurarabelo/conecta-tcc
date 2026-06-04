@@ -1,8 +1,6 @@
 import { renderHook, waitFor, act } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { describe, expect, it, vi } from 'vitest'
-import { http, HttpResponse } from 'msw'
-import { server } from '@/test/server'
 import {
   useProposals,
   useProposal,
@@ -164,6 +162,6 @@ describe('useApplyToProposal', () => {
       }
     })
     expect(result.current.isError).toBe(true)
-    expect((result.current.error as { status: number })?.status).toBe(422)
+    expect((result.current.error as unknown as { status: number })?.status).toBe(422)
   })
 })

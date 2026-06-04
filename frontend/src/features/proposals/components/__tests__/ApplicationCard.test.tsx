@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { RouterProvider, createMemoryHistory, createRouter, createRoute, createRootRoute } from '@tanstack/react-router'
+import { RouterProvider, createMemoryHistory, createRouter, createRootRoute } from '@tanstack/react-router'
 import { ApplicationCard } from '../ApplicationCard'
 import type { Proposal, User, Application } from '@/types/models'
 

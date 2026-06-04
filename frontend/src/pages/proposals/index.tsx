@@ -31,12 +31,20 @@ export default function ProposalsPage() {
   function handleFiltersChange(newFilters: ProposalFiltersValue) {
     const updated = { ...newFilters, page: 1 }
     setApiFilters(updated)
-    navigate({ search: { ...updated, search: searchText || undefined } })
+    navigate({
+      search: {
+        area_id: updated.area_id ?? undefined,
+        department_id: updated.department_id ?? undefined,
+        status: updated.status ?? undefined,
+        page: updated.page ?? undefined,
+        search: searchText || '',
+      },
+    })
   }
 
   function handleSearchChange(value: string) {
     setSearchText(value)
-    navigate({ search: (prev) => ({ ...prev, search: value || undefined }) })
+    navigate({ search: (prev) => ({ ...prev, search: value || '' }) })
   }
 
   function goToPage(page: number) {

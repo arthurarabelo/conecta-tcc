@@ -17,11 +17,6 @@ vi.mock('@/features/proposals/hooks', async (importOriginal) => {
   }
 })
 
-// Mock SiteHeader — not the focus of these tests
-vi.mock('@/components/shared/SiteHeader', () => ({
-  SiteHeader: () => <header data-testid="site-header" />,
-}))
-
 function buildProposal(overrides: Partial<Proposal> = {}): Proposal {
   return {
     id: 1, professor_id: 10, title: 'IA na saúde',

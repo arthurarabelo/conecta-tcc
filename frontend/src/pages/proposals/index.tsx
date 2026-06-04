@@ -3,7 +3,6 @@ import { useSearch, useNavigate } from '@tanstack/react-router'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Button } from '@/components/ui/button'
 import { ProposalCard } from '@/components/shared/ProposalCard'
-import { SiteHeader } from '@/components/shared/SiteHeader'
 import { ProposalFilters } from '@/features/proposals/components/ProposalFilters'
 import { useProposals } from '@/features/proposals/hooks'
 import type { ProposalFiltersValue } from '@/features/proposals/components/ProposalFilters'
@@ -51,9 +50,7 @@ export default function ProposalsPage() {
   const lastPage = meta?.last_page ?? 1
 
   return (
-    <>
-      <SiteHeader />
-      <main className="container mx-auto px-4 py-8">
+    <main className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-6">Mural de Propostas</h1>
 
         <div className="mb-6">
@@ -107,7 +104,6 @@ export default function ProposalsPage() {
             </Button>
           </div>
         )}
-      </main>
-    </>
+    </main>
   )
 }

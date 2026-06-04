@@ -44,6 +44,13 @@ const proposalsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/propostas',
   component: ProposalsPage,
+  validateSearch: (search: Record<string, unknown>) => ({
+    area_id: search.area_id ? Number(search.area_id) : undefined,
+    department_id: search.department_id ? Number(search.department_id) : undefined,
+    status: (search.status as 'open' | 'closed') ?? undefined,
+    page: search.page ? Number(search.page) : undefined,
+    search: (search.search as string) ?? '',
+  }),
 })
 
 const proposalDetailRoute = createRoute({

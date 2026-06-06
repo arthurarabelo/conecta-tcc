@@ -8,14 +8,14 @@ describe('StatusBadge', () => {
     expect(screen.getByText('Em análise')).toBeInTheDocument()
   })
 
-  it('renders "Aprovado" for approved status', () => {
+  it('renders "Aprovada" for approved status', () => {
     render(<StatusBadge status="approved" />)
-    expect(screen.getByText('Aprovado')).toBeInTheDocument()
+    expect(screen.getByText('Aprovada')).toBeInTheDocument()
   })
 
-  it('renders "Rejeitado" for rejected status', () => {
+  it('renders "Rejeitada" for rejected status', () => {
     render(<StatusBadge status="rejected" />)
-    expect(screen.getByText('Rejeitado')).toBeInTheDocument()
+    expect(screen.getByText('Rejeitada')).toBeInTheDocument()
   })
 
   it('applies yellow styling for pending', () => {

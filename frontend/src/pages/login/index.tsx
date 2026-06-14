@@ -4,6 +4,7 @@ import { GraduationCap } from 'lucide-react'
 import { useAuth } from '@/hooks/use-auth'
 import { LoginForm } from '@/features/auth/components/LoginForm'
 import { RegisterForm } from '@/features/auth/components/RegisterForm'
+import { OverlineLabel } from '@/components/shared/OverlineLabel'
 import { ROUTES } from '@/constants/routes'
 
 type Mode = 'login' | 'register'
@@ -49,9 +50,7 @@ export default function LoginPage() {
 
       <div className="flex flex-col justify-center px-6 md:px-16 py-16 bg-background">
         <div className="mx-auto w-full max-w-sm">
-          <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-            {mode === 'login' ? 'Acesso' : 'Cadastro'}
-          </div>
+          <OverlineLabel>{mode === 'login' ? 'Acesso' : 'Cadastro'}</OverlineLabel>
           <h1 className="mt-2 text-4xl font-semibold">
             {mode === 'login' ? 'Bem-vindo de volta.' : 'Crie sua conta.'}
           </h1>

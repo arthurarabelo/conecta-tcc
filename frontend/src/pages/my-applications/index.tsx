@@ -1,10 +1,13 @@
 import { useMemo } from 'react'
 import { Link } from '@tanstack/react-router'
+import { Clock, CheckCircle, XCircle } from 'lucide-react'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Card, CardContent } from '@/components/ui/card'
 import { ProtectedRoute } from '@/components/shared/ProtectedRoute'
 import { ApplicationCard } from '@/features/applications/components/ApplicationCard'
+import { OverlineLabel } from '@/components/shared/OverlineLabel'
 import { useApplications } from '@/features/applications/hooks'
+import { useAuthStore } from '@/store/auth.store'
 import { ROUTES } from '@/constants/routes'
 
 function ApplicationSkeleton() {
@@ -28,6 +31,7 @@ function ApplicationSkeleton() {
 
 export default function MyApplicationsPage() {
   const { data, isLoading } = useApplications()
+  const user = useAuthStore((s) => s.user)
 
   const applications = useMemo(() => {
     if (!data?.data) return []
@@ -48,18 +52,28 @@ export default function MyApplicationsPage() {
   return (
     <ProtectedRoute role="student">
       <div className="container mx-auto max-w-3xl px-4 py-8">
-        <h1 className="text-3xl font-bold">Minhas Candidaturas</h1>
+        <OverlineLabel>Aluno · {user?.name}</OverlineLabel>
+        <h1 className="text-4xl font-bold">Minhas Candidaturas</h1>
+        <p className="text-muted-foreground mt-2">
+          Acompanhe o status das suas inscrições em tempo real.
+        </p>
 
-        <div className="mt-4 flex flex-wrap gap-3">
-          <span className="bg-secondary text-secondary-foreground rounded-full px-4 py-1 text-sm font-medium">
-            Em análise {counts.pending}
-          </span>
-          <span className="bg-secondary text-secondary-foreground rounded-full px-4 py-1 text-sm font-medium">
-            Aprovadas {counts.approved}
-          </span>
-          <span className="bg-secondary text-secondary-foreground rounded-full px-4 py-1 text-sm font-medium">
-            Rejeitadas {counts.rejected}
-          </span>
+        <div className="mt-6 grid grid-cols-3 gap-4">
+          <div className="rounded-xl bg-amber-50 p-4">
+            <Clock className="text-amber-500 mb-2 h-5 w-5" />
+            <p className="text-3xl font-bold">{counts.pending}</p>
+            <p className="text-muted-foreground text-sm">Pendente</p>
+          </div>
+          <div className="rounded-xl bg-green-50 p-4">
+            <CheckCircle className="mb-2 h-5 w-5 text-green-500" />
+            <p className="text-3xl font-bold">{counts.approved}</p>
+            <p className="text-muted-foreground text-sm">Aprovada</p>
+          </div>
+          <div className="rounded-xl bg-red-50 p-4">
+            <XCircle className="mb-2 h-5 w-5 text-red-500" />
+            <p className="text-3xl font-bold">{counts.rejected}</p>
+            <p className="text-muted-foreground text-sm">Recusada</p>
+          </div>
         </div>
 
         <div className="mt-8 flex flex-col gap-4">
@@ -76,6 +90,7 @@ export default function MyApplicationsPage() {
               <p>Você ainda não se candidatou a nenhuma proposta.</p>
               <Link
                 to={ROUTES.proposals.list}
+                search={{ area_id: undefined, department_id: undefined, status: undefined, page: undefined, search: '' }}
                 className="text-primary mt-2 inline-block underline"
               >
                 Explorar mural →

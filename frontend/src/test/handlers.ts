@@ -69,3 +69,98 @@ export const authHandlers = [
     return HttpResponse.json({ data: mockUser }, { status: 200 })
   }),
 ]
+
+export const mockProfessor = {
+  id: 2,
+  name: 'Prof. Silva',
+  email: 'professor@ufmg.br',
+  role: 'professor' as const,
+  department_id: 1,
+  profile_link: null,
+}
+
+export const mockProposal = {
+  id: 1,
+  professor_id: 2,
+  title: 'ML em Biomedicina',
+  description: 'Pesquisa em IA aplicada à saúde',
+  prerequisites: null,
+  max_slots: 2,
+  department_id: 1,
+  area_id: 1,
+  status: 'open' as const,
+}
+
+export const mockApplication = {
+  id: 1,
+  student_id: 1,
+  proposal_id: 1,
+  status: 'pending' as const,
+  feedback: null,
+  applied_at: '2026-05-01T00:00:00Z',
+  reviewed_at: null,
+  student: mockUser,
+  proposal: mockProposal,
+}
+
+export const applicationHandlers = [
+  // Lista candidaturas (comportamento varia por role, mas o backend já filtra)
+  http.get(`${BASE_URL}/applications`, ({ request }) => {
+    const auth = request.headers.get('Authorization')
+    if (!auth?.startsWith('Bearer ')) {
+      return HttpResponse.json({ message: 'Não autenticado.' }, { status: 401 })
+    }
+    return HttpResponse.json({
+      data: [mockApplication],
+      meta: { current_page: 1, last_page: 1, per_page: 15, total: 1 },
+    }, { status: 200 })
+  }),
+
+  // Detalhe de candidatura
+  http.get(`${BASE_URL}/applications/:id`, ({ request, params }) => {
+    const auth = request.headers.get('Authorization')
+    if (!auth?.startsWith('Bearer ')) {
+      return HttpResponse.json({ message: 'Não autenticado.' }, { status: 401 })
+    }
+    if (Number(params.id) !== mockApplication.id) {
+      return HttpResponse.json({ message: 'Não encontrado.' }, { status: 404 })
+    }
+    return HttpResponse.json({ data: mockApplication }, { status: 200 })
+  }),
+
+  // Aprovar candidatura (apenas professor dono da proposta)
+  http.patch(`${BASE_URL}/applications/:id/approve`, ({ request, params }) => {
+    const auth = request.headers.get('Authorization')
+    if (!auth?.startsWith('Bearer ')) {
+      return HttpResponse.json({ message: 'Não autenticado.' }, { status: 401 })
+    }
+    // Simula 403 para token de aluno
+    if (auth === 'Bearer student-token') {
+      return HttpResponse.json({ message: 'Ação não permitida.' }, { status: 403 })
+    }
+    return HttpResponse.json({
+      data: { ...mockApplication, id: Number(params.id), status: 'approved', reviewed_at: '2026-05-10T00:00:00Z' },
+    }, { status: 200 })
+  }),
+
+  // Rejeitar candidatura
+  http.patch(`${BASE_URL}/applications/:id/reject`, async ({ request, params }) => {
+    const auth = request.headers.get('Authorization')
+    if (!auth?.startsWith('Bearer ')) {
+      return HttpResponse.json({ message: 'Não autenticado.' }, { status: 401 })
+    }
+    if (auth === 'Bearer student-token') {
+      return HttpResponse.json({ message: 'Ação não permitida.' }, { status: 403 })
+    }
+    const body = await request.json() as { feedback?: string }
+    return HttpResponse.json({
+      data: {
+        ...mockApplication,
+        id: Number(params.id),
+        status: 'rejected',
+        feedback: body?.feedback ?? null,
+        reviewed_at: '2026-05-10T00:00:00Z',
+      },
+    }, { status: 200 })
+  }),
+]

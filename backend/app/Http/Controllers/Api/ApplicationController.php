@@ -53,7 +53,7 @@ class ApplicationController extends Controller
     public function index(Request $request): JsonResponse
     {
         $user = $request->user();
-        $query = Application::with(['student', 'proposal']);
+        $query = Application::with(['student', 'proposal.professor', 'proposal.area']);
 
         if ($user->isStudent()) {
             $query->where('student_id', $user->id);

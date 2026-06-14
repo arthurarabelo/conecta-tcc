@@ -1,4 +1,4 @@
-import { authHandlers, applicationHandlers } from './handlers'
+import { authHandlers, applicationHandlers, BASE_URL } from './handlers'
 import { setupServer } from 'msw/node'
 import { http, HttpResponse } from 'msw'
 import { proposalHandlers } from './handlers/proposals'

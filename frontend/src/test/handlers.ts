@@ -152,7 +152,7 @@ export const applicationHandlers = [
     if (auth === 'Bearer student-token') {
       return HttpResponse.json({ message: 'Ação não permitida.' }, { status: 403 })
     }
-    const body = await request.json() as { feedback?: string }
+    const body = await request.json().catch(() => ({})) as { feedback?: string }
     return HttpResponse.json({
       data: {
         ...mockApplication,

@@ -8,6 +8,14 @@ import { RegisterForm } from '../RegisterForm'
 vi.mock('@/features/auth/hooks', () => ({
   useRegister: vi.fn(),
 }))
+vi.mock('@/features/proposals/hooks', () => ({
+  useDepartments: vi.fn(() => ({
+    data: [
+      { id: 1, name: 'Ciência da Computação' },
+      { id: 2, name: 'Engenharia de Software' },
+    ],
+  })),
+}))
 vi.mock('@tanstack/react-router', async (importOriginal) => {
   const actual = await importOriginal<typeof import('@tanstack/react-router')>()
   return { ...actual, useNavigate: () => vi.fn() }
@@ -112,6 +120,7 @@ describe('RegisterForm', () => {
     await user.type(screen.getByLabelText(/e-mail/i), 'joao@ufmg.br')
     await user.type(screen.getByLabelText(/^senha$/i), 'senha123')
     await user.type(screen.getByLabelText(/confirmar senha/i), 'senha123')
+    await user.selectOptions(screen.getByLabelText(/departamento/i), '1')
 
     await user.click(screen.getByRole('button', { name: /aluno/i }))
 

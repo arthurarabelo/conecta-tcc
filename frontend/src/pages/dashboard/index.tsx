@@ -3,6 +3,7 @@ import { toast } from 'sonner'
 import { useProposals } from '@/features/proposals/hooks'
 import { useApplications, useApproveApplication, useRejectApplication } from '@/features/applications/hooks'
 import { useAuthStore } from '@/store/auth.store'
+import { ProtectedRoute } from '@/components/shared/ProtectedRoute'
 import { DashboardHeader } from './DashboardHeader'
 import { DashboardKPIs } from './DashboardKPIs'
 import { ProposalsTable } from './ProposalsTable'
@@ -53,6 +54,7 @@ export default function Dashboard() {
   }
 
   return (
+    <ProtectedRoute role="professor">
     <div className="min-h-screen bg-background">
       <DashboardHeader user={user} />
 
@@ -87,5 +89,6 @@ export default function Dashboard() {
         onConfirm={handleReject}
       />
     </div>
+    </ProtectedRoute>
   )
 }

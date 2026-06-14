@@ -33,7 +33,7 @@ describe('useApplications', () => {
     localStorage.clear()
   })
 
-  it('retorna candidaturas do aluno logado', async () => {
+  it('returns applications for the logged-in student', async () => {
     localStorage.setItem('auth_token', mockToken)
     useAuthStore.setState({ user: mockUser, token: mockToken, isAuthenticated: true })
 
@@ -46,7 +46,7 @@ describe('useApplications', () => {
     expect(result.current.data?.data[0].student_id).toBe(mockUser.id)
   })
 
-  it('retorna apenas candidaturas com status pending quando filtrado', async () => {
+  it('returns only pending applications when filtered by status', async () => {
     localStorage.setItem('auth_token', mockToken)
     useAuthStore.setState({ user: mockUser, token: mockToken, isAuthenticated: true })
 
@@ -59,7 +59,7 @@ describe('useApplications', () => {
     expect(statuses?.every(s => s === 'pending')).toBe(true)
   })
 
-  it('verifica que ApplicationStatus cobre os três estados válidos', () => {
+  it('validates that ApplicationStatus covers all three valid states', () => {
     const validStatuses = ['pending', 'approved', 'rejected']
     expect(mockApplication.status).toMatch(/^(pending|approved|rejected)$/)
     validStatuses.forEach(s => {
@@ -74,7 +74,7 @@ describe('useApproveApplication', () => {
     localStorage.clear()
   })
 
-  it('aprova candidatura e atualiza status para approved', async () => {
+  it('approves an application and updates its status to approved', async () => {
     localStorage.setItem('auth_token', mockToken)
     useAuthStore.setState({ user: mockUser, token: mockToken, isAuthenticated: true })
 
@@ -91,7 +91,7 @@ describe('useApproveApplication', () => {
     expect(result.current.data?.reviewed_at).not.toBeNull()
   })
 
-  it('retorna erro 403 quando aluno tenta aprovar candidatura', async () => {
+  it('returns 403 error when a student tries to approve an application', async () => {
     localStorage.setItem('auth_token', 'student-token')
     useAuthStore.setState({ user: mockUser, token: 'student-token', isAuthenticated: true })
 
@@ -114,7 +114,7 @@ describe('useRejectApplication', () => {
     localStorage.clear()
   })
 
-  it('rejeita candidatura com feedback e atualiza status para rejected', async () => {
+  it('rejects an application with feedback and updates its status to rejected', async () => {
     localStorage.setItem('auth_token', mockToken)
     useAuthStore.setState({ user: mockUser, token: mockToken, isAuthenticated: true })
 
@@ -132,7 +132,7 @@ describe('useRejectApplication', () => {
     expect(result.current.data?.reviewed_at).not.toBeNull()
   })
 
-  it('rejeita candidatura sem feedback (feedback opcional)', async () => {
+  it('rejects an application without feedback (feedback is optional)', async () => {
     localStorage.setItem('auth_token', mockToken)
     useAuthStore.setState({ user: mockUser, token: mockToken, isAuthenticated: true })
 
@@ -148,7 +148,7 @@ describe('useRejectApplication', () => {
     expect(result.current.data?.status).toBe('rejected')
   })
 
-  it('retorna erro 403 quando aluno tenta rejeitar candidatura', async () => {
+  it('returns 403 error when a student tries to reject an application', async () => {
     localStorage.setItem('auth_token', 'student-token')
     useAuthStore.setState({ user: mockUser, token: 'student-token', isAuthenticated: true })
 

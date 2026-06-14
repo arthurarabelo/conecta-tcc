@@ -111,9 +111,11 @@ describe('MyApplicationsPage', () => {
     mockApplicationsList([pendingApp, approvedApp, rejectedApp])
     makeApp(<MyApplicationsPage />)
     await waitFor(() => expect(screen.getByText('ML em Biomedicina')).toBeInTheDocument())
-    expect(screen.getByText(/Em análise.*1/i)).toBeInTheDocument()
-    expect(screen.getByText(/Aprovadas.*1/i)).toBeInTheDocument()
-    expect(screen.getByText(/Rejeitadas.*1/i)).toBeInTheDocument()
+    expect(screen.getByText('Pendente')).toBeInTheDocument()
+    expect(screen.getAllByText('Aprovada').length).toBeGreaterThanOrEqual(1)
+    expect(screen.getByText('Recusada')).toBeInTheDocument()
+    const countCells = screen.getAllByText('1')
+    expect(countCells.length).toBeGreaterThanOrEqual(3)
   })
 
   it('shows empty state when there are no applications', async () => {

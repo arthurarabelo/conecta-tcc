@@ -133,5 +133,34 @@ class E2ETestSeeder extends Seeder
                 'updated_at' => now(),
             ]));
         }
+
+        // Applications (for dashboard approve/reject testing)
+        $applications = [
+            [
+                'id'            => 1,
+                'student_id'    => 1,
+                'proposal_id'   => 1,
+                'status'        => 'pending',
+                'feedback'      => null,
+                'applied_at'    => now(),
+                'reviewed_at'   => null,
+            ],
+            [
+                'id'            => 2,
+                'student_id'    => 1,
+                'proposal_id'   => 3,
+                'status'        => 'approved',
+                'feedback'      => 'Ótimo projeto!',
+                'applied_at'    => now(),
+                'reviewed_at'   => now(),
+            ],
+        ];
+
+        foreach ($applications as $app) {
+            DB::table('applications')->insert(array_merge($app, [
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]));
+        }
     }
 }

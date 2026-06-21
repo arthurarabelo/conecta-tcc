@@ -52,6 +52,9 @@ describe('Authentication', () => {
       cy.get('input[type="password"]').eq(0).type('password123')
       cy.get('input[type="password"]').eq(1).type('password123')
 
+      // Select department (fetched from API, default is disabled placeholder "0")
+      cy.get('select').select('1')
+
       // Ensure role is "Aluno" (it's the default)
       cy.get('button[aria-label="Aluno"]').click()
 

@@ -3,7 +3,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { StatusBadge } from '@/components/shared/StatusBadge'
-import { formatDateLong } from '@/lib/utils'
+import { formatDate } from '@/lib/utils'
 import { ROUTES } from '@/constants/routes'
 import type { Application } from '@/types/models'
 
@@ -34,10 +34,10 @@ export function ApplicationCard({ application }: ApplicationCardProps) {
         )}
 
         <p className="text-muted-foreground mt-1 text-sm">
-          Candidatado em {formatDateLong(applied_at)}
+          Aplicado em {formatDate(applied_at)}
         </p>
 
-        {status === 'rejected' && feedback && (
+        {feedback && (
           <div className="bg-muted mt-3 rounded-md p-3 text-sm">
             <span className="font-medium">Feedback:</span> {feedback}
           </div>
@@ -46,7 +46,7 @@ export function ApplicationCard({ application }: ApplicationCardProps) {
         <div className="mt-4 flex justify-end">
           <Button asChild variant="outline" size="sm">
             <Link to={ROUTES.proposals.detail(application.proposal_id)}>
-              Ver proposta →
+              Ver →
             </Link>
           </Button>
         </div>

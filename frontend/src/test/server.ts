@@ -1,11 +1,11 @@
+import { authHandlers, applicationHandlers, BASE_URL } from './handlers'
 import { setupServer } from 'msw/node'
 import { http, HttpResponse } from 'msw'
-import { authHandlers, BASE_URL } from './handlers'
 import { proposalHandlers } from './handlers/proposals'
 import type { PaginatedResponse } from '@/types/api'
 import type { Proposal, Application } from '@/types/models'
 
-export const server = setupServer(...authHandlers, ...proposalHandlers)
+export const server = setupServer(...authHandlers, ...proposalHandlers, ...applicationHandlers)
 
 export function mockProposalsList(
   proposals: Proposal[],

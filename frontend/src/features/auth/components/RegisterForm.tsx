@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { registerSchema, type RegisterFormValues } from '@/features/auth/schemas'
 import { useRegister } from '@/features/auth/hooks'
+import { useDepartments } from '@/features/proposals/hooks'
 import {
   Form,
   FormControl,
@@ -13,14 +14,6 @@ import {
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { ArrowRight, AlertCircle } from 'lucide-react'
 
-const DEPARTMENTS = [
-  { id: 1, name: 'Ciência da Computação' },
-  { id: 2, name: 'Engenharia de Software' },
-  { id: 3, name: 'Sistemas de Informação' },
-  { id: 4, name: 'Engenharia Elétrica' },
-  { id: 5, name: 'Matemática' },
-] as const
-
 const inputClass = 'mt-1 w-full rounded-md border border-border bg-card px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring'
 const labelClass = 'text-xs font-semibold uppercase tracking-wider text-muted-foreground'
 
@@ -30,6 +23,7 @@ interface RegisterFormProps {
 
 export function RegisterForm({ initialRole }: RegisterFormProps) {
   const { mutate, isPending, isError, error } = useRegister()
+  const { data: departments = [] } = useDepartments()
 
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
@@ -39,7 +33,7 @@ export function RegisterForm({ initialRole }: RegisterFormProps) {
       password: '',
       password_confirmation: '',
       role: initialRole ?? 'student',
-      department_id: 1,
+      department_id: 0,
       profile_link: '',
     },
   })
@@ -168,7 +162,8 @@ export function RegisterForm({ initialRole }: RegisterFormProps) {
                   value={field.value}
                   onChange={(e) => field.onChange(Number(e.target.value))}
                 >
-                  {DEPARTMENTS.map((dept) => (
+                  <option value={0} disabled>Selecione um departamento</option>
+                  {departments.map((dept) => (
                     <option key={dept.id} value={dept.id}>
                       {dept.name}
                     </option>

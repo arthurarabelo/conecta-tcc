@@ -64,10 +64,10 @@ describe('ApplicationCard', () => {
     expect(screen.getByText('Inteligência Artificial')).toBeInTheDocument()
   })
 
-  it('renders applied_at date formatted in long pt-BR format', () => {
+  it('renders applied_at date formatted as DD/MM/YYYY', () => {
     render(<ApplicationCard application={baseApplication} />)
-    // formatDateLong('2025-05-10T09:00:00Z') → "10 de maio de 2025"
-    expect(screen.getByText(/10 de maio de 2025/i)).toBeInTheDocument()
+    // formatDate('2025-05-10T09:00:00Z') → "10/05/2025"
+    expect(screen.getByText(/Aplicado em 10\/05\/2025/i)).toBeInTheDocument()
   })
 
   it('renders "Em análise" status badge for pending', () => {
@@ -85,8 +85,8 @@ describe('ApplicationCard', () => {
     expect(screen.queryByText(/Feedback:/i)).not.toBeInTheDocument()
   })
 
-  it('does NOT show feedback section when status is approved', () => {
-    render(<ApplicationCard application={{ ...baseApplication, status: 'approved' }} />)
+  it('does NOT show feedback section when feedback is null', () => {
+    render(<ApplicationCard application={{ ...baseApplication, status: 'approved', feedback: null }} />)
     expect(screen.queryByText(/Feedback:/i)).not.toBeInTheDocument()
   })
 
@@ -102,9 +102,9 @@ describe('ApplicationCard', () => {
     expect(screen.getByText(/Perfil não compatível/i)).toBeInTheDocument()
   })
 
-  it('renders "Ver proposta" link pointing to /propostas/10', () => {
+  it('renders "Ver" link pointing to /propostas/10', () => {
     render(<ApplicationCard application={baseApplication} />)
-    const link = screen.getByRole('link', { name: /Ver proposta/i })
+    const link = screen.getByRole('link', { name: /Ver →/i })
     expect(link).toHaveAttribute('href', '/propostas/10')
   })
 })

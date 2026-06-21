@@ -43,6 +43,8 @@ frontend/cypress/
 │   ├── proposals.cy.ts        — Browse proposals, filters, pagination, empty states
 │   ├── proposal-detail.cy.ts  — View detail, apply to proposal, 404, closed proposal
 │   ├── proposal-crud.cy.ts    — Create, edit, delete proposals as professor
+│   ├── my-applications.cy.ts  — Student's application list, status counts, empty state
+│   ├── dashboard.cy.ts        — Professor KPIs, proposals table, approve/reject applications
 │   └── navigation.cy.ts       — Public navigation, auth redirects, role-based access
 ```
 
@@ -96,15 +98,35 @@ frontend/cypress/
 | 7 | Delete proposal | Click "Excluir proposta", confirm dialog. Redirected to proposals list. Proposal no longer appears. |
 | 8 | Cannot edit another professor's proposal | Login as different professor, visit `/propostas/1/editar`. Access denied or redirected. |
 
+### `my-applications.cy.ts` — Student application tracking
+
+| # | Test | Key assertions |
+|---|------|----------------|
+| 1 | Page loads with applications | Login as student, visit `/minhas-candidaturas`. OverlineLabel shows student name. Status count cards visible (Pendente, Aprovada, Recusada). Application cards render. |
+| 2 | Empty state with no applications | Login as student with no applications (fresh DB). "Você ainda não se candidatou a nenhuma proposta." message visible. Link to "Explorar mural" present. |
+| 3 | Status counts reflect applications | Create applications with different statuses via API. Count cards show correct numbers. |
+
+### `dashboard.cy.ts` — Professor dashboard (NEW — was placeholder, now full-featured)
+
+| # | Test | Key assertions |
+|---|------|----------------|
+| 1 | Dashboard loads with KPIs | Login as professor, visit `/dashboard`. DashboardHeader visible. Four KPI cards: Propostas ativas, Vagas totais, Orientandos confirmados, Candidaturas pendentes. |
+| 2 | Proposals table shows professor's proposals | Section heading "Minhas propostas" visible. Table rows with proposal titles, areas, slots, application counts, status. |
+| 3 | Pending applications list | Section heading "Candidaturas para revisar" visible. Application cards with student names, proposal titles, approve/reject buttons. |
+| 4 | Empty pending applications | When no pending applications exist. "Nenhuma candidatura pendente." message visible. |
+| 5 | Approve application flow | Click "Aprovar" on a pending application. ApproveDialog opens with "Aprovar candidatura" title. Click "Confirmar aprovação". Success toast. |
+| 6 | Reject application flow | Click "Recusar" on a pending application. RejectDialog opens with feedback textarea. Type feedback. Click "Confirmar rejeição". Success toast. |
+| 7 | Reject requires feedback | Open reject dialog, leave feedback empty, click confirm. Error toast "Digite um feedback antes de rejeitar." |
+| 8 | Student cannot access dashboard | Login as student, visit `/dashboard`. Redirected away. |
+
 ### `navigation.cy.ts` — Public routing + auth guard
 
 | # | Test | Key assertions |
 |---|------|----------------|
 | 1 | Home page loads | Visit `/`. Hero section, "Como funciona", and featured proposals sections visible. |
-| 2 | Header nav links work | Click "Mural de Propostas" in header. Lands on `/propostas`. |
+| 2 | Header nav links work | Click "Mural" in header. Lands on `/propostas`. |
 | 3 | Protected routes redirect unauthenticated users | Visit `/propostas/nova` without auth. Redirected to `/entrar`. |
 | 4 | Protected routes redirect wrong role | Student visits `/dashboard`. Redirected (home or proposals). |
-| 5 | Dashboard loads for professor | Login as professor, visit `/dashboard`. Page content visible. |
 
 ## Test Data Seeder
 
@@ -129,11 +151,19 @@ A dedicated seeder (`backend/database/seeders/E2ETestSeeder.php`) creates determ
 - Engenharia de Software (ES)
 
 ### Proposals (created by professor@test.com)
-| ID | Title | Status | Slots |
-|----|-------|--------|-------|
-| 1 | Redes Neurais para Reconhecimento de Imagens | open | 2 |
-| 2 | Blockchain para Certificação Acadêmica | open | 1 |
-| 3 | Proposta Finalizada de Teste | closed | 1 |
+| ID | Title | Status | Slots | Approved |
+|----|-------|--------|-------|----------|
+| 1 | Redes Neurais para Reconhecimento de Imagens | open | 2 | 0 |
+| 2 | Blockchain para Certificação Acadêmica | open | 1 | 0 |
+| 3 | Proposta Finalizada de Teste | closed | 1 | 1 |
+
+### Applications (for dashboard approve/reject testing)
+| ID | Student | Proposal | Status |
+|----|---------|----------|--------|
+| 1 | student@test.com → Proposal 1 | Redes Neurais | pending |
+| 2 | student@test.com → Proposal 3 | Finalizada | approved |
+
+This provides one pending application for testing approve/reject flows on the dashboard.
 
 The seeder uses `truncate()` on affected tables before inserting, so it can be re-run safely between tests.
 
@@ -288,18 +318,21 @@ jobs:
 
 ## Implementation Order
 
-1. **Install Cypress** — `npm install -D cypress`
-2. **Create test seeder** — `backend/database/seeders/E2ETestSeeder.php` with deterministic test data
-3. **Create Cypress config** — `frontend/cypress.config.ts`
-4. **Create custom commands** — `cypress/support/commands.ts` with `loginByApi()`, `resetDb()`, `createProposalViaApi()`
-5. **Create global hooks** — `cypress/support/e2e.ts` with health check + beforeEach DB reset
-6. **Write `auth.cy.ts`** — 4 tests
-7. **Write `proposals.cy.ts`** — 8 tests
+1. **Install Cypress** — `npm install -D cypress` ✅ Done
+2. **Create test seeder** — `backend/database/seeders/E2ETestSeeder.php` ✅ Done (needs update: add applications)
+3. **Create Cypress config** — `frontend/cypress.config.ts` ✅ Done
+4. **Create custom commands** — `cypress/support/commands.ts` ✅ Done
+5. **Create global hooks** — `cypress/support/e2e.ts` ✅ Done
+6. **Write `auth.cy.ts`** — 4 tests ✅ Done (all pass)
+7. **Write `proposals.cy.ts`** — 8 tests ✅ Done (all pass)
 8. **Write `proposal-detail.cy.ts`** — 8 tests
 9. **Write `proposal-crud.cy.ts`** — 8 tests
-10. **Write `navigation.cy.ts`** — 5 tests
-11. **Update `package.json`** — add e2e scripts
-12. **Create CI workflow** — `.github/workflows/e2e.yml`
+10. **Write `my-applications.cy.ts`** — 3 tests
+11. **Write `dashboard.cy.ts`** — 8 tests (new: was placeholder, now full-featured)
+12. **Write `navigation.cy.ts`** — 4 tests
+13. **Update seeder** — Add pending applications for dashboard approve/reject testing
+14. **Update `package.json`** — add e2e scripts (optional)
+15. **Create CI workflow** — `.github/workflows/e2e.yml`
 
 ## Test Isolation Strategy
 

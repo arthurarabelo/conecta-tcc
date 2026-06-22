@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Proposal;
 
+use App\Models\Department;
+use App\Models\KnowledgeArea;
 use App\Models\Proposal;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -60,5 +62,35 @@ class IndexProposalTest extends TestCase
 
         $response->assertStatus(200);
         $this->assertCount(2, $response->json('data'));
+    }
+
+    public function test_proposals_can_be_filtered_by_area_id(): void
+    {
+        $professor = User::factory()->create(['role' => 'professor']);
+        $area1 = KnowledgeArea::create(['name' => 'IA']);
+        $area2 = KnowledgeArea::create(['name' => 'BD']);
+
+        Proposal::factory()->count(2)->create(['professor_id' => $professor->id, 'area_id' => $area1->id]);
+        Proposal::factory()->create(['professor_id' => $professor->id, 'area_id' => $area2->id]);
+
+        $response = $this->getJson('/api/proposals?area_id=' . $area1->id);
+
+        $response->assertStatus(200);
+        $this->assertCount(2, $response->json('data'));
+    }
+
+    public function test_proposals_can_be_filtered_by_department_id(): void
+    {
+        $professor = User::factory()->create(['role' => 'professor']);
+        $dept1 = Department::create(['name' => 'CC', 'code' => 'CC']);
+        $dept2 = Department::create(['name' => 'SI', 'code' => 'SI']);
+
+        Proposal::factory()->count(3)->create(['professor_id' => $professor->id, 'department_id' => $dept1->id]);
+        Proposal::factory()->create(['professor_id' => $professor->id, 'department_id' => $dept2->id]);
+
+        $response = $this->getJson('/api/proposals?department_id=' . $dept1->id);
+
+        $response->assertStatus(200);
+        $this->assertCount(3, $response->json('data'));
     }
 }

@@ -7,7 +7,7 @@
   </component>
   <component name="MessDetector">
     <phpmd_settings>
-      <phpmd_by_interpreter asDefaultInterpreter="true" interpreter_id="06e09fbf-6ad4-4e76-ac2c-a92c0bc29f68" timeout="30000" />
+      <phpmd_by_interpreter asDefaultInterpreter="true" interpreter_id="9945224f-130f-4a1b-afb9-a811079465e4" timeout="30000" />
     </phpmd_settings>
   </component>
   <component name="MessDetectorOptionsConfiguration">
@@ -22,7 +22,7 @@
   </component>
   <component name="PhpCodeSniffer">
     <phpcs_settings>
-      <phpcs_by_interpreter asDefaultInterpreter="true" interpreter_id="06e09fbf-6ad4-4e76-ac2c-a92c0bc29f68" timeout="30000" />
+      <phpcs_by_interpreter asDefaultInterpreter="true" interpreter_id="9945224f-130f-4a1b-afb9-a811079465e4" timeout="30000" />
     </phpcs_settings>
   </component>
   <component name="PhpIncludePathManager">
@@ -146,7 +146,7 @@
     <interpreters>
       <interpreter id="06e09fbf-6ad4-4e76-ac2c-a92c0bc29f68" name="app" home="docker-compose://DATA" auto="false" debugger_id="php.debugger.XDebug">
         <remote_data INTERPRETER_PATH="php" HELPERS_PATH="/opt/.phpstorm_helpers" VALID="true" RUN_AS_ROOT_VIA_SUDO="false" DOCKER_ACCOUNT_NAME="Docker" DOCKER_COMPOSE_SERVICE_NAME="app" DOCKER_REMOTE_PROJECT_PATH="/opt/project">
-          <type_data command="EXEC" />
+          <type_data command="RUN" />
           <dockerComposeConfigurationPaths>
             <item value="$PROJECT_DIR$/backend/compose.yaml" />
           </dockerComposeConfigurationPaths>

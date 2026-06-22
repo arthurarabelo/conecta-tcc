@@ -5,3 +5,6 @@ dist
 *.local
 tcc-connect-main/
 tcc-connect-main.zip
+cypress/videos/
+cypress/screenshots/
+cypress/downloads/

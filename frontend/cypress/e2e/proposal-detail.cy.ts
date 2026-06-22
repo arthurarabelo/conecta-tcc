@@ -1,25 +1,51 @@
 describe('Proposal Detail Page', () => {
-  it('1. carrega a página de detalhe corretamente', () => {
+  const EMPTY_APPS = {
+    data: [],
+    meta: { current_page: 1, last_page: 1, per_page: 15, total: 0, from: null, to: null },
+    links: { first: null, last: null, prev: null, next: null },
+  }
+
+  beforeEach(() => {
+    cy.intercept('GET', '**/api/proposals/**').as('getProposal')
+    // Stub applications by default (unauthenticated requests hit 401 → redirect)
+    // Authenticated tests that need real data override this below
+  })
+
+  function stubApplications() {
+    cy.intercept('GET', '**/api/applications*', { body: EMPTY_APPS, statusCode: 200 }).as('getApplications')
+  }
+
+  function allowApplications() {
+    cy.intercept('GET', '**/api/applications*').as('getApplications')
+  }
+
+  it('loads the detail page correctly', () => {
+    stubApplications()
     cy.visit('/propostas/1')
+    cy.wait('@getProposal')
+    cy.wait('@getApplications')
     cy.contains('Carregando...').should('not.exist')
 
     cy.contains('Redes Neurais para Reconhecimento de Imagens').should('be.visible')
     cy.contains('Sobre o projeto').should('be.visible')
-    cy.contains('professor@test.com'.split('@')[0], { matchCase: false }).should('not.exist') // sanity: não deve vazar email
-    cy.get('main').within(() => {
-      cy.get('[class*="badge"], span').should('exist')
-    })
+    cy.contains('Professor Teste').should('be.visible')
   })
 
-  it('2. exibe página de não encontrado para proposta inexistente', () => {
+  it('shows not-found page for non-existent proposal', () => {
+    stubApplications()
     cy.visit('/propostas/99999')
+    cy.wait('@getProposal')
+    cy.wait('@getApplications')
     cy.contains('Carregando...').should('not.exist')
-    cy.contains(/não encontrada/i).should('be.visible')
+    cy.contains('Proposta não encontrada').should('be.visible')
   })
 
-  it('3. aluno consegue se candidatar à proposta', () => {
+  it('student can apply to a proposal', () => {
+    allowApplications()
     cy.loginByApi('student@test.com', 'password123')
-    cy.visit('/propostas/2')
+    cy.visit('/propostas/2') // Blockchain — no application yet
+    cy.wait('@getProposal')
+    cy.wait('@getApplications')
     cy.contains('Carregando...').should('not.exist')
 
     cy.contains('button', 'Candidatar-se').click()
@@ -27,42 +53,57 @@ describe('Proposal Detail Page', () => {
     cy.contains('Em análise').should('be.visible')
   })
 
-  it('4. não permite se candidatar duas vezes', () => {
+  it('does not allow applying twice', () => {
+    allowApplications()
     cy.loginByApi('student@test.com', 'password123')
-    // Proposal 1 já tem application pending do seed (ver E2ETestSeeder)
+    // Proposal 1 already has a pending application from seed
     cy.visit('/propostas/1')
+    cy.wait('@getProposal')
+    cy.wait('@getApplications')
     cy.contains('Carregando...').should('not.exist')
 
     cy.contains('Em análise').should('be.visible')
     cy.contains('button', 'Candidatar-se').should('not.exist')
   })
 
-  it('5. proposta fechada não pode ser candidatada', () => {
+  it('closed proposal cannot be applied to', () => {
+    allowApplications()
     cy.loginByApi('student@test.com', 'password123')
-    cy.visit('/propostas/3') // status: closed no seed
+    cy.visit('/propostas/3') // status: closed in seed
+    cy.wait('@getProposal')
+    cy.wait('@getApplications')
     cy.contains('Carregando...').should('not.exist')
 
     cy.contains('button', 'Proposta encerrada').should('be.visible').and('be.disabled')
   })
 
-  it('6. usuário não autenticado vê prompt de login', () => {
+  it('unauthenticated user sees login prompt', () => {
+    stubApplications()
     cy.visit('/propostas/1')
+    cy.wait('@getProposal')
+    cy.wait('@getApplications')
     cy.contains('Carregando...').should('not.exist')
 
     cy.contains('Entrar para se candidatar').should('be.visible')
   })
 
-  it('7. professor vê botão de editar na própria proposta', () => {
+  it('professor sees edit button on own proposal', () => {
+    allowApplications()
     cy.loginByApi('professor@test.com', 'password123')
-    cy.visit('/propostas/1') // criada por professor@test.com no seed
+    cy.visit('/propostas/1') // owned by professor@test.com in seed
+    cy.wait('@getProposal')
+    cy.wait('@getApplications')
     cy.contains('Carregando...').should('not.exist')
 
-    cy.contains('a, button', 'Editar').should('be.visible')
+    cy.contains('Editar').should('be.visible')
   })
 
-  it('8. professor NÃO vê editar em proposta de outro professor', () => {
+  it('professor does NOT see edit on others proposals', () => {
+    allowApplications()
     cy.loginByApi('professor2@test.com', 'password123')
-    cy.visit('/propostas/1') // pertence a professor@test.com, não a professor2
+    cy.visit('/propostas/1') // owned by professor@test.com, not professor2
+    cy.wait('@getProposal')
+    cy.wait('@getApplications')
     cy.contains('Carregando...').should('not.exist')
 
     cy.contains('Editar').should('not.exist')

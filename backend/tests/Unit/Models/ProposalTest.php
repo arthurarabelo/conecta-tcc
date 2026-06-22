@@ -116,11 +116,10 @@ class ProposalTest extends TestCase
     {
         $professor = User::factory()->create(['role' => 'professor']);
         $proposal = Proposal::factory()->create(['professor_id' => $professor->id]);
-        $student = User::factory()->create(['role' => 'student']);
-        Application::factory()->count(2)->create([
-            'student_id' => $student->id,
-            'proposal_id' => $proposal->id,
-        ]);
+        $s1 = User::factory()->create(['role' => 'student']);
+        $s2 = User::factory()->create(['role' => 'student']);
+        Application::factory()->create(['student_id' => $s1->id, 'proposal_id' => $proposal->id]);
+        Application::factory()->create(['student_id' => $s2->id, 'proposal_id' => $proposal->id]);
 
         $this->assertCount(2, $proposal->applications);
     }

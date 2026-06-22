@@ -1,0 +1,30 @@
+name: Backend CI
+
+on:
+  push:
+    paths:
+      - "backend/**"
+  pull_request:
+    paths:
+      - "backend/**"
+
+jobs:
+  test:
+    name: PHPUnit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: sqlite3
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist
+        working-directory: backend
+
+      - name: Run tests with coverage
+        run: php artisan test --coverage
+        working-directory: backend
